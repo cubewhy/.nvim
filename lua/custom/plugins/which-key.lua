@@ -48,7 +48,7 @@ return {
       { '<leader>qq', icon = { icon = '󰗼 ', color = 'red' }, desc = 'Quit All' },
       { '<leader>qs', icon = { icon = '󰦛 ', color = 'green' }, desc = 'Restore Session' },
       { '<leader>ql', icon = { icon = '󰦛 ', color = 'cyan' }, desc = 'Restore Last Session' },
-      { '<leader>qd', icon = { icon = '󱏢 ', color = 'orange' }, desc = 'Stop Saving Session' },
+      { '<leader>qd', icon = { icon = '󰅙 ', color = 'red' }, desc = 'Stop Saving Session' },
 
       -- window
       { '<leader>w', group = '[W]indow', icon = { icon = ' ', color = 'purple' } },
