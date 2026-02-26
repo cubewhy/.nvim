@@ -1,8 +1,34 @@
 return {
   {
     'nvim-treesitter/nvim-treesitter',
-    lazy = false,
     build = ':TSUpdate',
+    event = { 'BufReadPost', 'BufNewFile' },
+    config = function()
+      local configs = {
+        'bash',
+        'c',
+        'diff',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'vim',
+        'vimdoc',
+        'python',
+      }
+
+      vim.cmd('TSUpdate ' .. table.concat(configs, ' '))
+
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function(args)
+          local bufnr = args.buf
+          local lang = vim.treesitter.language.get_lang(vim.bo[bufnr].filetype)
+          if lang then pcall(vim.treesitter.start, bufnr, lang) end
+        end,
+      })
+    end,
   },
   {
     'nvim-treesitter/nvim-treesitter-context',

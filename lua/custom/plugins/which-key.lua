@@ -111,6 +111,39 @@ return {
         desc = 'Line Wrap',
         icon = function() return toggle_icon(vim.wo.wrap) end,
       },
+      {
+        '<leader>uT',
+        function()
+          local bufnr = vim.api.nvim_get_current_buf()
+          if vim.treesitter.highlighter.active[bufnr] then
+            vim.treesitter.stop(bufnr)
+            vim.notify('Treesitter Highlighting: OFF', vim.log.levels.WARN)
+          else
+            vim.treesitter.start(bufnr)
+            vim.notify('Treesitter Highlighting: ON', vim.log.levels.INFO)
+          end
+        end,
+        desc = 'Treesitter Highlight',
+        icon = function()
+          local bufnr = vim.api.nvim_get_current_buf()
+          local is_active = vim.treesitter.highlighter.active[bufnr] ~= nil
+          return toggle_icon(is_active)
+        end,
+      },
+
+      {
+        '<leader>ut',
+        function()
+          local ok, tsc = pcall(require, 'treesitter-context')
+          if ok then tsc.toggle() end
+        end,
+        desc = 'Treesitter Context',
+        icon = function()
+          local ok, tsc = pcall(require, 'treesitter-context')
+          local status = ok and tsc.enabled()
+          return toggle_icon(status)
+        end,
+      },
     }
   end,
 }
