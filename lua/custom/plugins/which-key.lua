@@ -79,24 +79,6 @@ return {
 
       -- ui toggles
       {
-        '<leader>ub',
-        desc = 'Git Blame Line',
-        icon = function()
-          local gs = package.loaded['gitsigns']
-          local status = gs and gs.config and gs.config.current_line_blame
-          return toggle_icon(status)
-        end,
-      },
-      {
-        '<leader>uD',
-        desc = 'Git Show Deleted',
-        icon = function()
-          local gs = package.loaded['gitsigns']
-          local status = gs and gs.config and gs.config.show_deleted
-          return toggle_icon(status)
-        end,
-      },
-      {
         '<leader>uf',
         desc = 'Autoformat (Buffer)',
         icon = function() return toggle_icon(not vim.b.disable_autoformat) end,
