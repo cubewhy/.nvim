@@ -1,0 +1,29 @@
+return {
+  'akinsho/bufferline.nvim',
+  lazy = false,
+  version = '*',
+  dependencies = 'nvim-tree/nvim-web-devicons',
+  keys = {
+    { 'H', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev Buffer' },
+    { 'L', '<cmd>BufferLineCycleNext<cr>', desc = 'Next Buffer' },
+    { '<leader>bp', '<cmd>BufferLinePick<cr>', desc = 'Buffer Pick' },
+    { '<leader>bc', '<cmd>BufferLinePickClose<cr>', desc = 'Pick Close' },
+    { '<leader>be', '<cmd>BufferLineSortByExtension<cr>', desc = 'Sort by Extension' },
+    { '<leader>bd', '<cmd>bdelete<cr>', desc = 'Delete Buffer' },
+    { '<leader>`', '<cmd>e #<cr>', desc = 'Switch to Other Buffer' },
+    { '<leader>bb', '<cmd>e #<cr>', desc = 'Switch to Other Buffer' },
+  },
+  opts = {
+    options = {
+      mode = 'buffers',
+      offsets = {
+        {
+          filetype = 'neo-tree',
+          text = 'File Explorer',
+          highlight = 'Directory',
+          text_align = 'left',
+        },
+      },
+    },
+  },
+}
