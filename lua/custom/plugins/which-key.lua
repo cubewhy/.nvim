@@ -33,6 +33,8 @@ return {
       { '<leader>g', group = '[G]it', icon = { icon = ' ', color = 'orange' } },
       { '<leader>n', group = '[N]otifications', icon = { icon = '󰵅 ', color = 'blue' } },
 
+      { '<leader>l', '<cmd>Lazy<cr>', desc = '[L]azy.nvim', icon = { icon = '󰒲', color = 'azure' } },
+
       -- buffers
       { 'H', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev Buffer', icon = { icon = ' ', color = 'cyan' } },
       { 'L', '<cmd>BufferLineCycleNext<cr>', desc = 'Next Buffer', icon = { icon = ' ', color = 'cyan' } },
