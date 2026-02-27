@@ -4,7 +4,7 @@ return {
     build = ':TSUpdate',
     event = { 'BufReadPost', 'BufNewFile' },
     config = function()
-      local configs = {
+      require('nvim-treesitter').install {
         'bash',
         'c',
         'diff',
@@ -18,8 +18,6 @@ return {
         'vimdoc',
         'python',
       }
-
-      vim.cmd('TSUpdate ' .. table.concat(configs, ' '))
 
       vim.api.nvim_create_autocmd('FileType', {
         callback = function(args)
