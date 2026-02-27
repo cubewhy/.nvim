@@ -1,51 +1,22 @@
 return {
-  'nvimdev/dashboard-nvim',
-  event = 'VimEnter',
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
-  opts = function()
-    local logo = [[
-    NVIM
-    ]]
-    logo = string.rep('\n', 4) .. logo .. '\n\n'
+  {
+    'goolord/alpha-nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      local alpha = require 'alpha'
+      local startify = require 'alpha.themes.startify'
 
-    local opts = {
-      theme = 'hyper',
-      config = {
-        header = vim.split(logo, '\n'),
-        shortcut = {
-          { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
-          {
-            icon = ' ',
-            icon_hl = '@variable',
-            desc = 'Restore Session',
-            group = 'Label',
-            action = 'lua require("persistence").load()',
-            key = 's',
-          },
-          {
-            icon = '󰈔 ',
-            desc = 'New File',
-            group = 'DiagnosticHint',
-            action = 'enew',
-            key = 'n',
-          },
-          {
-            icon = '󰒲 ',
-            desc = 'Lazy',
-            group = 'DiagnosticOK',
-            action = 'Lazy',
-            key = 'l',
-          },
-          {
-            icon = ' ',
-            desc = 'Quit',
-            group = 'DiagnosticError',
-            action = 'qa',
-            key = 'q',
-          },
-        },
-      },
-    }
-    return opts
-  end,
+      startify.section.top_buttons.val = {
+        startify.button('n', '󰈔 New File', '<cmd>enew<CR>'),
+        startify.button('s', ' Restore Session', '<cmd>lua require("persistence").load()<CR>'),
+        startify.button('l', '󰒲 Lazy', '<cmd>Lazy<CR>'),
+        startify.button('u', '󰊳 Update', '<cmd>Lazy update<CR>'),
+        startify.button('q', ' Quit', '<cmd>qa<CR>'),
+      }
+
+      startify.file_icons.provider = 'devicons'
+
+      alpha.setup(startify.config)
+    end,
+  },
 }
