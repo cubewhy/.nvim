@@ -63,6 +63,9 @@ return {
         -- rust_analyzer = {},
         basedpyright = {},
         vtsls = {},
+        taplo = {
+          on_exit = function() end,
+        },
       }
 
       require('mason-lspconfig').setup {
@@ -163,7 +166,6 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        rust = { 'rustfmt', 'injected' },
         markdown = { 'injected' },
         sql = { 'sql_formatter' },
         -- Conform can also run multiple formatters sequentially
