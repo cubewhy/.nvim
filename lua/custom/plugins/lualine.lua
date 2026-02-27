@@ -33,7 +33,7 @@ return {
         },
         sections = {
           lualine_a = {
-            -- { 'mode', separator = { left = '' }, right_padding = 2 },
+            { 'mode', right_padding = 2 },
           },
           lualine_b = {
             { 'branch', icon = '' },
