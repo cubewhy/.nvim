@@ -31,7 +31,7 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
-vim.keymap.set({ 'n', 'i', 'v' }, '<C-a>', '<cmd>wa<cr><esc>', { desc = 'Save All Files' })
+-- vim.keymap.set({ 'n', 'i', 'v' }, '<C-a>', '<cmd>wa<cr><esc>', { desc = 'Save All Files' })
 
 vim.keymap.set('n', '<leader>-', '<C-w>s', { desc = 'Split Below' })
 vim.keymap.set('n', '<leader>|', '<C-w>v', { desc = 'Split Right' })
