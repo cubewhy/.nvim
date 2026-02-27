@@ -74,3 +74,10 @@ vim.keymap.set(
   end,
   { desc = 'Go to next [H]int' }
 )
+
+-- indent
+vim.keymap.set('n', '<A-h>', '<<', { desc = 'Indent left' })
+vim.keymap.set('v', '<A-h>', '<gv', { desc = 'Indent left' })
+
+vim.keymap.set('n', '<A-l>', '>>', { desc = 'Indent right' })
+vim.keymap.set('v', '<A-l>', '>gv', { desc = 'Indent right' })
