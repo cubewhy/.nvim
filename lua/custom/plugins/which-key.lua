@@ -77,7 +77,7 @@ return {
 
       -- file operations
       { '<C-s>', '<cmd>w<cr><esc>', mode = { 'n', 'i', 'v' }, desc = 'Save File', icon = { icon = '󰆓 ', color = 'green' } },
-      { '<C-a>', '<cmd>wa<cr><esc>', mode = { 'n', 'i', 'v' }, desc = 'Save All', icon = { icon = '󰆓 ', color = 'orange' } },
+      -- { '<C-a>', '<cmd>wa<cr><esc>', mode = { 'n', 'i', 'v' }, desc = 'Save All', icon = { icon = '󰆓 ', color = 'orange' } },
 
       -- ui toggles
       {
