@@ -24,6 +24,7 @@ return {
       { '<leader>sd', function() require('telescope.builtin').diagnostics() end, desc = '[S]earch [D]iagnostics' },
       { '<leader>sr', function() require('telescope.builtin').resume() end, desc = '[S]earch [R]esume' },
       { '<leader>sg', function() require('telescope.builtin').live_grep() end, desc = '[S]earch by [G]rep' },
+      { '<leader>/', function() require('telescope.builtin').live_grep() end, desc = 'Live Grep In Workspace' },
       { '<leader>s.', function() require('telescope.builtin').oldfiles() end, desc = '[S]earch Recent Files' },
       { '<leader><leader>', function() require('telescope.builtin').buffers() end, desc = 'Find existing buffers' },
       { '<leader>sw', function() require('telescope.builtin').grep_string() end, mode = { 'n', 'v' }, desc = '[S]earch current [W]ord' },
@@ -31,12 +32,7 @@ return {
       -- Specialized Search
       { '<leader>sn', function() require('telescope.builtin').find_files { cwd = vim.fn.stdpath 'config' } end, desc = '[S]earch [N]eovim files' },
       {
-        '<leader>sR',
-        function() require('telescope').extensions.live_grep_args.live_grep_args() end,
-        desc = '[S]earch by Grep with [R]aw Arguments',
-      },
-      {
-        '<leader>/',
+        '<leader>sb',
         function()
           require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
             winblend = 10,
@@ -86,6 +82,9 @@ return {
               ['<C-k>'] = require('telescope.actions').move_selection_previous, -- move to prev result
               ['<C-j>'] = require('telescope.actions').move_selection_next, -- move to next result
             },
+            n = {
+              ['q'] = require('telescope.actions').close,
+            },
           },
         },
         extensions = {
@@ -124,6 +123,29 @@ return {
           vim.keymap.set('n', '<leader>sS', builtin.lsp_dynamic_workspace_symbols, { buffer = buf, desc = 'Search Workspace Symbols' })
         end,
       })
+    end,
+  },
+  {
+    'MagicDuck/grug-far.nvim',
+    keys = {
+      {
+        '<leader>sA',
+        function() require('grug-far').open { engine = 'astgrep' } end,
+        desc = '[S]earch [A]stgrep (grug-far)',
+      },
+      {
+        '<leader>sR',
+        function() require('grug-far').open {} end,
+        desc = '[S]earch & [R]eplace (grug-far)',
+      },
+    },
+    config = function()
+      -- optional setup call to override plugin options
+      -- alternatively you can set options with vim.g.grug_far = { ... }
+      require('grug-far').setup {
+        -- options, see Configuration section below
+        -- there are no required options atm
+      }
     end,
   },
 }

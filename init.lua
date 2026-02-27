@@ -242,6 +242,8 @@ vim.keymap.set('n', '<leader>w<', '<cmd>vertical resize -5<cr>', { desc = 'Decre
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
+require 'custom.autocmd'
+
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.hl.on_yank()`
