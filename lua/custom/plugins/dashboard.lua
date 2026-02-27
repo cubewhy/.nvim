@@ -23,7 +23,7 @@ return {
             key = 's',
           },
           {
-            icon = '󰏒 ',
+            icon = '󰈔 ',
             desc = 'New File',
             group = 'DiagnosticHint',
             action = 'enew',
