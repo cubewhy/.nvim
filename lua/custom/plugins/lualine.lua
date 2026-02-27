@@ -24,6 +24,8 @@ return {
         return ''
       end
 
+      local function current_time() return '󱑒 ' .. os.date '%H:%M' end
+
       return {
         options = {
           theme = 'auto',
@@ -36,11 +38,22 @@ return {
           },
           lualine_b = {
             { 'branch', icon = '' },
-            { 'diff', symbols = { added = ' ', modified = '󰝤 ', removed = ' ' } },
           },
           lualine_c = {
             { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
-            { 'filename', path = 1, symbols = { modified = '  ', readonly = ' 󰖭 ', unnamed = ' [No Name] ' } },
+            {
+              'filename',
+              path = 1,
+              symbols = { readonly = '[RO]', unnamed = '[No Name]' },
+              color = function()
+                local is_modified = vim.bo.modified
+                if is_modified then
+                  return { fg = '#ff9e64', gui = 'bold' }
+                else
+                  return { fg = nil }
+                end
+              end,
+            },
           },
           lualine_x = {
             {
@@ -57,25 +70,17 @@ return {
               sources = { 'nvim_diagnostic' },
               symbols = { error = ' ', warn = ' ', info = ' ', hint = '󰌶 ' },
             },
-            -- {
-            --   function()
-            --     local msg = 'No LSP'
-            --     local buf_ft = vim.api.nvim_get_option_value('filetype', { buf = 0 })
-            --     local clients = vim.lsp.get_clients { bufnr = 0 }
-            --     if next(clients) == nil then return msg end
-            --     for _, client in ipairs(clients) do
-            --       local filetypes = client.config.filetypes
-            --       if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then return '' end
-            --     end
-            --     return msg
-            --   end,
-            --   icon = ' LSP:',
-            --   color = { fg = '#ffffff', gui = 'bold' },
-            -- },
+            { 'diff', symbols = { added = ' ', modified = ' ', removed = ' ' } },
           },
-          lualine_y = { 'progress' },
+          lualine_y = {
+            'progress',
+          },
           lualine_z = {
             { 'location', left_padding = 2 },
+            {
+              current_time,
+              color = { gui = 'bold' },
+            },
           },
         },
         inactive_sections = {
