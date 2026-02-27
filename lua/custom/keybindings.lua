@@ -49,9 +49,28 @@ vim.keymap.set('n', '<leader>w>', '<cmd>vertical resize +5<cr>', { desc = 'Incre
 vim.keymap.set('n', '<leader>w<', '<cmd>vertical resize -5<cr>', { desc = 'Decrease Width' })
 
 vim.keymap.set('n', '[e', function() vim.diagnostic.goto_prev { severity = vim.diagnostic.severity.ERROR } end, { desc = 'Go to previous [E]rror' })
-
 vim.keymap.set('n', ']e', function() vim.diagnostic.goto_next { severity = vim.diagnostic.severity.ERROR } end, { desc = 'Go to next [E]rror' })
-
 vim.keymap.set('n', '[w', function() vim.diagnostic.goto_prev() end, { desc = 'Go to previous [W]arning/Diagnostic' })
-
 vim.keymap.set('n', ']w', function() vim.diagnostic.goto_next() end, { desc = 'Go to next [W]arning/Diagnostic' })
+vim.keymap.set(
+  'n',
+  '[h',
+  function()
+    vim.diagnostic.goto_prev {
+      severity = vim.diagnostic.severity.HINT,
+      float = { border = 'none' },
+    }
+  end,
+  { desc = 'Go to previous [H]int' }
+)
+vim.keymap.set(
+  'n',
+  ']h',
+  function()
+    vim.diagnostic.goto_next {
+      severity = vim.diagnostic.severity.HINT,
+      float = { border = 'none' },
+    }
+  end,
+  { desc = 'Go to next [H]int' }
+)
