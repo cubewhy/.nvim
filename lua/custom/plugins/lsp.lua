@@ -53,7 +53,8 @@ return {
           },
         },
         -- rust_analyzer = {},
-        -- pyright = {},
+        basedpyright = {},
+        vtsls = {},
       }
 
       require('mason-lspconfig').setup {
