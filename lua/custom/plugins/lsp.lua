@@ -43,6 +43,19 @@ return {
 
           -- Source Action (Organize Imports etc.)
           mapv('<leader>cA', function() vim.lsp.buf.code_action { context = { only = { 'source' }, diagnostics = {} } } end, '[C]ode Source [A]ctions')
+          map(
+            '<leader>cu',
+            function()
+              vim.lsp.buf.code_action {
+                context = {
+                  only = { 'source.removeUnused' },
+                  diagnostics = {},
+                },
+                apply = true,
+              }
+            end,
+            '[C]ode [U]nused Imports (Remove)'
+          )
 
           -- Inlay Hints Toggle
           local client = vim.lsp.get_client_by_id(event.data.client_id)
