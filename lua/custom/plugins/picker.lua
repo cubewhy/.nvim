@@ -14,6 +14,7 @@ return {
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
       -- Extension for better ripgrep arguments support
       { 'nvim-telescope/telescope-live-grep-args.nvim' },
+      { 'debugloop/telescope-undo.nvim' },
     },
     -- Refactored keybindings into lazy.nvim keys table
     keys = {
@@ -27,6 +28,7 @@ return {
       { '<leader>sr', function() require('telescope.builtin').resume() end, desc = '[S]earch [R]esume' },
       { '<leader>sg', function() require('telescope.builtin').live_grep() end, desc = '[S]earch by [G]rep' },
       { '<leader>/', function() require('telescope.builtin').live_grep() end, desc = 'Live Grep In Workspace' },
+      { '<leader>su', function() require('telescope').extensions.undo.undo() end, desc = '[S]earch [U]ndo history' },
       { '<leader>s.', function() require('telescope.builtin').oldfiles() end, desc = '[S]earch Recent Files' },
       { '<leader><leader>', function() require('telescope.builtin').buffers() end, desc = 'Find existing buffers' },
       { '<leader>sw', function() require('telescope.builtin').grep_string() end, mode = { 'n', 'v' }, desc = '[S]earch current [W]ord' },
@@ -97,6 +99,7 @@ return {
           live_grep_args = {
             auto_quoting = true, -- enable/disable auto-quoting
           },
+          undo = {},
         },
       }
 
@@ -104,6 +107,7 @@ return {
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
       pcall(require('telescope').load_extension, 'live_grep_args')
+      pcall(require('telescope').load_extension, 'undo')
 
       -- [[ LSP Keybindings via Autocmd ]]
       -- These are only mapped when an LSP attaches to a buffer
