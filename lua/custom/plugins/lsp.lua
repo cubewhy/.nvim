@@ -1,10 +1,17 @@
 return {
   {
+    'mason-org/mason.nvim',
+    config = true,
+    keys = {
+      { '<leader>cm', '<cmd>Mason<cr>', desc = '[M]ason' },
+    },
+  },
+  {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
-      { 'williamboman/mason.nvim', config = true },
-      'williamboman/mason-lspconfig.nvim',
+      { 'mason-org/mason.nvim', config = true },
+      'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       { 'j-hui/fidget.nvim', opts = {} },
       'stevearc/aerial.nvim',
