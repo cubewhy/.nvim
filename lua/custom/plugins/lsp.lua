@@ -123,7 +123,7 @@ return {
             timeout_ms = 3000,
           }
         end,
-        desc = 'Format [F]injected langs',
+        desc = '[F]ormat Injected Languages',
       },
       {
         '<leader>uf',
