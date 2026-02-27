@@ -34,19 +34,20 @@ return {
         group = vim.api.nvim_create_augroup('user-lsp-attach', { clear = true }),
         callback = function(event)
           local map = function(keys, func, desc) vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc }) end
+          local mapv = function(keys, func, desc) vim.keymap.set({ 'n', 'v' }, keys, func, { buffer = event.buf, desc = desc }) end
 
           map('<leader>cr', vim.lsp.buf.rename, '[R]ename Symbol')
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+          mapv('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
           map('<leader>cd', vim.diagnostic.open_float, '[C]ode [D]iagnostics')
           map('<leader>cs', '<cmd>AerialToggle!<cr>', '[C]ode [S]ymbols Outline')
 
           -- Source Action (Organize Imports etc.)
-          map('<leader>cA', function() vim.lsp.buf.code_action { context = { only = { 'source' }, diagnostics = {} } } end, '[C]ode Source [A]ctions')
+          mapv('<leader>cA', function() vim.lsp.buf.code_action { context = { only = { 'source' }, diagnostics = {} } } end, '[C]ode Source [A]ctions')
 
           -- Inlay Hints Toggle
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client:supports_method 'textDocument/inlayHint' then
-            map('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
+            map('<leader>uh', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
           end
           -- enable inlay_hint by default
           vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
