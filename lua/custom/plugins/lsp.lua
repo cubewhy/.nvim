@@ -98,6 +98,16 @@ return {
         desc = '[F]ormat buffer',
       },
       {
+        '<leader>cF',
+        function()
+          require('conform').format {
+            formatters = { 'injected' },
+            timeout_ms = 3000,
+          }
+        end,
+        desc = 'Format [F]injected langs',
+      },
+      {
         '<leader>uf',
         function()
           local is_disabled = not vim.b.disable_autoformat
@@ -152,11 +162,20 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        rust = { 'rustfmt', 'injected' },
+        markdown = { 'injected' },
+        sql = { 'sql_formatter' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
+      },
+      formatters = {
+        injected = {
+          -- ignore errors on formatting injected languages
+          options = { ignore_errors = true },
+        },
       },
     },
   },
