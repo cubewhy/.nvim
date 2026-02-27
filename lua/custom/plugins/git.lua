@@ -9,7 +9,8 @@ return {
     },
     config = function()
       vim.opt.termguicolors = true
-      vim.api.nvim_set_hl(0, 'LazyGitBorder', { link = 'FloatBorder' })
+      vim.api.nvim_set_hl(0, 'LazyGitBorder', { fg = 'NONE', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'LazyGitFloat', { link = 'Normal' })
 
       vim.g.lazygit_floating_window_winblend = 0 -- transparency of floating window
       vim.g.lazygit_floating_window_scaling_factor = 0.9 -- scaling factor for floating window
