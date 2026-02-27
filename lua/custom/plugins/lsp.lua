@@ -27,7 +27,7 @@ return {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('user-lsp-attach', { clear = true }),
         callback = function(event)
-          local map = function(keys, func, desc) vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'Code: ' .. desc }) end
+          local map = function(keys, func, desc) vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc }) end
 
           map('<leader>cr', vim.lsp.buf.rename, '[R]ename Symbol')
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
