@@ -13,7 +13,6 @@ return {
       { 'mason-org/mason.nvim', config = true },
       'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      { 'j-hui/fidget.nvim', opts = {} },
       'stevearc/aerial.nvim',
     },
     config = function()
