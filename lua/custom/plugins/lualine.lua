@@ -28,7 +28,7 @@ return {
         options = {
           theme = 'auto',
           component_separators = { left = '│', right = '│' },
-          globalstatus = true,
+          globalstatus = false,
           disabled_filetypes = { statusline = { 'dashboard', 'alpha', 'neo-tree' } },
         },
         sections = {
