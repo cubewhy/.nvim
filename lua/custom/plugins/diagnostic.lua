@@ -51,17 +51,35 @@ return {
       {
         '<leader>cl',
         '<cmd>Trouble lsp toggle focus=false win.position=right<cr>',
-        desc = 'LSP Definitions / references / ... (Trouble)',
+        desc = '[L]SP Definitions / references / ... (Trouble)',
       },
       {
         '<leader>xL',
         '<cmd>Trouble loclist toggle<cr>',
-        desc = 'Location List (Trouble)',
+        desc = '[L]ocation List (Trouble)',
+      },
+      {
+        '<leader>xq',
+        function()
+          local qf_exists = false
+          for _, win in pairs(vim.fn.getwininfo()) do
+            if win.quickfix == 1 then
+              qf_exists = true
+              break
+            end
+          end
+          if qf_exists then
+            vim.cmd 'cclose'
+          else
+            vim.cmd 'copen'
+          end
+        end,
+        desc = '[Q]uickfix List',
       },
       {
         '<leader>xQ',
         '<cmd>Trouble qflist toggle<cr>',
-        desc = 'Quickfix List (Trouble)',
+        desc = '[Q]uickfix List (Trouble)',
       },
     },
   },
