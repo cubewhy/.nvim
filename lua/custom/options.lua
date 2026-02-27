@@ -99,3 +99,5 @@ vim.g.clipboard = {
     ['*'] = require('vim.ui.clipboard.osc52').paste '*',
   },
 }
+
+vim.opt.laststatus = 3

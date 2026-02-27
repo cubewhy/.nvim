@@ -29,7 +29,7 @@ return {
       return {
         options = {
           theme = 'auto',
-          globalstatus = false,
+          globalstatus = true,
           disabled_filetypes = { statusline = { 'dashboard', 'alpha', 'neo-tree' } },
         },
         sections = {
