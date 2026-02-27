@@ -22,15 +22,14 @@ return {
       -- categories
       { '<leader>b', group = '[B]uffer', icon = { icon = '󰓩 ', color = 'green' } },
       { '<leader>d', group = '[D]ebug', icon = { icon = '󰃤', color = 'red' } },
-      { '<leader>c', group = '[C]ode', icon = { icon = ' ', color = 'blue' } },
-      { '<leader>g', group = '[G]it', icon = { icon = ' ', color = 'orange' } },
+      { '<leader>c', group = '[C]ode', icon = { icon = ' ', color = 'blue' }, mode = { 'n', 'v' } },
+      { '<leader>g', group = '[G]it', icon = { icon = ' ', color = 'orange' }, mode = { 'n', 'v' } },
       { '<leader>q', group = '[Q]uit / Session', icon = { icon = '󰈆 ', color = 'red' } },
-      { '<leader>s', group = '[S]earch', icon = { icon = ' ', color = 'cyan' } },
+      { '<leader>s', group = '[S]earch', icon = { icon = ' ', color = 'cyan' }, mode = { 'n', 'v' } },
       { '<leader>t', group = '[T]erminal', icon = { icon = ' ', color = 'yellow' } },
       { '<leader>w', group = '[W]indow', icon = { icon = ' ', color = 'purple' } },
       { '<leader>x', group = '[D]iagnostics', icon = { icon = '󱖫 ', color = 'red' } },
       { '<leader>u', group = '[U]I Toggles', icon = { icon = '󰙵 ', color = 'azure' } },
-      { '<leader>g', group = '[G]it', icon = { icon = ' ', color = 'orange' } },
       { '<leader>n', group = '[N]otifications', icon = { icon = '󰵅 ', color = 'blue' } },
 
       { '<leader>l', '<cmd>Lazy<cr>', desc = '[L]azy.nvim', icon = { icon = '󰒲', color = 'azure' } },
