@@ -27,7 +27,6 @@ return {
       return {
         options = {
           theme = 'auto',
-          component_separators = { left = '│', right = '│' },
           globalstatus = false,
           disabled_filetypes = { statusline = { 'dashboard', 'alpha', 'neo-tree' } },
         },
@@ -44,6 +43,11 @@ return {
             { 'filename', path = 1, symbols = { modified = '  ', readonly = ' 󰖭 ', unnamed = ' [No Name] ' } },
           },
           lualine_x = {
+            {
+              require('noice').api.status.mode.get,
+              cond = require('noice').api.status.mode.has,
+              color = { fg = '#ff9e64' },
+            },
             {
               format_status,
               color = function() return { fg = (vim.g.disable_autoformat or vim.b.disable_autoformat) and '#ff5555' or '#50fa7b' } end,
