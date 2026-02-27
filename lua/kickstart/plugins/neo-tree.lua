@@ -18,6 +18,9 @@ return {
     },
     opts = {
       filesystem = {
+        use_libuv_file_watcher = true,
+        async_directory_scan = 'auto',
+        bind_to_cwd = true,
         window = {
           mappings = {
             ['\\'] = 'close_window',
