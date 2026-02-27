@@ -4,13 +4,14 @@
 return {
   {
     'nvim-neo-tree/neo-tree.nvim',
+    lazy = true,
+    cmd = 'Neotree',
     version = '*',
     dependencies = {
       'nvim-lua/plenary.nvim',
       { 'nvim-tree/nvim-web-devicons' },
       'MunifTanjim/nui.nvim',
     },
-    lazy = false,
     keys = {
       { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
       { '<leader>e', ':Neotree toggle<CR>', desc = 'Toggle NeoTr[e]e', silent = true }, -- lazyvim compat
@@ -32,6 +33,7 @@ return {
   },
   {
     'antosha417/nvim-lsp-file-operations',
+    lazy = true,
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-neo-tree/neo-tree.nvim',

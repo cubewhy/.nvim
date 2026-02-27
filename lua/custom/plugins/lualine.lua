@@ -1,6 +1,7 @@
 return {
   {
     'kevinhwang91/nvim-hlslens',
+    event = 'BufReadPost',
     config = function()
       require('hlslens').setup()
 
@@ -15,6 +16,7 @@ return {
   },
   {
     'nvim-lualine/lualine.nvim',
+    event = 'VeryLazy',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = function()
       local function format_status()

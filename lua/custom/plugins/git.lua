@@ -23,7 +23,6 @@ return {
   },
   {
     'lewis6991/gitsigns.nvim',
-    lazy = false,
     keys = {
       -- Navigation
       { ']c', function() require('gitsigns').nav_hunk 'next' end, desc = 'Next Git Change' },

@@ -1,7 +1,7 @@
 return {
   {
     'neovim/nvim-lspconfig',
-    lazy = false,
+    event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
@@ -145,7 +145,8 @@ return {
 
   { -- Autocompletion
     'saghen/blink.cmp',
-    event = 'VimEnter',
+    -- event = 'VimEnter',
+    event = 'InsertEnter',
     version = '1.*',
     dependencies = {
       -- Snippet Engine

@@ -207,6 +207,7 @@ require('lazy').setup({
 
   { -- Collection of various small independent plugins/modules
     'nvim-mini/mini.nvim',
+    event = 'InsertEnter',
     config = function()
       -- Better Around/Inside textobjects
       --
@@ -279,6 +280,36 @@ require('lazy').setup({
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
   -- you can continue same window with `<space>sr` which resumes last telescope search
 }, {
+  performance = {
+    cache = {
+      enabled = true,
+    },
+    rtp = {
+      disabled_plugins = {
+        'netrw',
+        'netrwPlugin',
+        'netrwSettings',
+        'netrwFileHandlers',
+        'gzip',
+        'zip',
+        'zipPlugin',
+        'tar',
+        'tarPlugin',
+        'getscript',
+        'getscriptPlugin',
+        'vimball',
+        'vimballPlugin',
+        '2html_plugin',
+        'logipat',
+        'rrhelper',
+        'spellfile_plugin',
+        'matchit',
+        'rplugin',
+        'tohtml',
+        'tutor',
+      },
+    },
+  },
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
