@@ -118,7 +118,6 @@ return {
           vim.b.disable_autoformat = is_disabled
 
           local b_icon = is_disabled and '󰅙 ' or '󰄬 '
-          local g_icon = vim.g.disable_autoformat and '󰅙 ' or '󰄬 '
 
           vim.notify(
             string.format('Buffer Format: %s\n(Global is %s)', is_disabled and 'OFF' or 'ON', vim.g.disable_autoformat and 'OFF' or 'ON'),
