@@ -77,9 +77,7 @@ return {
         -- rust_analyzer = {},
         basedpyright = {},
         vtsls = {},
-        taplo = {
-          on_exit = function() end,
-        },
+        taplo = {},
       }
 
       require('mason-lspconfig').setup {
@@ -186,6 +184,7 @@ return {
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        nix = { 'alejandra' },
       },
       formatters = {
         injected = {
