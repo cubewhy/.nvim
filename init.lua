@@ -307,6 +307,7 @@ require('lazy').setup({
         'rplugin',
         'tohtml',
         'tutor',
+        'matchparen',
       },
     },
   },
