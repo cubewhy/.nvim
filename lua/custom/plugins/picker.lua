@@ -23,6 +23,7 @@ return {
       { '<leader>sf', function() require('telescope.builtin').find_files() end, desc = '[S]earch [F]iles' },
       { '<leader>sc', function() require('telescope.builtin').commands() end, desc = '[S]earch [C]ommands' },
       { '<leader>sd', function() require('telescope.builtin').diagnostics() end, desc = '[S]earch [D]iagnostics' },
+      { '<leader>sD', function() require('telescope.builtin').diagnostics { bufnr = 0 } end, desc = '[S]earch [D]ocument Diagnostics' },
       { '<leader>sr', function() require('telescope.builtin').resume() end, desc = '[S]earch [R]esume' },
       { '<leader>sg', function() require('telescope.builtin').live_grep() end, desc = '[S]earch by [G]rep' },
       { '<leader>/', function() require('telescope.builtin').live_grep() end, desc = 'Live Grep In Workspace' },
