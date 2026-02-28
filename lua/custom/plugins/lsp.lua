@@ -13,23 +13,14 @@ return {
       { 'mason-org/mason.nvim', config = true },
       'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      'stevearc/aerial.nvim',
     },
     config = function()
-      -- 1. Aerial Outline Setup
-      require('aerial').setup {
-        on_attach = function(bufnr)
-          vim.keymap.set('n', '[[', '<cmd>AerialPrev<cr>', { buffer = bufnr, desc = 'Prev Symbol' })
-          vim.keymap.set('n', ']]', '<cmd>AerialNext<cr>', { buffer = bufnr, desc = 'Next Symbol' })
-        end,
-      }
-
-      -- 2. Capabilities (Blink.cmp & UFO)
+      -- Capabilities (Blink.cmp & UFO)
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       if pcall(require, 'blink.cmp') then capabilities = require('blink.cmp').get_lsp_capabilities(capabilities) end
       capabilities.textDocument.foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
 
-      -- 3. LspAttach Keymaps
+      -- LspAttach Keymaps
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('user-lsp-attach', { clear = true }),
         callback = function(event)
@@ -39,7 +30,6 @@ return {
           map('<leader>cr', vim.lsp.buf.rename, '[R]ename Symbol')
           mapv('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
           map('<leader>cd', vim.diagnostic.open_float, '[C]ode [D]iagnostics')
-          map('<leader>cs', '<cmd>AerialToggle!<cr>', '[C]ode [S]ymbols Outline')
 
           -- Source Action (Organize Imports etc.)
           mapv('<leader>cA', function() vim.lsp.buf.code_action { context = { only = { 'source' }, diagnostics = {} } } end, '[C]ode Source [A]ctions')
@@ -67,7 +57,7 @@ return {
         end,
       })
 
-      -- 4. Mason & Server Setup
+      -- Mason & Server Setup
       local servers = {
         lua_ls = {
           settings = {

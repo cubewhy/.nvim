@@ -49,4 +49,100 @@ return {
       }
     end,
   },
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    branch = 'main',
+    init = function()
+      -- Disable entire built-in ftplugin mappings to avoid conflicts.
+      -- See https://github.com/neovim/neovim/tree/master/runtime/ftplugin for built-in ftplugins.
+      vim.g.no_plugin_maps = true
+
+      -- Or, disable per filetype (add as you like)
+      -- vim.g.no_python_maps = true
+      -- vim.g.no_ruby_maps = true
+      -- vim.g.no_rust_maps = true
+      -- vim.g.no_go_maps = true
+    end,
+    keys = {
+      {
+        ']f',
+        function() require('nvim-treesitter-textobjects.move').goto_next_start('@function.outer', 'textobjects') end,
+        mode = { 'n', 'x', 'o' },
+        desc = 'Next function start',
+      },
+      {
+        '[f',
+        function() require('nvim-treesitter-textobjects.move').goto_previous_start('@function.outer', 'textobjects') end,
+        mode = { 'n', 'x', 'o' },
+        desc = 'Prev function start',
+      },
+      {
+        ']F',
+        function() require('nvim-treesitter-textobjects.move').goto_next_end('@function.outer', 'textobjects') end,
+        mode = { 'n', 'x', 'o' },
+        desc = 'Next function end',
+      },
+      {
+        '[F',
+        function() require('nvim-treesitter-textobjects.move').goto_previous_end('@function.outer', 'textobjects') end,
+        mode = { 'n', 'x', 'o' },
+        desc = 'Prev function end',
+      },
+
+      {
+        ']]',
+        function() require('nvim-treesitter-textobjects.move').goto_next_start('@class.outer', 'textobjects') end,
+        mode = { 'n', 'x', 'o' },
+        desc = 'Next class start',
+      },
+      {
+        '[[',
+        function() require('nvim-treesitter-textobjects.move').goto_previous_start('@class.outer', 'textobjects') end,
+        mode = { 'n', 'x', 'o' },
+        desc = 'Prev class start',
+      },
+      {
+        '][',
+        function() require('nvim-treesitter-textobjects.move').goto_next_end('@class.outer', 'textobjects') end,
+        mode = { 'n', 'x', 'o' },
+        desc = 'Next class end',
+      },
+      {
+        '[]',
+        function() require('nvim-treesitter-textobjects.move').goto_previous_end('@class.outer', 'textobjects') end,
+        mode = { 'n', 'x', 'o' },
+        desc = 'Prev class end',
+      },
+
+      {
+        ']o',
+        function() require('nvim-treesitter-textobjects.move').goto_next_start({ '@loop.inner', '@loop.outer' }, 'textobjects') end,
+        mode = { 'n', 'x', 'o' },
+        desc = 'Next loop',
+      },
+      {
+        ']s',
+        function() require('nvim-treesitter-textobjects.move').goto_next_start('@local.scope', 'locals') end,
+        mode = { 'n', 'x', 'o' },
+        desc = 'Next scope',
+      },
+      { ']z', function() require('nvim-treesitter-textobjects.move').goto_next_start('@fold', 'folds') end, mode = { 'n', 'x', 'o' }, desc = 'Next fold' },
+
+      {
+        ']d',
+        function() require('nvim-treesitter-textobjects.move').goto_next('@conditional.outer', 'textobjects') end,
+        mode = { 'n', 'x', 'o' },
+        desc = 'Next conditional',
+      },
+      {
+        '[d',
+        function() require('nvim-treesitter-textobjects.move').goto_previous('@conditional.outer', 'textobjects') end,
+        mode = { 'n', 'x', 'o' },
+        desc = 'Prev conditional',
+      },
+
+      { '<leader>a', function() require('nvim-treesitter-textobjects.swap').swap_next '@parameter.inner' end, desc = 'Swap next parameter' },
+      { '<leader>A', function() require('nvim-treesitter-textobjects.swap').swap_previous '@parameter.outer' end, desc = 'Swap prev parameter' },
+    },
+  },
 }
