@@ -8,6 +8,7 @@ return {
     { 'L', '<cmd>BufferLineCycleNext<cr>', desc = 'Next Buffer' },
     { '<leader>bp', '<cmd>BufferLinePick<cr>', desc = 'Buffer Pick' },
     { '<leader>bc', '<cmd>BufferLinePickClose<cr>', desc = 'Pick Close' },
+    { '<leader>bo', '<cmd>BufferLineCloseOthers<cr>', desc = '[C]lose [O]thers' },
     { '<leader>be', '<cmd>BufferLineSortByExtension<cr>', desc = 'Sort by Extension' },
     { '<leader>bd', '<cmd>bdelete<cr>', desc = 'Delete Buffer' },
     { '<leader>`', '<cmd>e #<cr>', desc = 'Switch to Other Buffer' },
