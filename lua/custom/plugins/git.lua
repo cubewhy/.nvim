@@ -25,8 +25,8 @@ return {
     'lewis6991/gitsigns.nvim',
     keys = {
       -- Navigation
-      { ']c', function() require('gitsigns').nav_hunk 'next' end, desc = 'Next Git Change' },
-      { '[c', function() require('gitsigns').nav_hunk 'prev' end, desc = 'Prev Git Change' },
+      { ']g', function() require('gitsigns').nav_hunk 'next' end, desc = 'Next Git Change' },
+      { '[g', function() require('gitsigns').nav_hunk 'prev' end, desc = 'Prev Git Change' },
 
       -- Hunk Actions
       { '<leader>gs', ':Gitsigns stage_hunk<CR>', mode = { 'n', 'v' }, desc = 'Stage Hunk' },

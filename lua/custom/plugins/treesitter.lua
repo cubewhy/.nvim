@@ -91,25 +91,25 @@ return {
       },
 
       {
-        ']]',
+        ']c',
         function() require('nvim-treesitter-textobjects.move').goto_next_start('@class.outer', 'textobjects') end,
         mode = { 'n', 'x', 'o' },
         desc = 'Next class start',
       },
       {
-        '[[',
+        '[c',
         function() require('nvim-treesitter-textobjects.move').goto_previous_start('@class.outer', 'textobjects') end,
         mode = { 'n', 'x', 'o' },
         desc = 'Prev class start',
       },
       {
-        '][',
+        ']C',
         function() require('nvim-treesitter-textobjects.move').goto_next_end('@class.outer', 'textobjects') end,
         mode = { 'n', 'x', 'o' },
         desc = 'Next class end',
       },
       {
-        '[]',
+        '[C',
         function() require('nvim-treesitter-textobjects.move').goto_previous_end('@class.outer', 'textobjects') end,
         mode = { 'n', 'x', 'o' },
         desc = 'Prev class end',
