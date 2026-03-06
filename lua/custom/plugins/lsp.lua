@@ -194,7 +194,7 @@ return {
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        javascript = { 'prettierd', stop_after_first = true },
         nix = { 'alejandra' },
       },
       formatters = {
@@ -299,11 +299,11 @@ return {
       signature = { enabled = true },
     },
   },
-  {
-    'zeioth/garbage-day.nvim',
-    event = 'VeryLazy',
-    opts = {
-      aggressive_mode = true,
-    },
-  },
+  -- {
+  --   'zeioth/garbage-day.nvim',
+  --   event = 'VeryLazy',
+  --   opts = {
+  --     aggressive_mode = true,
+  --   },
+  -- },
 }
