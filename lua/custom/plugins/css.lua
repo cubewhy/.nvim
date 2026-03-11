@@ -3,10 +3,12 @@ return {
     'catgoose/nvim-colorizer.lua',
     event = 'BufReadPre',
     opts = {
-      options = { parsers = {
-        css = true,
-        tailwind = { enable = true, lsp = true },
-      } },
+      options = {
+        parsers = {
+          css = true,
+          tailwind = { enable = false, lsp = true },
+        }
+      },
     },
   },
 }
