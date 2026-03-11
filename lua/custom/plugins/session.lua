@@ -3,10 +3,11 @@ return {
     'folke/persistence.nvim',
     event = 'BufReadPre', -- this will only start session saving when an actual file was opened
     keys = {
-      { '<leader>qs', function() require('persistence').load() end, desc = 'Restore Session' },
-      { '<leader>ql', function() require('persistence').load { last = true } end, desc = 'Restore Last Session' },
-      { '<leader>qd', function() require('persistence').stop() end, desc = "Don't Save Current Session" },
-      { '<leader>qq', '<cmd>qa<cr>', desc = '[Q]uit [Q]all' },
+      { '<leader>qs', function() require('persistence').load() end,               desc = 'Re[s]tore Session' },
+      { '<leader>qS', function() require('persistence').select() end,             desc = '[S]elect Session' },
+      { '<leader>ql', function() require('persistence').load { last = true } end, desc = 'Restore [L]ast Session' },
+      { '<leader>qd', function() require('persistence').stop() end,               desc = "[D]on't Save Current Session" },
+      { '<leader>qq', '<cmd>qa<cr>',                                              desc = '[Q]uit all' },
     },
     opts = {
       options = { 'buffers', 'curdir', 'tabpages', 'winsize' },
