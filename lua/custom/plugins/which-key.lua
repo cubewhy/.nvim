@@ -21,11 +21,12 @@ return {
     wk.add {
       -- categories
       { '<leader>b', group = '[B]uffer', icon = { icon = '󰓩 ', color = 'green' } },
-      { '<leader>d', group = '[D]ebug', icon = { icon = '󰃤', color = 'red' } },
+      { '<leader>d', group = '[D]ebug', icon = { icon = '󰃤 ', color = 'red' } },
       { '<leader>c', group = '[C]ode', icon = { icon = ' ', color = 'blue' }, mode = { 'n', 'v' } },
       { '<leader>g', group = '[G]it', icon = { icon = ' ', color = 'orange' }, mode = { 'n', 'v' } },
       { '<leader>q', group = '[Q]uit / Session', icon = { icon = '󰈆 ', color = 'red' } },
       { '<leader>s', group = '[S]earch', icon = { icon = ' ', color = 'cyan' }, mode = { 'n', 'v' } },
+      { '<leader>f', group = '[F]ind', icon = { icon = ' ', color = 'cyan' }, mode = { 'n', 'v' } },
       { '<leader>t', group = '[T]erminal', icon = { icon = ' ', color = 'yellow' } },
       { '<leader>w', group = '[W]indow', icon = { icon = ' ', color = 'purple' } },
       { '<leader>x', group = '[D]iagnostics', icon = { icon = '󱖫 ', color = 'red' } },
@@ -77,6 +78,9 @@ return {
       -- file operations
       { '<C-s>', '<cmd>w<cr><esc>', mode = { 'n', 'i', 'v' }, desc = 'Save File', icon = { icon = '󰆓 ', color = 'green' } },
       -- { '<C-a>', '<cmd>wa<cr><esc>', mode = { 'n', 'i', 'v' }, desc = 'Save All', icon = { icon = '󰆓 ', color = 'orange' } },
+
+      -- debugger
+      { '<leader>fd', group = '[D]ebugger', icon = { icon = '󰃤 ', color = 'red' }, mode = { 'n', 'v' } },
 
       -- ui toggles
       {

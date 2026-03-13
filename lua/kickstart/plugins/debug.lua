@@ -19,6 +19,9 @@ return { {
     'mason-org/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
 
+    -- Telescope plugin
+    'nvim-telescope/telescope-dap.nvim',
+
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
     "mrcjkb/rustaceanvim",
@@ -61,10 +64,17 @@ return { {
       function() require('dapui').toggle() end,
       desc = 'Debug: See last session result.',
     },
+    { '<leader>fdc', function() require('telescope').extensions.dap.commands {} end,         desc = 'Search [D]ebug [C]ommands' },
+    { '<leader>fdg', function() require('telescope').extensions.dap.configurations {} end,   desc = 'Search [D]ebug [G]o (Configs)' },
+    { '<leader>fdb', function() require('telescope').extensions.dap.list_breakpoints {} end, desc = 'Search [D]ebug [B]reakpoints' },
+    { '<leader>fdv', function() require('telescope').extensions.dap.variables {} end,        desc = 'Search [D]ebug [V]ariables' },
+    { '<leader>fdf', function() require('telescope').extensions.dap.frames {} end,           desc = 'Search [D]ebug [F]rames' },
   },
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
+
+    require('telescope').load_extension('dap')
 
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
