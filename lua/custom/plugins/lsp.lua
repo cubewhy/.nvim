@@ -38,10 +38,14 @@ return {
         group = vim.api.nvim_create_augroup('user-lsp-attach', { clear = true }),
         callback = function(event)
           local map = function(keys, func, desc) vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc }) end
-          local mapv = function(keys, func, desc) vim.keymap.set({ 'n', 'v' }, keys, func,
-              { buffer = event.buf, desc = desc }) end
+          local mapv = function(keys, func, desc)
+            vim.keymap.set({ 'n', 'v' }, keys, func,
+              { buffer = event.buf, desc = desc })
+          end
 
-          map('<leader>cr', vim.lsp.buf.rename, '[R]ename Symbol')
+          vim.keymap.set("n", "<leader>cr", function()
+            return ":IncRename " .. vim.fn.expand("<cword>")
+          end, { expr = true, desc = '[R]ename Symbol' })
           mapv('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
           map('<leader>cd', vim.diagnostic.open_float, '[C]ode [D]iagnostics')
 
@@ -303,6 +307,32 @@ return {
       signature = { enabled = true },
     },
   },
+  {
+    "smjonas/inc-rename.nvim",
+    config = function()
+      require("inc_rename").setup {
+        -- the name of the command
+        cmd_name = "IncRename",
+        -- the highlight group used for highlighting the identifier's new name
+        hl_group = "Substitute",
+        -- whether an empty new name should be previewed; if false the command preview will be cancelled instead
+        preview_empty_name = false,
+        -- whether to display a `Renamed m instances in n files` message after a rename operation
+        show_message = true,
+        -- whether to save the "IncRename" command in the commandline history (set to false to prevent issues with
+        -- navigating to older entries that may arise due to the behavior of command preview)
+        save_in_cmdline_history = true,
+        -- the type of the external input buffer to use (currently supports "dressing" or "snacks")
+        input_buffer_type = nil,
+        -- callback to run after renaming, receives the result table (from LSP handler) as an argument
+        post_hook = nil,
+      }
+
+      require("noice").setup {
+        presets = { inc_rename = true }
+      }
+    end
+  }
   -- {
   --   'zeioth/garbage-day.nvim',
   --   event = 'VeryLazy',
