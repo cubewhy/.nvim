@@ -27,7 +27,7 @@ return {
       { '<leader>q', group = '[Q]uit / Session', icon = { icon = '󰈆 ', color = 'red' } },
       { '<leader>s', group = '[S]earch', icon = { icon = ' ', color = 'cyan' }, mode = { 'n', 'v' } },
       { '<leader>f', group = '[F]ind', icon = { icon = ' ', color = 'cyan' }, mode = { 'n', 'v' } },
-      { '<leader>t', group = '[T]erminal', icon = { icon = ' ', color = 'yellow' } },
+      { '<leader>t', group = '[T]erminal / [T]est', icon = { icon = ' ', color = 'yellow' } },
       { '<leader>w', group = '[W]indow', icon = { icon = ' ', color = 'purple' } },
       { '<leader>x', group = '[D]iagnostics', icon = { icon = '󱖫 ', color = 'red' } },
       { '<leader>u', group = '[U]I Toggles', icon = { icon = '󰙵 ', color = 'azure' } },
