@@ -31,17 +31,27 @@ return {
     'kevinhwang91/promise-async',
   },
   keys = {
-    { 'zR', function() require('ufo').openAllFolds() end, desc = 'Open all folds' },
-    { 'zM', function() require('ufo').closeAllFolds() end, desc = 'Close all folds' },
+    { 'zR', function() require('ufo').openAllFolds() end,         desc = 'Open all folds' },
+    { 'zM', function() require('ufo').closeAllFolds() end,        desc = 'Close all folds' },
     { 'zr', function() require('ufo').openFoldsExceptKinds() end, desc = 'Open folds except kinds' },
-    { 'zm', function() require('ufo').closeFoldsWith(0) end, desc = 'Close folds with (0)' },
+    { 'zm', function() require('ufo').closeFoldsWith(0) end,      desc = 'Close folds with (0)' },
     {
       'K',
       function()
-        local winid = require('ufo').peekFoldedLinesUnderCursor()
-        if not winid then vim.lsp.buf.hover() end
+        local ok_dap, dap = pcall(require, 'dap')
+        if ok_dap and dap.session() then
+          require('dap.ui.widgets').hover()
+          return
+        end
+
+        local ok_ufo, ufo = pcall(require, 'ufo')
+        local winid = ok_ufo and ufo.peekFoldedLinesUnderCursor() or nil
+
+        if not winid then
+          vim.lsp.buf.hover()
+        end
       end,
-      desc = 'Peek fold or Hover LSP',
+      desc = 'Smart Hover (DAP > UFO > LSP)',
     },
   },
   config = function()
