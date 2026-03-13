@@ -1,3 +1,21 @@
+local function smart_toggle_term()
+  local ok, Terminal = pcall(require, 'toggleterm.terminal')
+  if not ok then
+    return
+  end
+
+  if vim.bo.buftype == 'terminal' then
+    local term = Terminal.get_or_create_term(vim.b.toggle_number)
+    if term then
+      term:toggle()
+      return
+    end
+  end
+
+  local term1 = Terminal.get_or_create_term(1)
+  term1:toggle()
+end
+
 return {
   {
     'akinsho/toggleterm.nvim',
@@ -5,7 +23,6 @@ return {
     opts = {
       direction = 'horizontal',
       size = 15,
-      open_mapping = [[<C-_>]],
       hide_numbers = true,
       shade_terminals = false,
       start_in_insert = true,
@@ -13,8 +30,8 @@ return {
       persist_size = true,
     },
     keys = {
-      { '<C-_>', '<cmd>ToggleTerm<cr>', mode = { 'n', 't' }, desc = 'Terminal (Ctrl+/)' },
-      { '<C-/>', '<cmd>ToggleTerm<cr>', mode = { 'n', 't' }, desc = 'Terminal (Ctrl+/)' },
+      { '<C-_>',      smart_toggle_term,      mode = { 'n', 't' }, desc = 'Terminal (Ctrl+/)' },
+      { '<C-/>',      smart_toggle_term,      mode = { 'n', 't' }, desc = 'Terminal (Ctrl+/)' },
 
       { '<leader>t1', '<cmd>1ToggleTerm<cr>', desc = 'Terminal 1' },
       { '<leader>t2', '<cmd>2ToggleTerm<cr>', desc = 'Terminal 2' },
