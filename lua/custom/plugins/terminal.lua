@@ -44,14 +44,8 @@ return {
         callback = function()
           if vim.bo.buftype == 'terminal' then
             set_terminal_keymaps()
-            vim.schedule(function() vim.cmd 'startinsert' end)
           end
         end,
-      })
-
-      vim.api.nvim_create_autocmd('BufLeave', {
-        pattern = 'term://*toggleterm#*',
-        callback = function() vim.cmd 'stopinsert' end,
       })
     end,
   },
