@@ -2,7 +2,7 @@ return {
   {
     'mrcjkb/rustaceanvim',
     version = '^8', -- Recommended
-    lazy = false, -- This plugin is already lazy
+    lazy = false,   -- This plugin is already lazy
     config = function()
       vim.g.rustaceanvim = {
         server = {
@@ -11,6 +11,7 @@ return {
             ['rust-analyzer'] = {
               diagnostics = {
                 enable = true,
+                disabled = { 'unresolved-proc-macro' },
               },
               hover = {
                 actions = {
@@ -29,7 +30,7 @@ return {
               procMacro = {
                 enable = true,
                 ignored = {
-                  ['async-trait'] = { 'async_trait' },
+                  -- ['async-trait'] = { 'async_trait' },
                   ['napi-derive'] = { 'napi' },
                   ['async-recursion'] = { 'async_recursion' },
                 },
@@ -65,7 +66,7 @@ return {
           crates = {
             enabled = true,
             max_results = 8, -- The maximum number of search results to display
-            min_chars = 3, -- The minimum number of charaters to type before completions begin appearing
+            min_chars = 3,   -- The minimum number of charaters to type before completions begin appearing
           },
         },
         lsp = {
