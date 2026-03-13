@@ -117,3 +117,6 @@ if vim.g.neovide then
   --   },
   -- }
 end
+
+vim.opt.synmaxcol = 500
+vim.cmd.syntax("manual")

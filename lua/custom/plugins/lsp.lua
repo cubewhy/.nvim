@@ -38,14 +38,17 @@ return {
         group = vim.api.nvim_create_augroup('user-lsp-attach', { clear = true }),
         callback = function(event)
           local map = function(keys, func, desc) vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc }) end
-          local mapv = function(keys, func, desc) vim.keymap.set({ 'n', 'v' }, keys, func, { buffer = event.buf, desc = desc }) end
+          local mapv = function(keys, func, desc) vim.keymap.set({ 'n', 'v' }, keys, func,
+              { buffer = event.buf, desc = desc }) end
 
           map('<leader>cr', vim.lsp.buf.rename, '[R]ename Symbol')
           mapv('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
           map('<leader>cd', vim.diagnostic.open_float, '[C]ode [D]iagnostics')
 
           -- Source Action (Organize Imports etc.)
-          mapv('<leader>cA', function() vim.lsp.buf.code_action { context = { only = { 'source' }, diagnostics = {} } } end, '[C]ode Source [A]ctions')
+          mapv('<leader>cA',
+            function() vim.lsp.buf.code_action { context = { only = { 'source' }, diagnostics = {} } } end,
+            '[C]ode Source [A]ctions')
           map(
             '<leader>cu',
             function()
@@ -63,10 +66,10 @@ return {
           -- Inlay Hints Toggle
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client:supports_method 'textDocument/inlayHint' then
-            map('<leader>uh', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
+            map('<leader>uh',
+              function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end,
+              '[T]oggle Inlay [H]ints')
           end
-          -- enable inlay_hint by default
-          vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
         end,
       })
 
@@ -143,7 +146,8 @@ return {
           local b_icon = is_disabled and '󰅙 ' or '󰄬 '
 
           vim.notify(
-            string.format('Buffer Format: %s\n(Global is %s)', is_disabled and 'OFF' or 'ON', vim.g.disable_autoformat and 'OFF' or 'ON'),
+            string.format('Buffer Format: %s\n(Global is %s)', is_disabled and 'OFF' or 'ON',
+              vim.g.disable_autoformat and 'OFF' or 'ON'),
             is_disabled and vim.log.levels.WARN or vim.log.levels.INFO,
             { title = 'Formatter', icon = b_icon }
           )

@@ -6,6 +6,9 @@ return {
     config = function()
       vim.g.rustaceanvim = {
         server = {
+          -- on_attach = function(client, _)
+          --   client.server_capabilities.semanticTokensProvider = nil
+          -- end,
           default_settings = {
             -- rust-analyzer language server configuration
             ['rust-analyzer'] = {

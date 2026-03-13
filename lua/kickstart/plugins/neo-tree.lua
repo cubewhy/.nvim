@@ -13,11 +13,19 @@ return {
       'MunifTanjim/nui.nvim',
     },
     keys = {
-      { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
+      { '\\',        ':Neotree reveal<CR>', desc = 'NeoTree reveal',   silent = true },
       { '<leader>e', ':Neotree toggle<CR>', desc = 'Toggle NeoTr[e]e', silent = true }, -- lazyvim compat
     },
     opts = {
       filesystem = {
+        filesystem_watchers = {
+          enable = true,
+          -- I personally ignore the `.git` and `.direnv` directories since I use https://direnv.net
+          ignore_dirs = { "node_modules", ".direnv", ".git" },
+        },
+        modified = {
+          enabled = false
+        },
         use_libuv_file_watcher = true,
         async_directory_scan = 'auto',
         bind_to_cwd = true,
