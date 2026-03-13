@@ -309,6 +309,7 @@ return {
   },
   {
     "smjonas/inc-rename.nvim",
+    event = "BufEnter",
     config = function()
       require("inc_rename").setup {
         -- the name of the command
