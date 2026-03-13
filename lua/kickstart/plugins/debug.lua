@@ -145,9 +145,10 @@ return {
     "Weissle/persistent-breakpoints.nvim",
     event = "BufReadPost",
     keys = {
-      { '<leader>db', function() require('persistent-breakpoints.api').toggle_breakpoint() end,          desc = 'Toggle Breakpoint' },
+      { '<leader>db', function() require('persistent-breakpoints.api').toggle_breakpoint() end,          desc = 'Toggle [B]reakpoint' },
       { '<leader>dB', function() require('persistent-breakpoints.api').set_conditional_breakpoint() end, desc = 'Conditional Breakpoint' },
-      { '<leader>dc', function() require('persistent-breakpoints.api').clear_all_breakpoints() end,      desc = 'Clear Breakpoints' },
+      { '<leader>dc', function() require('persistent-breakpoints.api').clear_all_breakpoints() end,      desc = '[C]lear Breakpoints' },
+      { '<leader>dl', function() require('persistent-breakpoints.api').set_log_point() end,              desc = 'Set [L]og Point' },
     },
     config = function()
       require('persistent-breakpoints').setup {
