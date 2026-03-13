@@ -13,7 +13,8 @@ vim.api.nvim_create_autocmd('FileType', {
     'grug-far',
     'grug-far-help',
     'notify',
-    "dap-float"
+    "dap-float",
+    "oil"
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
