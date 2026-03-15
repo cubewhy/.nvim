@@ -56,6 +56,7 @@ return {
             },
           },
           lualine_x = {
+            'venv-selector',
             {
               require('noice').api.status.mode.get,
               cond = require('noice').api.status.mode.has,
