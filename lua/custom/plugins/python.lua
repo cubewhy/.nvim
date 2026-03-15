@@ -7,7 +7,9 @@ return {
     ft = 'python', -- Load when opening Python files
     keys = { { '<leader>cv', '<cmd>VenvSelect<cr>', desc = 'Select venv' } }, -- Open picker on keymap
     opts = {
-      options = {}, -- plugin-wide options
+      options = {
+        override_notify = false,
+      },
       search = {}, -- custom search definitions
     },
   },
