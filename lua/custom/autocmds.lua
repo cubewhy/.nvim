@@ -14,7 +14,7 @@ vim.api.nvim_create_autocmd('FileType', {
     'grug-far-help',
     'notify',
     'dap-float',
-    'oil',
+    -- 'oil',
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
