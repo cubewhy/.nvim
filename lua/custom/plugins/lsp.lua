@@ -3,7 +3,7 @@ return {
     'mason-org/mason.nvim',
     config = true,
     keys = {
-      { '<leader>cm', '<cmd>Mason<cr>', desc = '[M]ason' },
+      { '<leader>cm', '<cmd>Mason<cr>', desc = 'Mason' },
     },
   },
   {
@@ -40,12 +40,12 @@ return {
           local map = function(keys, func, desc) vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc }) end
           local mapv = function(keys, func, desc) vim.keymap.set({ 'n', 'v' }, keys, func, { buffer = event.buf, desc = desc }) end
 
-          vim.keymap.set('n', '<leader>cr', function() return ':IncRename ' .. vim.fn.expand '<cword>' end, { expr = true, desc = '[R]ename Symbol' })
-          mapv('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-          map('<leader>cd', vim.diagnostic.open_float, '[C]ode [D]iagnostics')
+          vim.keymap.set('n', '<leader>cr', function() return ':IncRename ' .. vim.fn.expand '<cword>' end, { expr = true, desc = 'Rename Symbol' })
+          mapv('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
+          map('<leader>cd', vim.diagnostic.open_float, 'Code Diagnostics')
 
           -- Source Action (Organize Imports etc.)
-          mapv('<leader>cA', function() vim.lsp.buf.code_action { context = { only = { 'source' }, diagnostics = {} } } end, '[C]ode Source [A]ctions')
+          mapv('<leader>cA', function() vim.lsp.buf.code_action { context = { only = { 'source' }, diagnostics = {} } } end, 'Code Source Actions')
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
 
@@ -61,13 +61,13 @@ return {
                   apply = true,
                 }
               end,
-              'Remove [U]nused Imports'
+              'Remove Unused Imports'
             )
           end
 
           -- Inlay Hints Toggle
           if client and client:supports_method 'textDocument/inlayHint' then
-            map('<leader>uh', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
+            map('<leader>uh', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, 'Toggle Inlay Hints')
           end
         end,
       })
@@ -124,7 +124,7 @@ return {
         '<leader>cf',
         function() require('conform').format { async = true, lsp_format = 'fallback' } end,
         mode = '',
-        desc = '[F]ormat buffer',
+        desc = 'Format buffer',
       },
       {
         '<leader>cF',
@@ -134,7 +134,7 @@ return {
             timeout_ms = 3000,
           }
         end,
-        desc = '[F]ormat Injected Languages',
+        desc = 'Format Injected Languages',
       },
       {
         '<leader>uf',

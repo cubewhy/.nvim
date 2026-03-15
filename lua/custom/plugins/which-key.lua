@@ -20,22 +20,18 @@ return {
 
     wk.add {
       -- categories
-      { '<leader>b', group = 'Buffer', icon = { icon = '󰓩 ', color = 'green' } },
-      { '<leader>d', group = 'Debug', icon = { icon = '󰃤 ', color = 'red' } },
-      { '<leader>c', group = 'Code', icon = { icon = ' ', color = 'blue' }, mode = { 'n', 'v' } },
       { '<leader>g', group = 'Git', icon = { icon = ' ', color = 'orange' }, mode = { 'n', 'v' } },
       { '<leader>q', group = 'Quit / Session', icon = { icon = '󰈆 ', color = 'red' } },
       { '<leader>s', group = 'Search', icon = { icon = ' ', color = 'cyan' }, mode = { 'n', 'v' } },
       { '<leader>f', group = 'Find', icon = { icon = ' ', color = 'cyan' }, mode = { 'n', 'v' } },
-      { '<leader>t', group = 'Terminal / [T]est', icon = { icon = ' ', color = 'yellow' } },
-      { '<leader>w', group = 'Window', icon = { icon = ' ', color = 'purple' } },
+      { '<leader>t', group = 'Terminal / Test', icon = { icon = ' ', color = 'yellow' } },
       { '<leader>x', group = 'Diagnostics', icon = { icon = '󱖫 ', color = 'red' } },
-      { '<leader>u', group = 'UI Toggles', icon = { icon = '󰙵 ', color = 'azure' } },
       { '<leader>n', group = 'Notifications', icon = { icon = '󰵅 ', color = 'blue' } },
 
-      { '<leader>l', '<cmd>Lazy<cr>', desc = 'Lazy.nvim', icon = { icon = '󰒲', color = 'azure' } },
+      { '<leader>l', '<cmd>Lazy<cr>', desc = 'Lazy.nvim', icon = { icon = '󰒲 ', color = 'azure' } },
 
       -- buffers
+      { '<leader>b', group = 'Buffer', icon = { icon = '󰓩 ', color = 'green' } },
       { 'H', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev Buffer', icon = { icon = ' ', color = 'cyan' } },
       { 'L', '<cmd>BufferLineCycleNext<cr>', desc = 'Next Buffer', icon = { icon = ' ', color = 'cyan' } },
       { '<leader>bc', '<cmd>BufferLinePickClose<cr>', desc = 'Pick Close', icon = { icon = '󰅙 ', color = 'red' } },
@@ -45,24 +41,29 @@ return {
       { '<leader>bb', '<cmd>e #<cr>', desc = 'Switch to Other Buffer', icon = { icon = '󰈔', color = 'green' } },
       { '<leader>`', '<cmd>e #<cr>', desc = 'Switch to Other Buffer', icon = { icon = '󰈔', color = 'green' } },
 
+      -- code
+      { '<leader>c', group = 'Code', icon = { icon = ' ', color = 'blue' }, mode = { 'n', 'v' } },
+      { '<leader>cv', desc = 'Select venv', icon = { icon = ' ', color = 'yellow' } },
+      { '<leader>cr', desc = 'Rename', icon = { icon = ' ', color = 'blue' } },
+
       -- Session
-      { '<leader>q', group = '[Q]uit / Session', icon = '󰦛 ' },
+      { '<leader>q', group = 'Quit / Session', icon = '󰦛 ' },
       { '<leader>qq', icon = { icon = '󰗼 ', color = 'red' }, desc = 'Quit All' },
       { '<leader>qs', icon = { icon = '󰦛 ', color = 'green' }, desc = 'Restore Session' },
       { '<leader>ql', icon = { icon = '󰦛 ', color = 'cyan' }, desc = 'Restore Last Session' },
       { '<leader>qd', icon = { icon = '󰅙 ', color = 'red' }, desc = 'Stop Saving Session' },
 
       -- window
-      { '<leader>w', group = '[W]indow', icon = { icon = ' ', color = 'purple' } },
+      { '<leader>w', group = 'Window', icon = { icon = ' ', color = 'purple' } },
       { '<leader>w-', '<C-w>s', desc = 'Split Below', icon = { icon = ' ', color = 'purple' } },
       { '<leader>w|', '<C-w>v', desc = 'Split Right', icon = { icon = ' ', color = 'purple' } },
       { '<leader>wd', '<C-w>c', desc = 'Close Window', icon = { icon = '󰅙 ', color = 'red' } },
-      { '<leader>ww', '<C-w>w', desc = 'Switch Window', icon = { icon = ' ', color = 'purple' } },
+      { '<leader>ww', '<C-w>w', desc = 'Switch Window', icon = { icon = ' ', color = 'purple' } },
       { '<leader>wh', '<C-w>h', desc = 'Move to Left', icon = { icon = ' ', color = 'purple' } },
       { '<leader>wj', '<C-w>j', desc = 'Move Down', icon = { icon = ' ', color = 'purple' } },
       { '<leader>wk', '<C-w>k', desc = 'Move Up', icon = { icon = ' ', color = 'purple' } },
       { '<leader>wl', '<C-w>l', desc = 'Move to Right', icon = { icon = ' ', color = 'purple' } },
-      { '<leader>wo', '<C-w>o', desc = 'Close Others', icon = { icon = '󰭖 ', color = 'red' } },
+      { '<leader>wo', '<C-w>o', desc = 'Close Others', icon = { icon = ' ', color = 'red' } },
       { '<leader>w=', '<C-w>=', desc = 'Equalize Size', icon = { icon = '󰦪 ', color = 'purple' } },
       { '<leader>w>', '<cmd>vertical resize +5<cr>', desc = 'Increase Width', icon = { icon = '󰁔 ', color = 'purple' } },
       { '<leader>w<', '<cmd>vertical resize -5<cr>', desc = 'Decrease Width', icon = { icon = '󰁍 ', color = 'purple' } },
@@ -80,9 +81,11 @@ return {
       -- { '<C-a>', '<cmd>wa<cr><esc>', mode = { 'n', 'i', 'v' }, desc = 'Save All', icon = { icon = '󰆓 ', color = 'orange' } },
 
       -- debugger
-      { '<leader>fd', group = '[D]ebugger', icon = { icon = '󰃤 ', color = 'red' }, mode = { 'n', 'v' } },
+      { '<leader>d', group = 'Debug', icon = { icon = '󰃤 ', color = 'red' } },
+      { '<leader>fd', group = 'Debugger', icon = { icon = '󰃤 ', color = 'red' }, mode = { 'n', 'v' } },
 
       -- ui toggles
+      { '<leader>u', group = 'UI', icon = { icon = '󰙵 ', color = 'azure' } },
       {
         '<leader>uf',
         desc = 'Autoformat (Buffer)',

@@ -5,7 +5,7 @@ return {
       { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } }, -- optional: you can also use fzf-lua, snacks, mini-pick instead.
     },
     ft = 'python', -- Load when opening Python files
-    keys = { { '<leader>cv', '<cmd>VenvSelect<cr>', desc = 'Select virtual environment' } }, -- Open picker on keymap
+    keys = { { '<leader>cv', '<cmd>VenvSelect<cr>', desc = 'Select venv' } }, -- Open picker on keymap
     opts = {
       options = {}, -- plugin-wide options
       search = {}, -- custom search definitions
