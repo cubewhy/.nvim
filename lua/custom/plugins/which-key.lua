@@ -20,20 +20,20 @@ return {
 
     wk.add {
       -- categories
-      { '<leader>b', group = '[B]uffer', icon = { icon = '󰓩 ', color = 'green' } },
-      { '<leader>d', group = '[D]ebug', icon = { icon = '󰃤 ', color = 'red' } },
-      { '<leader>c', group = '[C]ode', icon = { icon = ' ', color = 'blue' }, mode = { 'n', 'v' } },
-      { '<leader>g', group = '[G]it', icon = { icon = ' ', color = 'orange' }, mode = { 'n', 'v' } },
-      { '<leader>q', group = '[Q]uit / Session', icon = { icon = '󰈆 ', color = 'red' } },
-      { '<leader>s', group = '[S]earch', icon = { icon = ' ', color = 'cyan' }, mode = { 'n', 'v' } },
-      { '<leader>f', group = '[F]ind', icon = { icon = ' ', color = 'cyan' }, mode = { 'n', 'v' } },
-      { '<leader>t', group = '[T]erminal / [T]est', icon = { icon = ' ', color = 'yellow' } },
-      { '<leader>w', group = '[W]indow', icon = { icon = ' ', color = 'purple' } },
-      { '<leader>x', group = '[D]iagnostics', icon = { icon = '󱖫 ', color = 'red' } },
-      { '<leader>u', group = '[U]I Toggles', icon = { icon = '󰙵 ', color = 'azure' } },
-      { '<leader>n', group = '[N]otifications', icon = { icon = '󰵅 ', color = 'blue' } },
+      { '<leader>b', group = 'Buffer', icon = { icon = '󰓩 ', color = 'green' } },
+      { '<leader>d', group = 'Debug', icon = { icon = '󰃤 ', color = 'red' } },
+      { '<leader>c', group = 'Code', icon = { icon = ' ', color = 'blue' }, mode = { 'n', 'v' } },
+      { '<leader>g', group = 'Git', icon = { icon = ' ', color = 'orange' }, mode = { 'n', 'v' } },
+      { '<leader>q', group = 'Quit / Session', icon = { icon = '󰈆 ', color = 'red' } },
+      { '<leader>s', group = 'Search', icon = { icon = ' ', color = 'cyan' }, mode = { 'n', 'v' } },
+      { '<leader>f', group = 'Find', icon = { icon = ' ', color = 'cyan' }, mode = { 'n', 'v' } },
+      { '<leader>t', group = 'Terminal / [T]est', icon = { icon = ' ', color = 'yellow' } },
+      { '<leader>w', group = 'Window', icon = { icon = ' ', color = 'purple' } },
+      { '<leader>x', group = 'Diagnostics', icon = { icon = '󱖫 ', color = 'red' } },
+      { '<leader>u', group = 'UI Toggles', icon = { icon = '󰙵 ', color = 'azure' } },
+      { '<leader>n', group = 'Notifications', icon = { icon = '󰵅 ', color = 'blue' } },
 
-      { '<leader>l', '<cmd>Lazy<cr>', desc = '[L]azy.nvim', icon = { icon = '󰒲', color = 'azure' } },
+      { '<leader>l', '<cmd>Lazy<cr>', desc = 'Lazy.nvim', icon = { icon = '󰒲', color = 'azure' } },
 
       -- buffers
       { 'H', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev Buffer', icon = { icon = ' ', color = 'cyan' } },
