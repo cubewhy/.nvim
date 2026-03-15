@@ -13,8 +13,8 @@ vim.api.nvim_create_autocmd('FileType', {
     'grug-far',
     'grug-far-help',
     'notify',
-    "dap-float",
-    "oil"
+    'dap-float',
+    'oil',
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -26,39 +26,40 @@ if vim.g.neovide then
   -- auto toggle ime
   vim.g.neovide_input_ime = false
   local function set_ime(args)
-    if args.event:match("Enter$") then
+    if args.event:match 'Enter$' then
       vim.g.neovide_input_ime = true
     else
       vim.g.neovide_input_ime = false
     end
   end
 
-  local ime_input = vim.api.nvim_create_augroup("ime_input", { clear = true })
+  local ime_input = vim.api.nvim_create_augroup('ime_input', { clear = true })
 
-  vim.api.nvim_create_autocmd({ "InsertEnter", "InsertLeave" }, {
+  vim.api.nvim_create_autocmd({ 'InsertEnter', 'InsertLeave' }, {
     group = ime_input,
-    pattern = "*",
+    pattern = '*',
     callback = set_ime,
   })
 
-  vim.api.nvim_create_autocmd({ "CmdlineEnter", "CmdlineLeave" }, {
+  vim.api.nvim_create_autocmd({ 'CmdlineEnter', 'CmdlineLeave' }, {
     group = ime_input,
-    -- pattern = "[/\\?]",
-    pattern = "*",
+    -- pattern = '[/\\?]',
+    pattern = '*',
     callback = set_ime,
   })
 
-  vim.api.nvim_create_autocmd({ "TermEnter", "TermLeave" }, {
+  vim.api.nvim_create_autocmd({ 'TermEnter', 'TermLeave' }, {
     group = ime_input,
-    pattern = "*",
+    pattern = '*',
     callback = set_ime,
   })
 end
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'gitsendemail', 'conf', 'editorconfig', 'qf', 'checkhealth', 'less' },
+  callback = function(event) vim.bo[event.buf].syntax = vim.bo[event.buf].filetype end,
+})
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "gitsendemail", "conf", "editorconfig", "qf", "checkhealth", "less" },
-  callback = function(event)
-    vim.bo[event.buf].syntax = vim.bo[event.buf].filetype
-  end,
+vim.api.nvim_create_autocmd({ 'InsertLeave', 'BufLeave' }, {
+  callback = function() require('blink.cmp').cancel() end,
 })
