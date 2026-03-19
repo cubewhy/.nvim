@@ -31,10 +31,10 @@ return {
     'kevinhwang91/promise-async',
   },
   keys = {
-    { 'zR', function() require('ufo').openAllFolds() end,         desc = 'Open all folds' },
-    { 'zM', function() require('ufo').closeAllFolds() end,        desc = 'Close all folds' },
+    { 'zR', function() require('ufo').openAllFolds() end, desc = 'Open all folds' },
+    { 'zM', function() require('ufo').closeAllFolds() end, desc = 'Close all folds' },
     { 'zr', function() require('ufo').openFoldsExceptKinds() end, desc = 'Open folds except kinds' },
-    { 'zm', function() require('ufo').closeFoldsWith(0) end,      desc = 'Close folds with (0)' },
+    { 'zm', function() require('ufo').closeFoldsWith(0) end, desc = 'Close folds with (0)' },
     {
       'K',
       function()
@@ -47,9 +47,7 @@ return {
         local ok_ufo, ufo = pcall(require, 'ufo')
         local winid = ok_ufo and ufo.peekFoldedLinesUnderCursor() or nil
 
-        if not winid then
-          vim.lsp.buf.hover()
-        end
+        if not winid then vim.lsp.buf.hover() end
       end,
       desc = 'Smart Hover (DAP > UFO > LSP)',
     },
@@ -68,7 +66,7 @@ return {
     }
     local language_servers = vim.lsp.get_clients()
     for _, ls in ipairs(language_servers) do
-      require('lspconfig')[ls].setup {
+      vim.lsp.config[ls].setup {
         capabilities = capabilities,
         -- you can add other fields for setting up lsp server in this table
       }
