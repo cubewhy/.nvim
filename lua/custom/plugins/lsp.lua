@@ -197,7 +197,10 @@ return {
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettierd', stop_after_first = true },
-        nix = { 'alejandra' },
+        json = { 'prettierd', stop_after_first = true },
+        yaml = { 'prettierd', stop_after_first = true },
+        html = { 'prettierd', stop_after_first = true },
+        -- nix = { 'alejandra' },
       },
       formatters = {
         injected = {
