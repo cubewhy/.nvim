@@ -13,4 +13,7 @@ return {
       search = {}, -- custom search definitions
     },
   },
+  {
+    'Vimjas/vim-python-pep8-indent',
+  },
 }
