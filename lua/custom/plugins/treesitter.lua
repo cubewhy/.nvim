@@ -26,6 +26,11 @@ return {
           if lang then pcall(vim.treesitter.start, bufnr, lang) end
         end,
       })
+      require('nvim-treesitter').setup {
+        indent = {
+          enable = true,
+        },
+      }
     end,
   },
   {
