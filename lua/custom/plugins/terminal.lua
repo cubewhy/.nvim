@@ -1,8 +1,6 @@
 local function smart_toggle_term()
   local ok, Terminal = pcall(require, 'toggleterm.terminal')
-  if not ok then
-    return
-  end
+  if not ok then return end
 
   if vim.bo.buftype == 'terminal' then
     local term = Terminal.get_or_create_term(vim.b.toggle_number)
@@ -27,11 +25,11 @@ return {
       shade_terminals = false,
       start_in_insert = true,
       insert_mappings = true,
-      persist_size = true,
+      persist_size = false,
     },
     keys = {
-      { '<C-_>',      smart_toggle_term,      mode = { 'n', 't' }, desc = 'Terminal (Ctrl+/)' },
-      { '<C-/>',      smart_toggle_term,      mode = { 'n', 't' }, desc = 'Terminal (Ctrl+/)' },
+      { '<C-_>', smart_toggle_term, mode = { 'n', 't' }, desc = 'Terminal (Ctrl+/)' },
+      { '<C-/>', smart_toggle_term, mode = { 'n', 't' }, desc = 'Terminal (Ctrl+/)' },
 
       { '<leader>t1', '<cmd>1ToggleTerm<cr>', desc = 'Terminal 1' },
       { '<leader>t2', '<cmd>2ToggleTerm<cr>', desc = 'Terminal 2' },
@@ -59,9 +57,7 @@ return {
       vim.api.nvim_create_autocmd({ 'TermOpen', 'BufEnter' }, {
         pattern = 'term://*toggleterm#*',
         callback = function()
-          if vim.bo.buftype == 'terminal' then
-            set_terminal_keymaps()
-          end
+          if vim.bo.buftype == 'terminal' then set_terminal_keymaps() end
         end,
       })
     end,
