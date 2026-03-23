@@ -24,7 +24,7 @@ return {
       { '<leader>q', group = 'Quit / Session', icon = { icon = '󰈆 ', color = 'red' } },
       { '<leader>s', group = 'Search', icon = { icon = ' ', color = 'cyan' }, mode = { 'n', 'v' } },
       { '<leader>f', group = 'Find', icon = { icon = ' ', color = 'cyan' }, mode = { 'n', 'v' } },
-      { '<leader>t', group = 'Terminal / Test', icon = { icon = ' ', color = 'yellow' } },
+      { '<leader>t', group = 'Test', icon = { icon = '󰙨 ', color = 'yellow' } },
       { '<leader>x', group = 'Diagnostics', icon = { icon = '󱖫 ', color = 'red' } },
       { '<leader>n', group = 'Notifications', icon = { icon = '󰵅 ', color = 'blue' } },
 
