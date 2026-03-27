@@ -78,6 +78,14 @@ return {
       { '<C-j>', '<C-w><C-j>', desc = 'Window Down', icon = { icon = ' ', color = 'purple' } },
       { '<C-k>', '<C-w><C-k>', desc = 'Window Up', icon = { icon = ' ', color = 'purple' } },
 
+      -- tabs
+      { '<leader><TAB>', group = 'Tabs', icon = { icon = '󰓩 ', color = 'green' } },
+      { '<leader><TAB><TAB>', '<cmd>tabnew<cr>', desc = 'New Tab' },
+      { '<leader><TAB>d', '<cmd>tabclose<cr>', desc = 'Close Tab' },
+      { '<leader><TAB>o', '<cmd>tabonly<cr>', desc = 'Close Other Tabs' },
+      { '<leader><TAB>l', '<cmd>tabnext<cr>', desc = 'Next Tab' },
+      { '<leader><TAB>h', '<cmd>tabprevious<cr>', desc = 'Previous Tab' },
+
       -- file operations
       { '<C-s>', '<cmd>w<cr><esc>', mode = { 'n', 'i', 'v' }, desc = 'Save File', icon = { icon = '󰆓 ', color = 'green' } },
       -- { '<C-a>', '<cmd>wa<cr><esc>', mode = { 'n', 'i', 'v' }, desc = 'Save All', icon = { icon = '󰆓 ', color = 'orange' } },
