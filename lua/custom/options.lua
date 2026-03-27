@@ -81,7 +81,7 @@ vim.diagnostic.config {
   underline = true,
 
   -- Can switch between these as you prefer
-  virtual_text = false,  -- Text shows up at the end of the line
+  virtual_text = false, -- Text shows up at the end of the line
   virtual_lines = false, -- Teest shows up underneath the line, with virtual lines
 
   -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
@@ -103,7 +103,7 @@ vim.diagnostic.config {
 vim.opt.laststatus = 3
 
 if vim.g.neovide then
-  vim.o.guifont = "JetBrainsMono Nerd Font:h12"
+  vim.o.guifont = 'JetBrainsMono Nerd Font:h12'
 
   -- vim.g.clipboard = {
   --   name = "OSC 52",
@@ -119,4 +119,4 @@ if vim.g.neovide then
 end
 
 vim.opt.synmaxcol = 500
-vim.cmd.syntax("manual")
+vim.cmd.syntax 'manual'
