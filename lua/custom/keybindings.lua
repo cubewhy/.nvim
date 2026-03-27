@@ -48,32 +48,61 @@ vim.keymap.set('n', '<leader>w=', '<C-w>=', { desc = 'Equalize size' })
 vim.keymap.set('n', '<leader>w>', '<cmd>vertical resize +5<cr>', { desc = 'Increase Width' })
 vim.keymap.set('n', '<leader>w<', '<cmd>vertical resize -5<cr>', { desc = 'Decrease Width' })
 
-vim.keymap.set('n', '[e', function() vim.diagnostic.goto_prev { severity = vim.diagnostic.severity.ERROR } end, { desc = 'Go to previous [E]rror' })
-vim.keymap.set('n', ']e', function() vim.diagnostic.goto_next { severity = vim.diagnostic.severity.ERROR } end, { desc = 'Go to next [E]rror' })
-vim.keymap.set('n', '[w', function() vim.diagnostic.goto_prev() end, { desc = 'Go to previous [W]arning/Diagnostic' })
-vim.keymap.set('n', ']w', function() vim.diagnostic.goto_next() end, { desc = 'Go to next [W]arning/Diagnostic' })
+vim.keymap.set(
+  'n',
+  '[e',
+  function()
+    vim.diagnostic.jump {
+      count = -1,
+      severity = vim.diagnostic.severity.ERROR,
+    }
+  end,
+  { desc = 'Go to previous Error' }
+)
+
+vim.keymap.set(
+  'n',
+  ']e',
+  function()
+    vim.diagnostic.jump {
+      count = 1,
+      severity = vim.diagnostic.severity.ERROR,
+    }
+  end,
+  { desc = 'Go to next Error' }
+)
+
+vim.keymap.set('n', '[w', function()
+  vim.diagnostic.jump {
+    count = -1,
+  }
+end, { desc = 'Go to previous Warning/Diagnostic' })
+
+vim.keymap.set('n', ']w', function()
+  vim.diagnostic.jump {
+    count = 1,
+  }
+end, { desc = 'Go to next Warning/Diagnostic' })
+
 vim.keymap.set(
   'n',
   '[h',
   function()
-    vim.diagnostic.goto_prev {
+    vim.diagnostic.jump {
+      count = -1,
       severity = vim.diagnostic.severity.HINT,
       float = { border = 'none' },
     }
   end,
-  { desc = 'Go to previous [H]int' }
+  { desc = 'Go to previous Hint' }
 )
-vim.keymap.set(
-  'n',
-  ']h',
-  function()
-    vim.diagnostic.goto_next {
-      severity = vim.diagnostic.severity.HINT,
-      float = { border = 'none' },
-    }
-  end,
-  { desc = 'Go to next [H]int' }
-)
+
+vim.keymap.set('n', ']h', function()
+  vim.diagnostic.jump {
+    count = 1,
+    float = { border = 'none' },
+  }
+end, { desc = 'Go to next Hint' })
 
 -- indent
 vim.keymap.set('n', '<A-h>', '<<', { desc = 'Indent left' })
