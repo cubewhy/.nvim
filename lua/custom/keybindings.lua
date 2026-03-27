@@ -81,3 +81,11 @@ vim.keymap.set('v', '<A-h>', '<gv', { desc = 'Indent left' })
 
 vim.keymap.set('n', '<A-l>', '>>', { desc = 'Indent right' })
 vim.keymap.set('v', '<A-l>', '>gv', { desc = 'Indent right' })
+
+vim.keymap.del('n', 'grn')
+vim.keymap.del({ 'n', 'x' }, 'gra')
+vim.keymap.del('n', 'grr')
+vim.keymap.del('n', 'gri')
+vim.keymap.del('n', 'grt')
+vim.keymap.del('n', 'gO')
+vim.keymap.del({ 'i', 's' }, '<C-S>')
