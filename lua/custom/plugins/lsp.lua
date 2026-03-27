@@ -83,7 +83,8 @@ return {
           },
         },
         -- rust_analyzer = {},
-        basedpyright = {},
+        -- basedpyright = {},
+        ty = {},
         vtsls = {},
         taplo = {},
       }
