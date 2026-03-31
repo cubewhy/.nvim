@@ -194,13 +194,21 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        markdown = { 'injected' },
+        markdown = { 'prettierd', 'injected' },
         sql = { 'sql_formatter' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettierd', stop_after_first = true },
+        typescript = { 'prettierd', stop_after_first = true },
+        jsx = { 'prettierd', stop_after_first = true },
+        vue = { 'prettierd', stop_after_first = true },
+        less = { 'prettierd', stop_after_first = true },
+        scss = { 'prettierd', stop_after_first = true },
+        graphql = { 'prettierd', stop_after_first = true },
+        flow = { 'prettierd', stop_after_first = true },
+        css = { 'prettierd', stop_after_first = true },
         json = { 'prettierd', stop_after_first = true },
         yaml = { 'prettierd', stop_after_first = true },
         html = { 'prettierd', stop_after_first = true },
@@ -337,6 +345,7 @@ return {
   },
   {
     'Wansmer/symbol-usage.nvim',
+    enabled = false,
     event = 'BufReadPre',
     config = function()
       local function text_format(symbol)
