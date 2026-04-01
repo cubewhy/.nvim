@@ -56,10 +56,46 @@ return {
 
       vim.api.nvim_create_autocmd({ 'TermOpen', 'BufEnter' }, {
         pattern = 'term://*toggleterm#*',
-        callback = function()
+        callback = function(args)
           if vim.bo.buftype == 'terminal' then
-            if vim.fn.has 'nvim-0.10' == 1 then vim.wo.winfixbuf = true end
+            -- if vim.fn.has 'nvim-0.10' == 1 then vim.wo.winfixbuf = true end
             set_terminal_keymaps()
+            vim.w.toggleterm_buf = args.buf
+          end
+        end,
+      })
+
+      vim.api.nvim_create_autocmd('BufEnter', {
+        callback = function(args)
+          local win = vim.api.nvim_get_current_win()
+          local buf = args.buf
+
+          if vim.w[win].toggleterm_buf and vim.bo[buf].buftype ~= 'terminal' then
+            local term_buf = vim.w[win].toggleterm_buf
+            if not vim.api.nvim_buf_is_valid(term_buf) then
+              vim.w[win].toggleterm_buf = nil
+              return
+            end
+
+            vim.api.nvim_win_set_buf(win, term_buf)
+
+            local target_win
+            for _, w in ipairs(vim.api.nvim_list_wins()) do
+              local b = vim.api.nvim_win_get_buf(w)
+              if vim.bo[b].buftype == '' and w ~= win then
+                target_win = w
+                break
+              end
+            end
+
+            if target_win then
+              vim.api.nvim_set_current_win(target_win)
+              vim.api.nvim_win_set_buf(target_win, buf)
+            else
+              vim.cmd 'wincmd p'
+              vim.cmd 'split'
+              vim.api.nvim_win_set_buf(0, buf)
+            end
           end
         end,
       })
