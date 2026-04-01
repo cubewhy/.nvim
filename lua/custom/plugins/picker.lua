@@ -103,6 +103,17 @@ return {
               ['q'] = require('telescope.actions').close,
             },
           },
+          get_selection_window = function()
+            local wins = vim.api.nvim_list_wins()
+            for _, win in ipairs(wins) do
+              local buf = vim.api.nvim_win_get_buf(win)
+              if vim.bo[buf].buftype == '' and not vim.wo[win].winfixbuf then return win end
+            end
+            vim.cmd 'vsplit'
+            local new_win = vim.api.nvim_get_current_win()
+            vim.wo[new_win].winfixbuf = false
+            return new_win
+          end,
         },
         extensions = {
           ['ui-select'] = {
