@@ -57,7 +57,10 @@ return {
       vim.api.nvim_create_autocmd({ 'TermOpen', 'BufEnter' }, {
         pattern = 'term://*toggleterm#*',
         callback = function()
-          if vim.bo.buftype == 'terminal' then set_terminal_keymaps() end
+          if vim.bo.buftype == 'terminal' then
+            if vim.fn.has 'nvim-0.10' == 1 then vim.wo.winfixbuf = true end
+            set_terminal_keymaps()
+          end
         end,
       })
     end,
