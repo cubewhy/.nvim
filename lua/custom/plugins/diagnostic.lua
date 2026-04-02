@@ -19,7 +19,7 @@ return {
 
           vim.diagnostic.enable(new_state)
         end,
-        desc = 'Toggle [D]iagnostics',
+        desc = 'Toggle Diagnostics',
       },
     },
     opts = {
@@ -74,12 +74,12 @@ return {
             vim.cmd 'copen'
           end
         end,
-        desc = '[Q]uickfix List',
+        desc = 'Quickfix List',
       },
       {
         '<leader>xQ',
         '<cmd>Trouble qflist toggle<cr>',
-        desc = '[Q]uickfix List (Trouble)',
+        desc = 'Quickfix List (Trouble)',
       },
     },
   },

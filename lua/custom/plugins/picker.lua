@@ -19,31 +19,31 @@ return {
     -- Refactored keybindings into lazy.nvim keys table
     keys = {
       -- Basic Search
-      { '<leader>sh', function() require('telescope.builtin').help_tags() end, desc = '[S]earch [H]elp' },
-      { '<leader>sk', function() require('telescope.builtin').keymaps() end, desc = '[S]earch [K]eymaps' },
-      { '<leader>sf', function() require('telescope.builtin').find_files() end, desc = '[S]earch [F]iles' },
-      { '<leader>sc', function() require('telescope.builtin').commands() end, desc = '[S]earch [C]ommands' },
-      { '<leader>sd', function() require('telescope.builtin').diagnostics() end, desc = '[S]earch [D]iagnostics' },
+      { '<leader>sh', function() require('telescope.builtin').help_tags() end, desc = 'Search Help' },
+      { '<leader>sk', function() require('telescope.builtin').keymaps() end, desc = 'Search Keymaps' },
+      { '<leader>sf', function() require('telescope.builtin').find_files() end, desc = 'Search Files' },
+      { '<leader>sc', function() require('telescope.builtin').commands() end, desc = 'Search Commands' },
+      { '<leader>sd', function() require('telescope.builtin').diagnostics() end, desc = 'Search Diagnostics' },
       {
         '<leader>sD',
         function() require('telescope.builtin').diagnostics { bufnr = 0 } end,
-        desc = '[S]earch [D]ocument Diagnostics',
+        desc = 'Search Document Diagnostics',
       },
-      { '<leader>sr', function() require('telescope.builtin').resume() end, desc = '[S]earch [R]esume' },
-      { '<leader>sg', function() require('telescope.builtin').live_grep() end, desc = '[S]earch by [G]rep' },
+      { '<leader>sr', function() require('telescope.builtin').resume() end, desc = 'Search Resume' },
+      { '<leader>sg', function() require('telescope.builtin').live_grep() end, desc = 'Search by Grep' },
       { '<leader>/', function() require('telescope.builtin').live_grep() end, desc = 'Live Grep In Workspace' },
-      { '<leader>su', function() require('telescope').extensions.undo.undo() end, desc = '[S]earch [U]ndo history' },
-      { '<leader>s.', function() require('telescope.builtin').oldfiles() end, desc = '[S]earch Recent Files' },
+      { '<leader>su', function() require('telescope').extensions.undo.undo() end, desc = 'Search Undo history' },
+      { '<leader>s.', function() require('telescope.builtin').oldfiles() end, desc = 'Search Recent Files' },
       { '<leader><leader>', function() require('telescope.builtin').buffers() end, desc = 'Find existing buffers' },
       {
         '<leader>sw',
         function() require('telescope.builtin').grep_string() end,
         mode = { 'n', 'v' },
-        desc = '[S]earch current [W]ord',
+        desc = 'Search current Word',
       },
 
       -- Specialized Search
-      { '<leader>sn', function() require('telescope.builtin').find_files { cwd = vim.fn.stdpath 'config' } end, desc = '[S]earch [N]eovim files' },
+      { '<leader>sn', function() require('telescope.builtin').find_files { cwd = vim.fn.stdpath 'config' } end, desc = 'Search Neovim files' },
       {
         '<leader>sb',
         function()

@@ -25,7 +25,7 @@ return {
 
       -- Add your own debuggers here
       'leoluz/nvim-dap-go',
-      "mrcjkb/rustaceanvim",
+      'mrcjkb/rustaceanvim',
     },
     keys = {
       -- Basic debugging keymaps, feel free to change to your liking!
@@ -55,17 +55,17 @@ return {
         function() require('dapui').toggle() end,
         desc = 'Debug: See last session result.',
       },
-      { '<leader>fdc', function() require('telescope').extensions.dap.commands {} end,         desc = 'Search [D]ebug [C]ommands' },
-      { '<leader>fdg', function() require('telescope').extensions.dap.configurations {} end,   desc = 'Search [D]ebug [G]o (Configs)' },
-      { '<leader>fdb', function() require('telescope').extensions.dap.list_breakpoints {} end, desc = 'Search [D]ebug [B]reakpoints' },
-      { '<leader>fdv', function() require('telescope').extensions.dap.variables {} end,        desc = 'Search [D]ebug [V]ariables' },
-      { '<leader>fdf', function() require('telescope').extensions.dap.frames {} end,           desc = 'Search [D]ebug [F]rames' },
+      { '<leader>fdc', function() require('telescope').extensions.dap.commands {} end, desc = 'Search Debug Commands' },
+      { '<leader>fdg', function() require('telescope').extensions.dap.configurations {} end, desc = 'Search Debug Go (Configs)' },
+      { '<leader>fdb', function() require('telescope').extensions.dap.list_breakpoints {} end, desc = 'Search Debug Breakpoints' },
+      { '<leader>fdv', function() require('telescope').extensions.dap.variables {} end, desc = 'Search Debug Variables' },
+      { '<leader>fdf', function() require('telescope').extensions.dap.frames {} end, desc = 'Search Debug Frames' },
     },
     config = function()
       local dap = require 'dap'
       local dapui = require 'dapui'
 
-      require('telescope').load_extension('dap')
+      require('telescope').load_extension 'dap'
 
       require('mason-nvim-dap').setup {
         -- Makes a best effort to setup the various debuggers with
@@ -111,7 +111,7 @@ return {
       vim.api.nvim_set_hl(0, 'DapStop', { fg = '#ffcc00' })
       local breakpoint_icons = vim.g.have_nerd_font
           and { Breakpoint = '', BreakpointCondition = '', BreakpointRejected = '', LogPoint = '', Stopped = '' }
-          or { Breakpoint = '●', BreakpointCondition = '⊜', BreakpointRejected = '⊘', LogPoint = '◆', Stopped = '⭔' }
+        or { Breakpoint = '●', BreakpointCondition = '⊜', BreakpointRejected = '⊘', LogPoint = '◆', Stopped = '⭔' }
       for type, icon in pairs(breakpoint_icons) do
         local tp = 'Dap' .. type
         local hl = (type == 'Stopped') and 'DapStop' or 'DapBreak'
@@ -133,33 +133,33 @@ return {
     end,
   },
   {
-    "nvim-neotest/neotest",
+    'nvim-neotest/neotest',
     dependencies = {
-      "nvim-neotest/nvim-nio",
-      "nvim-lua/plenary.nvim",
-      "antlr/antlr4",
-      "antoinemadec/FixCursorHold.nvim",
-      "nvim-treesitter/nvim-treesitter",
+      'nvim-neotest/nvim-nio',
+      'nvim-lua/plenary.nvim',
+      'antlr/antlr4',
+      'antoinemadec/FixCursorHold.nvim',
+      'nvim-treesitter/nvim-treesitter',
     },
     keys = {
       -- Running Tests
-      { "<leader>tr", function() require("neotest").run.run() end,                                        desc = "Run Nearest" },
-      { "<leader>tf", function() require("neotest").run.run(vim.fn.expand("%")) end,                      desc = "Run File" },
-      { "<leader>ts", function() require("neotest").run.run(vim.fn.getcwd()) end,                         desc = "Run Suite" },
-      { "<leader>tx", function() require("neotest").stop() end,                                           desc = "Stop" },
+      { '<leader>tr', function() require('neotest').run.run() end, desc = 'Run Nearest' },
+      { '<leader>tf', function() require('neotest').run.run(vim.fn.expand '%') end, desc = 'Run File' },
+      { '<leader>ts', function() require('neotest').run.run(vim.fn.getcwd()) end, desc = 'Run Suite' },
+      { '<leader>tx', function() require('neotest').stop() end, desc = 'Stop' },
 
       -- UI & Visualization
-      { "<leader>tt", function() require("neotest").summary.toggle() end,                                 desc = "Toggle Summary" },
-      { "<leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, desc = "Show Output" },
-      { "<leader>tO", function() require("neotest").output_panel.toggle() end,                            desc = "Toggle Output Panel" },
+      { '<leader>tt', function() require('neotest').summary.toggle() end, desc = 'Toggle Summary' },
+      { '<leader>to', function() require('neotest').output.open { enter = true, auto_close = true } end, desc = 'Show Output' },
+      { '<leader>tO', function() require('neotest').output_panel.toggle() end, desc = 'Toggle Output Panel' },
 
       -- Debugging & Monitoring
-      { "<leader>td", function() require("neotest").run.run({ strategy = "dap" }) end,                    desc = "Debug Nearest" },
-      { "<leader>tw", function() require("neotest").watch.toggle(vim.fn.expand("%")) end,                 desc = "Watch File" },
+      { '<leader>td', function() require('neotest').run.run { strategy = 'dap' } end, desc = 'Debug Nearest' },
+      { '<leader>tw', function() require('neotest').watch.toggle(vim.fn.expand '%') end, desc = 'Watch File' },
 
       -- Navigation
-      { "[n",         function() require("neotest").jump.prev({ status = "failed" }) end,                 desc = "Prev Failed Test" },
-      { "]n",         function() require("neotest").jump.next({ status = "failed" }) end,                 desc = "Next Failed Test" },
+      { '[n', function() require('neotest').jump.prev { status = 'failed' } end, desc = 'Prev Failed Test' },
+      { ']n', function() require('neotest').jump.next { status = 'failed' } end, desc = 'Next Failed Test' },
     },
     opts = {
       status = { virtual_text = true },
@@ -169,19 +169,19 @@ return {
     },
   },
   {
-    "Weissle/persistent-breakpoints.nvim",
-    event = "BufReadPost",
+    'Weissle/persistent-breakpoints.nvim',
+    event = 'BufReadPost',
     keys = {
-      { '<leader>db', function() require('persistent-breakpoints.api').toggle_breakpoint() end,          desc = 'Toggle [B]reakpoint' },
+      { '<leader>db', function() require('persistent-breakpoints.api').toggle_breakpoint() end, desc = 'Toggle Breakpoint' },
       { '<leader>dB', function() require('persistent-breakpoints.api').set_conditional_breakpoint() end, desc = 'Conditional Breakpoint' },
-      { '<leader>dc', function() require('persistent-breakpoints.api').clear_all_breakpoints() end,      desc = '[C]lear Breakpoints' },
-      { '<leader>dl', function() require('persistent-breakpoints.api').set_log_point() end,              desc = 'Set [L]og Point' },
+      { '<leader>dc', function() require('persistent-breakpoints.api').clear_all_breakpoints() end, desc = 'Clear Breakpoints' },
+      { '<leader>dl', function() require('persistent-breakpoints.api').set_log_point() end, desc = 'Set Log Point' },
     },
     config = function()
       require('persistent-breakpoints').setup {
-        save_dir = vim.fn.stdpath('data') .. '/nvim_checkpoints',
+        save_dir = vim.fn.stdpath 'data' .. '/nvim_checkpoints',
         -- when to load the breakpoints? "BufReadPost" is recommanded.
-        load_breakpoints_event = { "BufReadPost" },
+        load_breakpoints_event = { 'BufReadPost' },
         -- record the performance of different function. run :lua require('persistent-breakpoints.api').print_perf_data() to see the result.
         perf_record = false,
         -- perform callback when loading a persisted breakpoint
@@ -192,25 +192,25 @@ return {
         -- set this to true if the breakpoints are not loaded when you are using a session-like plugin.
         always_reload = false,
       }
-    end
+    end,
   },
   {
     'theHamsta/nvim-dap-virtual-text',
     dependencies = {
       'mfussenegger/nvim-dap',
-      'nvim-treesitter/nvim-treesitter'
+      'nvim-treesitter/nvim-treesitter',
     },
     config = function()
-      require("nvim-dap-virtual-text").setup {
-        enabled = true,                     -- enable this plugin (the default)
-        enabled_commands = true,            -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
+      require('nvim-dap-virtual-text').setup {
+        enabled = true, -- enable this plugin (the default)
+        enabled_commands = true, -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
         highlight_changed_variables = true, -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
-        highlight_new_as_changed = false,   -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
-        show_stop_reason = true,            -- show stop reason when stopped for exceptions
-        commented = false,                  -- prefix virtual text with comment string
-        only_first_definition = true,       -- only show virtual text at first definition (if there are multiple)
-        all_references = false,             -- show virtual text on all all references of the variable (not only definitions)
-        clear_on_continue = false,          -- clear virtual text on "continue" (might cause flickering when stepping)
+        highlight_new_as_changed = false, -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
+        show_stop_reason = true, -- show stop reason when stopped for exceptions
+        commented = false, -- prefix virtual text with comment string
+        only_first_definition = true, -- only show virtual text at first definition (if there are multiple)
+        all_references = false, -- show virtual text on all all references of the variable (not only definitions)
+        clear_on_continue = false, -- clear virtual text on "continue" (might cause flickering when stepping)
         --- A callback that determines how a variable is displayed or whether it should be omitted
         --- @param variable Variable https://microsoft.github.io/debug-adapter-protocol/specification#Types_Variable
         --- @param buf number
@@ -221,20 +221,20 @@ return {
         display_callback = function(variable, buf, stackframe, node, options)
           -- by default, strip out new line characters
           if options.virt_text_pos == 'inline' then
-            return ' = ' .. variable.value:gsub("%s+", " ")
+            return ' = ' .. variable.value:gsub('%s+', ' ')
           else
-            return variable.name .. ' = ' .. variable.value:gsub("%s+", " ")
+            return variable.name .. ' = ' .. variable.value:gsub('%s+', ' ')
           end
         end,
         -- position of virtual text, see `:h nvim_buf_set_extmark()`, default tries to inline the virtual text. Use 'eol' to set to end of line
         virt_text_pos = vim.fn.has 'nvim-0.10' == 1 and 'inline' or 'eol',
 
         -- experimental features:
-        all_frames = false,     -- show virtual text for all stack frames not only current. Only works for debugpy on my machine.
-        virt_lines = false,     -- show virtual lines instead of virtual text (will flicker!)
-        virt_text_win_col = nil -- position the virtual text at a fixed window column (starting from the first text column) ,
+        all_frames = false, -- show virtual text for all stack frames not only current. Only works for debugpy on my machine.
+        virt_lines = false, -- show virtual lines instead of virtual text (will flicker!)
+        virt_text_win_col = nil, -- position the virtual text at a fixed window column (starting from the first text column) ,
         -- e.g. 80 to position at column 80, see `:h nvim_buf_set_extmark()`
       }
-    end
-  }
+    end,
+  },
 }
