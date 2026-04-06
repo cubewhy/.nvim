@@ -15,6 +15,7 @@ vim.api.nvim_create_autocmd('FileType', {
     'notify',
     'dap-float',
     'oil',
+    'lazygit',
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
