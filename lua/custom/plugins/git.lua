@@ -8,6 +8,10 @@ return {
       { '<leader>gg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
     },
     config = function()
+      vim.api.nvim_create_autocmd('TermEnter', {
+        pattern = 'lazygit',
+        callback = function() vim.o.winfixbuf = true end,
+      })
       vim.opt.termguicolors = true
       vim.api.nvim_set_hl(0, 'LazyGitBorder', { fg = 'NONE', bg = 'NONE' })
       vim.api.nvim_set_hl(0, 'LazyGitFloat', { link = 'Normal' })
