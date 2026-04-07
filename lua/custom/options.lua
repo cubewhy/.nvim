@@ -82,7 +82,7 @@ vim.diagnostic.config {
 
   -- Can switch between these as you prefer
   virtual_text = false, -- Text shows up at the end of the line
-  virtual_lines = false, -- Teest shows up underneath the line, with virtual lines
+  virtual_lines = false, -- Text shows up underneath the line, with virtual lines
 }
 
 vim.opt.laststatus = 3
