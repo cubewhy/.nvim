@@ -90,17 +90,19 @@ vim.opt.laststatus = 3
 if vim.g.neovide then
   vim.o.guifont = 'JetBrainsMono Nerd Font:h12'
 else
-  -- vim.g.clipboard = {
-  --   name = 'OSC 52',
-  --   copy = {
-  --     ['+'] = require('vim.ui.clipboard.osc52').copy '+',
-  --     ['*'] = require('vim.ui.clipboard.osc52').copy '*',
-  --   },
-  --   paste = {
-  --     ['+'] = require('vim.ui.clipboard.osc52').paste '+',
-  --     ['*'] = require('vim.ui.clipboard.osc52').paste '*',
-  --   },
-  -- }
+  if os.getenv 'TERM' == 'xterm-kitty' then
+    vim.g.clipboard = {
+      name = 'OSC 52',
+      copy = {
+        ['+'] = require('vim.ui.clipboard.osc52').copy '+',
+        ['*'] = require('vim.ui.clipboard.osc52').copy '*',
+      },
+      paste = {
+        ['+'] = require('vim.ui.clipboard.osc52').paste '+',
+        ['*'] = require('vim.ui.clipboard.osc52').paste '*',
+      },
+    }
+  end
 end
 
 vim.opt.synmaxcol = 500
