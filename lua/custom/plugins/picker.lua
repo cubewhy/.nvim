@@ -81,7 +81,6 @@ return {
       local telescope = require 'telescope'
       local actions = require 'telescope.actions'
 
-      require('telescope').setup {
       local function flash(prompt_bufnr)
         require('flash').jump {
           pattern = '^',
@@ -99,6 +98,7 @@ return {
         }
       end
 
+      telescope.setup {
         defaults = {
           -- General appearance
           path_display = { 'smart' },
@@ -147,10 +147,10 @@ return {
       }
 
       -- Load extensions if installed
-      pcall(require('telescope').load_extension, 'fzf')
-      pcall(require('telescope').load_extension, 'ui-select')
-      pcall(require('telescope').load_extension, 'live_grep_args')
-      pcall(require('telescope').load_extension, 'undo')
+      pcall(telescope.load_extension, 'fzf')
+      pcall(telescope.load_extension, 'ui-select')
+      pcall(telescope.load_extension, 'live_grep_args')
+      pcall(telescope.load_extension, 'undo')
 
       -- [[ LSP Keybindings via Autocmd ]]
       -- These are only mapped when an LSP attaches to a buffer
