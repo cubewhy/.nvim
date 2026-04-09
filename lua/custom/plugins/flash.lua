@@ -1,6 +1,9 @@
 return {
   {
     'folke/flash.nvim',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+    },
     event = 'VeryLazy',
     ---@type Flash.Config
     opts = {},
@@ -11,5 +14,20 @@ return {
       { 'R', mode = { 'o', 'x' }, function() require('flash').treesitter_search() end, desc = 'Treesitter Search' },
       { '<c-s>', mode = { 'c' }, function() require('flash').toggle() end, desc = 'Toggle Flash Search' },
     },
+    config = function()
+      vim.keymap.set(
+        { 'n', 'x', 'o' },
+        '<c-space>',
+        function()
+          require('flash').treesitter {
+            actions = {
+              ['<c-space>'] = 'next',
+              ['<BS>'] = 'prev',
+            },
+          }
+        end,
+        { desc = 'Treesitter incremental selection' }
+      )
+    end,
   },
 }
