@@ -85,7 +85,12 @@ return {
         -- rust_analyzer = {},
         basedpyright = {},
         -- ty = {},
-        vtsls = {},
+        vtsls = {
+          settings = {
+            vtsls = {},
+            typescript = {},
+          },
+        },
         taplo = {},
       }
 
