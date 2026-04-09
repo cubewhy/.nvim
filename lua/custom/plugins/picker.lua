@@ -82,6 +82,23 @@ return {
       local actions = require 'telescope.actions'
 
       require('telescope').setup {
+      local function flash(prompt_bufnr)
+        require('flash').jump {
+          pattern = '^',
+          label = { after = { 0, 0 } },
+          search = {
+            mode = 'search',
+            exclude = {
+              function(win) return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= 'TelescopeResults' end,
+            },
+          },
+          action = function(match)
+            local picker = require('telescope.actions.state').get_current_picker(prompt_bufnr)
+            picker:set_selection(match.pos[1] - 1)
+          end,
+        }
+      end
+
         defaults = {
           -- General appearance
           path_display = { 'smart' },
@@ -92,6 +109,7 @@ return {
 
               ['<C-Up>'] = actions.cycle_history_prev,
               ['<C-Down>'] = actions.cycle_history_next,
+              ['<c-s>'] = flash,
             },
             n = {
               ['<C-k>'] = require('telescope.actions').move_selection_previous, -- move to prev result
@@ -101,6 +119,7 @@ return {
               ['<C-Down>'] = actions.cycle_history_next,
 
               ['q'] = require('telescope.actions').close,
+              ['s'] = flash,
             },
           },
           -- get_selection_window = function()
