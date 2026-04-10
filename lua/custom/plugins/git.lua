@@ -43,9 +43,6 @@ return {
       { '<leader>gb', function() require('gitsigns').blame_line { full = true } end, desc = 'Blame Line' },
       { '<leader>gd', function() require('gitsigns').diffthis() end, desc = 'Diff Against Index' },
       { '<leader>gD', function() require('gitsigns').diffthis '~' end, desc = 'Diff Against Last Commit' },
-
-      -- Toggles
-      { '<leader>ub', function() require('gitsigns').toggle_current_line_blame() end, desc = 'Toggle Git Blame Line' },
     },
     config = function()
       require('gitsigns').setup {

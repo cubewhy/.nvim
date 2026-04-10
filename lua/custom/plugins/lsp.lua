@@ -62,11 +62,6 @@ return {
             end, 'Remove Unused Imports')
           end
 
-          -- Inlay Hints Toggle
-          if client and client:supports_method 'textDocument/inlayHint' then
-            map('<leader>uh', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, 'Toggle Inlay Hints')
-          end
-
           if client and client:supports_method 'textDocument/codeLens' then
             map('<leader>cc', vim.lsp.codelens.run, 'Run CodeLens')
             map('<leader>cC', function() vim.lsp.codelens.enable(true, { bufnr = event.buf }) end, 'Refresh CodeLens')
@@ -148,39 +143,6 @@ return {
           }
         end,
         desc = 'Format Injected Languages',
-      },
-      {
-        '<leader>uf',
-        function()
-          local is_disabled = not vim.b.disable_autoformat
-          vim.b.disable_autoformat = is_disabled
-
-          local b_icon = is_disabled and '󰅙 ' or '󰄬 '
-
-          vim.notify(
-            string.format('Buffer Format: %s\n(Global is %s)', is_disabled and 'OFF' or 'ON', vim.g.disable_autoformat and 'OFF' or 'ON'),
-            is_disabled and vim.log.levels.WARN or vim.log.levels.INFO,
-            { title = 'Formatter', icon = b_icon }
-          )
-        end,
-        desc = 'Toggle format-on-save (buffer)',
-      },
-      {
-        '<leader>uF',
-        function()
-          local is_disabled = not vim.g.disable_autoformat
-          vim.g.disable_autoformat = is_disabled
-
-          local g_icon = is_disabled and '󰅙 ' or '󰄬 '
-          local b_status = vim.b.disable_autoformat and 'OFF' or 'ON'
-
-          vim.notify(
-            string.format('Global Format: %s\n(Buffer is %s)', is_disabled and 'OFF' or 'ON', b_status),
-            is_disabled and vim.log.levels.WARN or vim.log.levels.INFO,
-            { title = 'Formatter', icon = g_icon }
-          )
-        end,
-        desc = 'Toggle format-on-save (global)',
       },
     },
     opts = {

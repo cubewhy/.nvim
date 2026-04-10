@@ -94,77 +94,112 @@ return {
       { '<leader>fd', group = 'Debugger', icon = { icon = '󰃤 ', color = 'red' }, mode = { 'n', 'v' } },
 
       -- ui toggles
-      { '<leader>u', group = 'UI', icon = { icon = '󰙵 ', color = 'azure' } },
       {
-        '<leader>uf',
-        desc = 'Autoformat (Buffer)',
-        icon = function() return toggle_icon(not vim.b.disable_autoformat) end,
-      },
-      {
-        '<leader>uF',
-        desc = 'Autoformat (Global)',
-        icon = function() return toggle_icon(not vim.g.disable_autoformat) end,
-      },
-
-      {
-        '<leader>ud',
-        function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end,
-        desc = 'Diagnostics',
-        icon = function() return toggle_icon(vim.diagnostic.is_enabled()) end,
-      },
-      {
-        '<leader>uh',
-        function()
-          if vim.lsp.inlay_hint then vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {}) end
-        end,
-        desc = 'Inlay Hints',
-        icon = function() return toggle_icon(vim.lsp.inlay_hint and vim.lsp.inlay_hint.is_enabled {}) end,
-      },
-      {
-        '<leader>uc',
-        function()
-          if vim.lsp.codelens then vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled {}) end
-        end,
-        desc = 'Codelens',
-        icon = function() return toggle_icon(vim.lsp.codelens and vim.lsp.codelens.is_enabled {}) end,
-      },
-      {
-        '<leader>uw',
-        function() vim.wo.wrap = not vim.wo.wrap end,
-        desc = 'Line Wrap',
-        icon = function() return toggle_icon(vim.wo.wrap) end,
-      },
-      {
-        '<leader>uT',
-        function()
+        '<leader>u',
+        group = 'UI',
+        icon = { icon = '󰙵 ', color = 'azure' },
+        expand = function()
           local bufnr = vim.api.nvim_get_current_buf()
-          if vim.treesitter.highlighter.active[bufnr] then
-            vim.treesitter.stop(bufnr)
-            vim.notify('Treesitter Highlighting: OFF', vim.log.levels.WARN)
-          else
-            vim.treesitter.start(bufnr)
-            vim.notify('Treesitter Highlighting: ON', vim.log.levels.INFO)
-          end
-        end,
-        desc = 'Treesitter Highlight',
-        icon = function()
-          local bufnr = vim.api.nvim_get_current_buf()
-          local is_active = vim.treesitter.highlighter.active[bufnr] ~= nil
-          return toggle_icon(is_active)
-        end,
-      },
 
-      {
-        '<leader>ut',
-        function()
-          local ok, tsc = pcall(require, 'treesitter-context')
-          if ok then tsc.toggle() end
-        end,
-        desc = 'Treesitter Context',
-        icon = function()
-          local ok, tsc = pcall(require, 'treesitter-context')
-          local status = ok and tsc.enabled()
-          return toggle_icon(status)
+          local tsc_ok, tsc = pcall(require, 'treesitter-context')
+          local tsc_enabled = tsc_ok and tsc.enabled()
+
+          return {
+            {
+              'f',
+
+              function()
+                local is_disabled = not vim.b.disable_autoformat
+                vim.b.disable_autoformat = is_disabled
+
+                local b_icon = is_disabled and '󰅙 ' or '󰄬 '
+
+                vim.notify(
+                  string.format('Buffer Format: %s\n(Global is %s)', is_disabled and 'OFF' or 'ON', vim.g.disable_autoformat and 'OFF' or 'ON'),
+                  is_disabled and vim.log.levels.WARN or vim.log.levels.INFO,
+                  { title = 'Formatter', icon = b_icon }
+                )
+              end,
+              desc = 'Autoformat (Buffer)',
+              icon = toggle_icon(not vim.b.disable_autoformat),
+            },
+            {
+              'F',
+
+              function()
+                local is_disabled = not vim.g.disable_autoformat
+                vim.g.disable_autoformat = is_disabled
+
+                local g_icon = is_disabled and '󰅙 ' or '󰄬 '
+                local b_status = vim.b.disable_autoformat and 'OFF' or 'ON'
+
+                vim.notify(
+                  string.format('Global Format: %s\n(Buffer is %s)', is_disabled and 'OFF' or 'ON', b_status),
+                  is_disabled and vim.log.levels.WARN or vim.log.levels.INFO,
+                  { title = 'Formatter', icon = g_icon }
+                )
+              end,
+
+              desc = 'Autoformat (Global)',
+              icon = toggle_icon(not vim.g.disable_autoformat),
+            },
+            {
+              'd',
+              function() vim.diagnostic.enable(not vim.diagnostic.is_enabled { bufnr = bufnr }) end,
+              desc = 'Toggle Diagnostics',
+              icon = toggle_icon(vim.diagnostic.is_enabled { bufnr = bufnr }),
+            },
+            {
+              'h',
+              function()
+                if vim.lsp.inlay_hint then vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }) end
+              end,
+              desc = 'Toggle Inlay Hints',
+              icon = toggle_icon(vim.lsp.inlay_hint and vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }),
+            },
+            {
+              'c',
+              function()
+                if vim.lsp.codelens then vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled { bufnr = bufnr }) end
+              end,
+              desc = 'Toggle Codelens',
+              icon = toggle_icon(vim.lsp.codelens and vim.lsp.codelens.is_enabled { bufnr = bufnr }),
+            },
+            {
+              'w',
+              function() vim.wo.wrap = not vim.wo.wrap end,
+              desc = 'Toggle Line Wrap',
+              icon = toggle_icon(vim.wo.wrap),
+            },
+            {
+              'T',
+              function()
+                if vim.treesitter.highlighter.active[bufnr] then
+                  vim.treesitter.stop(bufnr)
+                  vim.notify('Treesitter Highlighting: OFF', vim.log.levels.WARN)
+                else
+                  vim.treesitter.start(bufnr)
+                  vim.notify('Treesitter Highlighting: ON', vim.log.levels.INFO)
+                end
+              end,
+              desc = 'Toggle Treesitter Highlight',
+              icon = toggle_icon(vim.treesitter.highlighter.active[bufnr] ~= nil),
+            },
+            {
+              't',
+              function()
+                if tsc_ok then tsc.toggle() end
+              end,
+              desc = 'Toggle Treesitter Context',
+              icon = toggle_icon(tsc_enabled),
+            },
+            {
+              'b',
+              function() require('gitsigns').toggle_current_line_blame() end,
+              desc = 'Toggle Git blame line',
+              icon = toggle_icon(require('gitsigns.config').config.current_line_blame),
+            },
+          }
         end,
       },
     }

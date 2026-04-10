@@ -10,18 +10,6 @@ return {
   },
   {
     'neovim/nvim-lspconfig',
-    keys = {
-      {
-        '<leader>ud',
-        function()
-          local is_enabled = vim.diagnostic.is_enabled()
-          local new_state = not is_enabled
-
-          vim.diagnostic.enable(new_state)
-        end,
-        desc = 'Toggle Diagnostics',
-      },
-    },
     opts = {
       diagnostics = {
         virtual_text = false,
