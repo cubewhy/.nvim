@@ -23,6 +23,7 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       { 'mason-org/mason.nvim', config = true },
+      'b0o/schemastore.nvim',
       'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       'stevearc/aerial.nvim',
@@ -83,6 +84,28 @@ return {
         },
         -- rust_analyzer = {},
         basedpyright = {},
+        jsonls = {
+          settings = {
+            json = {
+              schemas = require('schemastore').json.schemas(),
+              validate = { enable = true },
+            },
+          },
+        },
+        yamlls = {
+          settings = {
+            yaml = {
+              schemaStore = {
+                -- You must disable built-in schemaStore support if you want to use
+                -- this plugin and its advanced options like `ignore`.
+                enable = false,
+                -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                url = '',
+              },
+              schemas = require('schemastore').yaml.schemas(),
+            },
+          },
+        },
         -- ty = {},
         -- vtsls = {
         --   settings = {
@@ -343,5 +366,8 @@ return {
         text_format = text_format,
       }
     end,
+  },
+  {
+    'b0o/schemastore.nvim',
   },
 }
