@@ -43,7 +43,6 @@ return {
 
       -- code
       { '<leader>c', group = 'Code', icon = { icon = ' ', color = 'blue' }, mode = { 'n', 'v' } },
-      { '<leader>cv', desc = 'Select venv', icon = { icon = ' ', color = 'yellow' } },
       { '<leader>cr', desc = 'Rename', icon = { icon = ' ', color = 'blue' } },
       { '<leader>cf', mode = 'v', desc = 'Format Selected', icon = { icon = '󰈔', color = 'cyan' } },
       { '<leader>cf', mode = 'n', desc = 'Format Buffer', icon = { icon = '󰈔', color = 'cyan' } },
