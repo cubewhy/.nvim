@@ -67,6 +67,13 @@ return {
             map('<leader>uh', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, 'Toggle Inlay Hints')
           end
 
+          if client and client:supports_method 'textDocument/codeLens' then
+            map('<leader>cc', vim.lsp.codelens.run, 'Run CodeLens')
+            map('<leader>cC', function() vim.lsp.codelens.enable(true, { bufnr = event.buf }) end, 'Refresh CodeLens')
+
+            vim.lsp.codelens.enable(true, { bufnr = event.buf })
+          end
+
           -- enable inlay_hint by default
           vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
         end,
