@@ -106,6 +106,7 @@ return {
             i = {
               ['<C-k>'] = require('telescope.actions').move_selection_previous, -- move to prev result
               ['<C-j>'] = require('telescope.actions').move_selection_next, -- move to next result
+              ['<C-y>'] = require('telescope.actions').select_default, -- move to next result
 
               ['<C-Up>'] = actions.cycle_history_prev,
               ['<C-Down>'] = actions.cycle_history_next,
@@ -114,6 +115,7 @@ return {
             n = {
               ['<C-k>'] = require('telescope.actions').move_selection_previous, -- move to prev result
               ['<C-j>'] = require('telescope.actions').move_selection_next, -- move to next result
+              ['<C-y>'] = require('telescope.actions').select_default, -- move to next result
 
               ['<C-Up>'] = actions.cycle_history_prev,
               ['<C-Down>'] = actions.cycle_history_next,
