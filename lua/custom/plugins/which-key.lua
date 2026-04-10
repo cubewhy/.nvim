@@ -121,6 +121,14 @@ return {
         icon = function() return toggle_icon(vim.lsp.inlay_hint and vim.lsp.inlay_hint.is_enabled {}) end,
       },
       {
+        '<leader>uc',
+        function()
+          if vim.lsp.codelens then vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled {}) end
+        end,
+        desc = 'Codelens',
+        icon = function() return toggle_icon(vim.lsp.codelens and vim.lsp.codelens.is_enabled {}) end,
+      },
+      {
         '<leader>uw',
         function() vim.wo.wrap = not vim.wo.wrap end,
         desc = 'Line Wrap',
