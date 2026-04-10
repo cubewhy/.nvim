@@ -31,7 +31,12 @@ return {
       { '<leader>l', '<cmd>Lazy<cr>', desc = 'Lazy.nvim', icon = { icon = '󰒲 ', color = 'azure' } },
 
       -- buffers
-      { '<leader>b', group = 'Buffer', icon = { icon = '󰓩 ', color = 'green' } },
+      {
+        '<leader>b',
+        group = 'Buffer',
+        icon = { icon = '󰓩 ', color = 'green' },
+        expand = function() return require('which-key.extras').expand.buf() end,
+      },
       { 'H', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev Buffer', icon = { icon = ' ', color = 'cyan' } },
       { 'L', '<cmd>BufferLineCycleNext<cr>', desc = 'Next Buffer', icon = { icon = ' ', color = 'cyan' } },
       { '<leader>bc', '<cmd>BufferLinePickClose<cr>', desc = 'Pick Close', icon = { icon = '󰅙 ', color = 'red' } },
