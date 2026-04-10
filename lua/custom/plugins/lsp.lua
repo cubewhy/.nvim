@@ -71,7 +71,7 @@ return {
             map('<leader>cc', vim.lsp.codelens.run, 'Run CodeLens')
             map('<leader>cC', function() vim.lsp.codelens.enable(true, { bufnr = event.buf }) end, 'Refresh CodeLens')
 
-            vim.lsp.codelens.enable(true, { bufnr = event.buf })
+            -- vim.lsp.codelens.enable(true, { bufnr = event.buf })
           end
 
           -- enable inlay_hint by default
