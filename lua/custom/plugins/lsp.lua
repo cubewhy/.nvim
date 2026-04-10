@@ -42,7 +42,7 @@ return {
 
           vim.keymap.set('n', '<leader>cr', function() return ':IncRename ' .. vim.fn.expand '<cword>' end, { expr = true, desc = 'Rename Symbol' })
           mapv('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
-          map('<leader>cd', vim.diagnostic.open_float, 'Code Diagnostics')
+          -- map('<leader>cd', vim.diagnostic.open_float, 'Code Diagnostics')
 
           -- Source Action (Organize Imports etc.)
           mapv('<leader>cA', function() vim.lsp.buf.code_action { context = { only = { 'source' }, diagnostics = {} } } end, 'Code Source Actions')
