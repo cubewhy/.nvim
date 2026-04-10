@@ -82,12 +82,12 @@ return {
         -- rust_analyzer = {},
         basedpyright = {},
         -- ty = {},
-        vtsls = {
-          settings = {
-            vtsls = {},
-            typescript = {},
-          },
-        },
+        -- vtsls = {
+        --   settings = {
+        --     vtsls = {},
+        --     typescript = {},
+        --   },
+        -- },
         taplo = {},
       }
 
