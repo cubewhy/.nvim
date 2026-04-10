@@ -141,6 +141,7 @@ return {
   },
   {
     'jmbuhr/otter.nvim',
+    ft = { 'markdown', 'norg', 'quarto' },
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
     },
