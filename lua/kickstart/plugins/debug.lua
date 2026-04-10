@@ -55,11 +55,6 @@ return {
         function() require('dapui').toggle() end,
         desc = 'Debug: See last session result.',
       },
-      { '<leader>fdc', function() require('telescope').extensions.dap.commands {} end, desc = 'Search Debug Commands' },
-      { '<leader>fdg', function() require('telescope').extensions.dap.configurations {} end, desc = 'Search Debug Go (Configs)' },
-      { '<leader>fdb', function() require('telescope').extensions.dap.list_breakpoints {} end, desc = 'Search Debug Breakpoints' },
-      { '<leader>fdv', function() require('telescope').extensions.dap.variables {} end, desc = 'Search Debug Variables' },
-      { '<leader>fdf', function() require('telescope').extensions.dap.frames {} end, desc = 'Search Debug Frames' },
     },
     config = function()
       local dap = require 'dap'
@@ -81,6 +76,26 @@ return {
         ensure_installed = {
           -- Update this to ensure that you have the debuggers for the langs you want
           'delve',
+        },
+      }
+
+      -- keybinding config
+      require('which-key').add {
+        {
+          '<leader>fd',
+          group = 'Telescope Debug',
+          expand = function()
+            local ok, dap = pcall(require, 'dap')
+            if not ok or dap.session() == nil then return {} end
+
+            return {
+              { 'fdb', function() require('telescope').extensions.dap.list_breakpoints {} end, desc = 'Search Debug Breakpoints' },
+              { 'fdf', function() require('telescope').extensions.dap.frames {} end, desc = 'Search Debug Frames' },
+              { 'fdv', function() require('telescope').extensions.dap.variables {} end, desc = 'Search Debug Variables' },
+            }
+          end,
+          { '<leader>fdg', function() require('telescope').extensions.dap.configurations {} end, desc = 'Search Debug Configs' },
+          { '<leader>fdc', function() require('telescope').extensions.dap.commands {} end, desc = 'Search Debug Commands' },
         },
       }
 
