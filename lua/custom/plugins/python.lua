@@ -24,6 +24,7 @@ return {
           local allowed_lsps = {
             pyright = true,
             basedpyright = true,
+            ty = true,
             ruff = true,
             pylsp = true,
             jedi_language_server = true,
