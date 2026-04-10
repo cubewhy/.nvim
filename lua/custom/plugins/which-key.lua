@@ -66,6 +66,7 @@ return {
         proxy = '<c-w>',
         expand = function() return require('which-key.extras').expand.win() end,
       },
+      { 'gx', desc = 'Open with system app' },
 
       -- window navigations
       { '<C-h>', '<C-w><C-h>', desc = 'Window Left', icon = { icon = ' ', color = 'purple' } },
