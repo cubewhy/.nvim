@@ -1,6 +1,7 @@
 return {
   {
     'yioneko/nvim-vtsls',
+    ft = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact' },
     dependencies = { 'neovim/nvim-lspconfig' },
     config = function()
       require('lspconfig.configs').vtsls = require('vtsls').lspconfig
