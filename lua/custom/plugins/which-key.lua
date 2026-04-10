@@ -101,6 +101,14 @@ return {
         expand = function()
           local bufnr = vim.api.nvim_get_current_buf()
 
+          local has_inlay_hints = false
+          local has_codelens = false
+
+          for _, client in ipairs(vim.lsp.get_clients { bufnr = bufnr }) do
+            if client.server_capabilities.inlayHintProvider then has_inlay_hints = true end
+            if client.server_capabilities.codeLensProvider then has_codelens = true end
+          end
+
           local tsc_ok, tsc = pcall(require, 'treesitter-context')
           local tsc_enabled = tsc_ok and tsc.enabled()
 
@@ -155,6 +163,7 @@ return {
                 if vim.lsp.inlay_hint then vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }) end
               end,
               desc = 'Toggle Inlay Hints',
+              cond = has_inlay_hints,
               icon = toggle_icon(vim.lsp.inlay_hint and vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }),
             },
             {
@@ -163,6 +172,7 @@ return {
                 if vim.lsp.codelens then vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled { bufnr = bufnr }) end
               end,
               desc = 'Toggle Codelens',
+              cond = has_codelens,
               icon = toggle_icon(vim.lsp.codelens and vim.lsp.codelens.is_enabled { bufnr = bufnr }),
             },
             {
