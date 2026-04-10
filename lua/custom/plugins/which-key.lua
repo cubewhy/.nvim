@@ -60,21 +60,12 @@ return {
       { '<leader>qd', icon = { icon = '󰅙 ', color = 'red' }, desc = 'Stop Saving Session' },
 
       -- window
-      { '<leader>w', group = 'Window', icon = { icon = ' ', color = 'purple' } },
-      { '<leader>w-', '<C-w>s', desc = 'Split Below', icon = { icon = ' ', color = 'purple' } },
-      { '<leader>w|', '<C-w>v', desc = 'Split Right', icon = { icon = ' ', color = 'purple' } },
-      { '<leader>wd', '<C-w>c', desc = 'Close Window', icon = { icon = '󰅙 ', color = 'red' } },
-      { '<leader>ww', '<C-w>w', desc = 'Switch Window', icon = { icon = ' ', color = 'purple' } },
-      { '<leader>wh', '<C-w>h', desc = 'Move to Left', icon = { icon = ' ', color = 'purple' } },
-      { '<leader>wj', '<C-w>j', desc = 'Move Down', icon = { icon = ' ', color = 'purple' } },
-      { '<leader>wk', '<C-w>k', desc = 'Move Up', icon = { icon = ' ', color = 'purple' } },
-      { '<leader>wl', '<C-w>l', desc = 'Move to Right', icon = { icon = ' ', color = 'purple' } },
-      { '<leader>wo', '<C-w>o', desc = 'Close Others', icon = { icon = ' ', color = 'red' } },
-      { '<leader>w=', '<C-w>=', desc = 'Equalize Size', icon = { icon = '󰦪 ', color = 'purple' } },
-      { '<leader>w>', '<cmd>vertical resize +5<cr>', desc = 'Increase Width', icon = { icon = '󰁔 ', color = 'purple' } },
-      { '<leader>w<', '<cmd>vertical resize -5<cr>', desc = 'Decrease Width', icon = { icon = '󰁍 ', color = 'purple' } },
-      { '<leader>-', '<C-w>s', desc = 'Split Below', icon = { icon = ' ', color = 'purple' } },
-      { '<leader>|', '<C-w>v', desc = 'Split Right', icon = { icon = ' ', color = 'purple' } },
+      {
+        '<leader>w',
+        group = 'windows',
+        proxy = '<c-w>',
+        expand = function() return require('which-key.extras').expand.win() end,
+      },
 
       -- window navigations
       { '<C-h>', '<C-w><C-h>', desc = 'Window Left', icon = { icon = ' ', color = 'purple' } },
