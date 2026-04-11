@@ -20,6 +20,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
+  group = indent_settings,
   pattern = 'go',
   callback = function()
     vim.opt_local.expandtab = false
@@ -29,6 +30,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
+  group = indent_settings,
   pattern = 'make',
   callback = function()
     vim.opt_local.expandtab = false
