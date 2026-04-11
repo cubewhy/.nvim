@@ -24,7 +24,7 @@ return {
       { '<leader>q', group = 'Quit / Session', icon = { icon = '󰈆 ', color = 'red' } },
       { '<leader>s', group = 'Search', icon = { icon = ' ', color = 'cyan' }, mode = { 'n', 'v' } },
       { '<leader>f', group = 'Find / File', icon = { icon = ' ', color = 'cyan' }, mode = { 'n', 'v' } },
-      { '<leader>t', group = 'Test', icon = { icon = '󰙨 ', color = 'yellow' } },
+      { '<leader>t', group = 'Test', icon = { icon = '󰱑 ', color = 'red' } },
       { '<leader>x', group = 'Diagnostics', icon = { icon = '󱖫 ', color = 'red' } },
       { '<leader>n', group = 'Notifications', icon = { icon = '󰵅 ', color = 'blue' } },
       { '<leader>r', group = 'Refactor', icon = { icon = ' ', color = 'cyan' }, mode = { 'n', 'v' } },
@@ -54,7 +54,7 @@ return {
       { '<leader>cf', mode = 'n', desc = 'Format Buffer', icon = { icon = '󰈔 ', color = 'cyan' } },
 
       -- Session
-      { '<leader>q', group = 'Quit / Session', icon = '󰦛 ' },
+      { '<leader>q', group = 'Quit / Session', icon = { icon = '󰈆 ', color = 'red' } },
       { '<leader>qq', icon = { icon = '󰗼 ', color = 'red' }, desc = 'Quit All' },
       { '<leader>qs', icon = { icon = '󰦛 ', color = 'green' }, desc = 'Restore Session' },
       { '<leader>ql', icon = { icon = '󰦛 ', color = 'cyan' }, desc = 'Restore Last Session' },
