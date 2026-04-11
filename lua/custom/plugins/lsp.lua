@@ -369,4 +369,23 @@ return {
   {
     'b0o/schemastore.nvim',
   },
+  {
+    'ThePrimeagen/refactoring.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+    },
+    keys = {
+      { '<leader>re', ':Refactor extract ', mode = 'x', desc = 'Extract Function' },
+      { '<leader>rf', ':Refactor extract_to_file ', mode = 'x', desc = 'Extract to File' },
+      { '<leader>rv', ':Refactor extract_var ', mode = 'x', desc = 'Extract Variable' },
+
+      { '<leader>ri', '<cmd>Refactor inline_var<cr>', mode = { 'n', 'x' }, desc = 'Inline Variable' },
+
+      { '<leader>rI', '<cmd>Refactor inline_func<cr>', mode = 'n', desc = 'Inline Function' },
+      { '<leader>rb', ':Refactor extract_block', mode = 'n', desc = 'Extract Block' },
+      { '<leader>rbf', ':Refactor extract_block_to_file', mode = 'n', desc = 'Extract Block to File' },
+    },
+    opts = {},
+  },
 }

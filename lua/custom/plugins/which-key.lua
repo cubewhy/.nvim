@@ -27,6 +27,7 @@ return {
       { '<leader>t', group = 'Test', icon = { icon = '󰙨 ', color = 'yellow' } },
       { '<leader>x', group = 'Diagnostics', icon = { icon = '󱖫 ', color = 'red' } },
       { '<leader>n', group = 'Notifications', icon = { icon = '󰵅 ', color = 'blue' } },
+      { '<leader>r', group = 'Refactor', icon = { icon = ' ', color = 'cyan' }, mode = { 'n', 'v' } },
 
       { '<leader>l', '<cmd>Lazy<cr>', desc = 'Lazy.nvim', icon = { icon = '󰒲 ', color = 'azure' } },
 
