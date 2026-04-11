@@ -42,11 +42,11 @@ return {
           local mapv = function(keys, func, desc) vim.keymap.set({ 'n', 'v' }, keys, func, { buffer = event.buf, desc = desc }) end
 
           vim.keymap.set('n', '<leader>cr', function() return ':IncRename ' .. vim.fn.expand '<cword>' end, { expr = true, desc = 'Rename Symbol' })
-          mapv('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
+          mapv('<leader>ca', vim.lsp.buf.code_action, 'Code Actions')
           -- map('<leader>cd', vim.diagnostic.open_float, 'Code Diagnostics')
 
           -- Source Action (Organize Imports etc.)
-          mapv('<leader>cA', function() vim.lsp.buf.code_action { context = { only = { 'source' }, diagnostics = {} } } end, 'Code Source Actions')
+          mapv('<leader>cA', function() vim.lsp.buf.code_action { context = { only = { 'source' }, diagnostics = {} } } end, 'Source Actions')
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
 
