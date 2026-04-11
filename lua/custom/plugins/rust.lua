@@ -1,8 +1,8 @@
 return {
   {
     'mrcjkb/rustaceanvim',
-    version = '^8', -- Recommended
-    lazy = false,   -- This plugin is already lazy
+    version = '^9', -- Recommended
+    lazy = false, -- This plugin is already lazy
     config = function()
       vim.g.rustaceanvim = {
         server = {
@@ -69,7 +69,7 @@ return {
           crates = {
             enabled = true,
             max_results = 8, -- The maximum number of search results to display
-            min_chars = 3,   -- The minimum number of charaters to type before completions begin appearing
+            min_chars = 3, -- The minimum number of charaters to type before completions begin appearing
           },
         },
         lsp = {
