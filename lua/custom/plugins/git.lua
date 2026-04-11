@@ -2,10 +2,11 @@ return {
   {
     'kdheepak/lazygit.nvim',
     lazy = true,
-    cmd = { 'LazyGit', 'LazyGitConfig', 'LazyGitCurrentFile', 'LazyGitFilter', 'LazyGitFilterCurrentFile' },
+    cmd = { 'LazyGit', 'LazyGitConfig', 'LazyGitCurrentFile', 'LazyGitFilter', 'LazyGitFilterCurrentFile', 'LazyGitLog' },
     dependencies = { 'nvim-lua/plenary.nvim' },
     keys = {
       { '<leader>gg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
+      { '<leader>gh', '<cmd>LazyGitLog<cr>', desc = 'Git History' },
     },
     config = function()
       vim.api.nvim_create_autocmd('TermEnter', {
