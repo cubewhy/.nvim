@@ -57,4 +57,17 @@ return {
   {
     'Vimjas/vim-python-pep8-indent',
   },
+  {
+    'nvim-neotest/neotest-python',
+    dependencies = {
+      'nvim-neotest/neotest',
+    },
+    config = function()
+      require('neotest').setup {
+        adapters = {
+          require 'neotest-python',
+        },
+      }
+    end,
+  },
 }
