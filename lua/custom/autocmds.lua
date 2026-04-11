@@ -60,3 +60,5 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'gitsendemail', 'conf', 'editorconfig', 'qf', 'checkhealth', 'less' },
   callback = function(event) vim.bo[event.buf].syntax = vim.bo[event.buf].filetype end,
 })
+
+require 'custom.indent'
