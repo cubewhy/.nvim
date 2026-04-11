@@ -31,6 +31,11 @@ map('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 map('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+map('n', '<C-Up>', '<cmd>resize +2<cr>', { desc = 'Increase Window Height' })
+map('n', '<C-Down>', '<cmd>resize -2<cr>', { desc = 'Decrease Window Height' })
+map('n', '<C-Left>', '<cmd>vertical resize -2<cr>', { desc = 'Decrease Window Width' })
+map('n', '<C-Right>', '<cmd>vertical resize +2<cr>', { desc = 'Increase Window Width' })
+
 map('n', '<leader>-', '<C-w>s', { desc = 'Split Below' })
 map('n', '<leader>|', '<C-w>v', { desc = 'Split Right' })
 map('n', '<leader>w-', '<C-w>s', { desc = 'Split Window Below' })
