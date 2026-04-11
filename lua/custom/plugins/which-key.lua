@@ -75,12 +75,14 @@ return {
       { '<C-k>', '<C-w><C-k>', desc = 'Window Up', icon = { icon = ' ', color = 'purple' } },
 
       -- tabs
-      { '<leader><TAB>', group = 'Tabs', icon = { icon = '󰓩 ', color = 'green' } },
+      { '<leader><TAB>', group = 'Tabs', icon = { icon = '󰓩 ', color = 'purple' } },
       { '<leader><TAB><TAB>', '<cmd>tabnew<cr>', desc = 'New Tab' },
       { '<leader><TAB>d', '<cmd>tabclose<cr>', desc = 'Close Tab' },
       { '<leader><TAB>o', '<cmd>tabonly<cr>', desc = 'Close Other Tabs' },
-      { '<leader><TAB>l', '<cmd>tabnext<cr>', desc = 'Next Tab' },
-      { '<leader><TAB>h', '<cmd>tabprevious<cr>', desc = 'Previous Tab' },
+      { '<leader><TAB>]', '<cmd>tabnext<cr>', desc = 'Next Tab' },
+      { '<leader><TAB>[', '<cmd>tabprevious<cr>', desc = 'Previous Tab' },
+      { '<leader><TAB>f', '<cmd>tabfirst<cr>', desc = 'First Tab' },
+      { '<leader><TAB>l', '<cmd>tablast<cr>', desc = 'Last Tab' },
 
       -- debugger
       { '<leader>d', group = 'Debug', icon = { icon = '󰃤 ', color = 'red' } },
