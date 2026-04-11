@@ -16,6 +16,7 @@ vim.api.nvim_create_autocmd('FileType', {
     'dap-float',
     'oil',
     'lazygit',
+    'neotest-summary',
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
