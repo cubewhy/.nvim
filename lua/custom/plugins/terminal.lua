@@ -2,16 +2,20 @@ local function smart_toggle_term()
   local ok, Terminal = pcall(require, 'toggleterm.terminal')
   if not ok then return end
 
+  local count = vim.v.count
+
   if vim.bo.buftype == 'terminal' then
-    local term = Terminal.get_or_create_term(vim.b.toggle_number)
+    local target_num = count > 0 and count or vim.b.toggle_number
+    local term = Terminal.get_or_create_term(target_num)
     if term then
       term:toggle()
       return
     end
   end
 
-  local term1 = Terminal.get_or_create_term(1)
-  term1:toggle()
+  local target_num = count > 0 and count or 1
+  local term = Terminal.get_or_create_term(target_num)
+  term:toggle()
 end
 
 return {
@@ -30,16 +34,6 @@ return {
     keys = {
       { '<C-_>', smart_toggle_term, mode = { 'n', 't' }, desc = 'Terminal (Ctrl+/)' },
       { '<C-/>', smart_toggle_term, mode = { 'n', 't' }, desc = 'Terminal (Ctrl+/)' },
-
-      { '1<C-/>', '<cmd>1ToggleTerm<cr>', desc = 'Terminal 1' },
-      { '2<C-/>', '<cmd>2ToggleTerm<cr>', desc = 'Terminal 2' },
-      { '3<C-/>', '<cmd>3ToggleTerm<cr>', desc = 'Terminal 3' },
-      { '4<C-/>', '<cmd>4ToggleTerm<cr>', desc = 'Terminal 4' },
-      { '5<C-/>', '<cmd>5ToggleTerm<cr>', desc = 'Terminal 5' },
-      { '6<C-/>', '<cmd>6ToggleTerm<cr>', desc = 'Terminal 6' },
-      { '7<C-/>', '<cmd>7ToggleTerm<cr>', desc = 'Terminal 7' },
-      { '8<C-/>', '<cmd>8ToggleTerm<cr>', desc = 'Terminal 8' },
-      { '9<C-/>', '<cmd>9ToggleTerm<cr>', desc = 'Terminal 9' },
     },
     config = function(_, opts)
       require('toggleterm').setup(opts)
