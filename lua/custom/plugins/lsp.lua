@@ -12,8 +12,15 @@ return {
     config = function()
       require('aerial').setup {
         on_attach = function(bufnr)
-          vim.keymap.set('n', '[[', '<cmd>AerialPrev<cr>', { buffer = bufnr, desc = 'Prev Symbol' })
-          vim.keymap.set('n', ']]', '<cmd>AerialNext<cr>', { buffer = bufnr, desc = 'Next Symbol' })
+          vim.keymap.set('n', '[[', function()
+            local count = vim.v.count > 0 and vim.v.count or 1
+            vim.cmd(count .. 'AerialPrev')
+          end, { buffer = bufnr, desc = 'Prev Symbol (supports count)' })
+
+          vim.keymap.set('n', ']]', function()
+            local count = vim.v.count > 0 and vim.v.count or 1
+            vim.cmd(count .. 'AerialNext')
+          end, { buffer = bufnr, desc = 'Next Symbol (supports count)' })
         end,
       }
     end,
