@@ -23,6 +23,7 @@ return {
       { '<leader>sk', function() require('telescope.builtin').keymaps() end, desc = 'Search Keymaps' },
       { '<leader>sf', function() require('telescope.builtin').find_files() end, desc = 'Search Files' },
       { '<leader>sc', function() require('telescope.builtin').commands() end, desc = 'Search Commands' },
+      { '<leader>sj', function() require('telescope.builtin').jumplist() end, desc = 'Search Jumplist' },
       { '<leader>sd', function() require('telescope.builtin').diagnostics() end, desc = 'Search Diagnostics' },
       {
         '<leader>sD',
