@@ -18,6 +18,23 @@ local function smart_toggle_term()
   term:toggle()
 end
 
+local function toggle_float_term()
+  local count = vim.v.count
+  local id = count > 0 and count or 99
+
+  local float_term = require('toggleterm.terminal').Terminal:new {
+    id = id,
+    direction = 'float',
+    float_opts = {
+      border = 'curved', -- 'single', 'double', 'shadow', 'curved'
+    },
+    on_open = function(_)
+      if _G.set_terminal_keymaps then _G.set_terminal_keymaps() end
+    end,
+  }
+  float_term:toggle()
+end
+
 return {
   {
     'akinsho/toggleterm.nvim',
@@ -34,6 +51,7 @@ return {
     keys = {
       { '<C-_>', smart_toggle_term, mode = { 'n', 't' }, desc = 'Terminal (Ctrl+/)' },
       { '<C-/>', smart_toggle_term, mode = { 'n', 't' }, desc = 'Terminal (Ctrl+/)' },
+      { '<leader>ft', toggle_float_term, mode = { 'n' }, desc = 'Float Terminal' },
     },
     config = function(_, opts)
       require('toggleterm').setup(opts)
