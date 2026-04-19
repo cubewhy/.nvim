@@ -16,6 +16,7 @@ vim.api.nvim_create_autocmd('FileType', {
     'dap-float',
     'oil',
     'lazygit',
+    'toggleterm',
     'neotest-summary',
   },
   callback = function(event)
