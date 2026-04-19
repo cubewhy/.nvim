@@ -5,8 +5,16 @@ return {
     version = '*',
     dependencies = 'nvim-tree/nvim-web-devicons',
     keys = {
-      { 'H', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev Buffer' },
-      { 'L', '<cmd>BufferLineCycleNext<cr>', desc = 'Next Buffer' },
+      {
+        'H',
+        function() require('bufferline').cycle(-vim.v.count1) end,
+        desc = 'Prev Buffer (Smart Jump)',
+      },
+      {
+        'L',
+        function() require('bufferline').cycle(vim.v.count1) end,
+        desc = 'Next Buffer (Smart Jump)',
+      },
       { '<leader>bp', '<cmd>BufferLinePick<cr>', desc = 'Buffer Pick' },
       { '<leader>bc', '<cmd>BufferLinePickClose<cr>', desc = 'Pick Close' },
       { '<leader>bo', '<cmd>BufferLineCloseOthers<cr>', desc = 'Close Others' },
