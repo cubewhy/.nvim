@@ -51,29 +51,39 @@ map('n', '<leader>w=', '<C-w>=', { desc = 'Equalize size' })
 map('n', '<leader>w>', '<cmd>vertical resize +5<cr>', { desc = 'Increase Width' })
 map('n', '<leader>w<', '<cmd>vertical resize -5<cr>', { desc = 'Decrease Width' })
 
-map('n', '[e', function()
-  vim.diagnostic.jump {
-    count = -1,
-    severity = vim.diagnostic.severity.ERROR,
-  }
-end, { desc = 'Go to previous Error' })
+map(
+  'n',
+  '[e',
+  function()
+    vim.diagnostic.jump {
+      count = -vim.v.count1,
+      severity = vim.diagnostic.severity.ERROR,
+    }
+  end,
+  { desc = 'Go to previous Error' }
+)
 
-map('n', ']e', function()
-  vim.diagnostic.jump {
-    count = 1,
-    severity = vim.diagnostic.severity.ERROR,
-  }
-end, { desc = 'Go to next Error' })
+map(
+  'n',
+  ']e',
+  function()
+    vim.diagnostic.jump {
+      count = vim.v.count1,
+      severity = vim.diagnostic.severity.ERROR,
+    }
+  end,
+  { desc = 'Go to next Error' }
+)
 
 map('n', '[w', function()
   vim.diagnostic.jump {
-    count = -1,
+    count = -vim.v.count1,
   }
 end, { desc = 'Go to previous Warning/Diagnostic' })
 
 map('n', ']w', function()
   vim.diagnostic.jump {
-    count = 1,
+    count = vim.v.count1,
   }
 end, { desc = 'Go to next Warning/Diagnostic' })
 
@@ -82,7 +92,7 @@ map(
   '[h',
   function()
     vim.diagnostic.jump {
-      count = -1,
+      count = -vim.v.count1,
       severity = vim.diagnostic.severity.HINT,
       float = { border = 'none' },
     }
@@ -92,7 +102,7 @@ map(
 
 map('n', ']h', function()
   vim.diagnostic.jump {
-    count = 1,
+    count = vim.v.count1,
     float = { border = 'none' },
   }
 end, { desc = 'Go to next Hint' })
