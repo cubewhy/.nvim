@@ -33,7 +33,8 @@ return {
         format = {
           search_down = { kind = 'search', pattern = '^/', icon = ' ', lang = 'regex', view = 'cmdline' },
           search_up = { kind = 'search', pattern = '^%?', icon = ' ', lang = 'regex', view = 'cmdline' },
-          cmdline = { pattern = '^:', icon = '', lang = 'vim', view = 'cmdline_popup' },
+          cmdline = { pattern = '^:', icon = '', lang = 'vim', view = 'cmdline' },
+          lua = { pattern = '^:%s*lua%s+', icon = ' ', lang = 'lua', view = 'cmdline' },
         },
       },
       views = {
