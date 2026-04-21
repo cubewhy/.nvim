@@ -15,12 +15,12 @@ return {
           vim.keymap.set('n', '[[', function()
             local count = vim.v.count > 0 and vim.v.count or 1
             vim.cmd(count .. 'AerialPrev')
-          end, { buffer = bufnr, desc = 'Prev Symbol (supports count)' })
+          end, { buffer = bufnr, desc = 'Prev Symbol' })
 
           vim.keymap.set('n', ']]', function()
             local count = vim.v.count > 0 and vim.v.count or 1
             vim.cmd(count .. 'AerialNext')
-          end, { buffer = bufnr, desc = 'Next Symbol (supports count)' })
+          end, { buffer = bufnr, desc = 'Next Symbol' })
         end,
       }
     end,
