@@ -18,14 +18,9 @@ return {
         desc = 'Dismiss All Notifications',
       },
       {
-        '<leader>nh',
+        '<leader>n',
         '<cmd>Noice telescope<cr>',
         desc = 'Noice History',
-      },
-      {
-        '<leader>nl',
-        '<cmd>Noice last<cr>',
-        desc = 'Noice Last Message',
       },
     },
     opts = {
