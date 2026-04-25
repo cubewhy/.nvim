@@ -59,7 +59,7 @@ return {
       local wk = require 'which-key'
 
       wk.add {
-        { '<leader>m', group = 'Marks', icon = { icon = '󱚐 ', color = 'orange' } },
+        { '<leader>m', group = 'Marks', icon = { icon = '⚑', color = 'orange' } },
 
         { '<leader>mm', '<cmd>Markit mark list all<cr>', desc = 'List All Marks' },
         { '<leader>mM', '<cmd>Markit mark list buffer<cr>', desc = 'List Buffer Marks' },
