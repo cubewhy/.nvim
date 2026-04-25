@@ -45,7 +45,7 @@ return {
       bookmarks = {
         {
           sign = '⚑', -- string: sign character to display (empty string to disable)
-          virt_text = 'hello', -- string: virtual text to show at end of line
+          -- virt_text = 'hello', -- string: virtual text to show at end of line
           annotate = false, -- boolean: whether to prompt for annotation when setting bookmark
         },
         { sign = '!', virt_text = '', annotate = false },
