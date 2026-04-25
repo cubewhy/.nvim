@@ -4,9 +4,13 @@ return {
     dependencies = {
       {
         '2kabhishek/pickme.nvim',
+        dependencies = {
+          'nvim-telescope/telescope.nvim',
+        },
         config = function()
           require('pickme').setup {
             provider = 'telescope',
+            add_default_keybindings = false,
           }
         end,
       },
