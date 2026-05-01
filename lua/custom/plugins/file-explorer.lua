@@ -33,7 +33,16 @@ return {
         -- 'size',
         -- 'mtime',
       },
+      buf_options = {
+        buflisted = false,
+        bufhidden = 'hide',
+      },
       skip_confirm_for_simple_edits = true,
+      -- Constrain the cursor to the editable parts of the oil buffer
+      -- Set to `false` to disable, or "name" to keep it on the file names
+      constrain_cursor = 'editable',
+      -- Set to true to watch the filesystem for changes and reload oil
+      watch_for_changes = true,
       keymaps = {
         ['g?'] = 'show_help',
         ['<CR>'] = 'actions.select',
