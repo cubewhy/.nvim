@@ -1,7 +1,12 @@
 return {
   {
-    'nvim-mini/mini.nvim',
-    event = 'InsertEnter',
+    'nvim-mini/mini.move',
+    keys = {
+      { '<M-h>', mode = { 'n', 'v' } },
+      { '<M-j>', mode = { 'n', 'v' } },
+      { '<M-k>', mode = { 'n', 'v' } },
+      { '<M-l>', mode = { 'n', 'v' } },
+    },
     config = function()
       require('mini.move').setup {
         mappings = {
