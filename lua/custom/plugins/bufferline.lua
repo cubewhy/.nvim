@@ -93,7 +93,6 @@ return {
       { 'H', '<cmd>bprevious<cr>', desc = 'Prev Buffer' },
       { 'L', '<cmd>bnext<cr>', desc = 'Next Buffer' },
       { '<leader>`', '<cmd>e #<cr>', desc = 'Switch to Other Buffer' },
-      { '<leader>bb', '<cmd>e #<cr>', desc = 'Switch to Other Buffer' },
     },
   },
   {

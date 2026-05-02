@@ -40,11 +40,7 @@ return {
       },
       { 'H', desc = 'Prev Buffer', icon = { icon = ' ', color = 'cyan' } },
       { 'L', desc = 'Next Buffer', icon = { icon = ' ', color = 'cyan' } },
-      { '<leader>bc', '<cmd>BufferLinePickClose<cr>', desc = 'Pick Close', icon = { icon = '󰅙 ', color = 'red' } },
       { '<leader>bd', desc = 'Delete Buffer', icon = { icon = '󰆴', color = 'red' } },
-      { '<leader>be', '<cmd>BufferLineSortByExtension<cr>', desc = 'Sort by Extension', icon = { icon = '󰒺 ', color = 'yellow' } },
-      { '<leader>bp', '<cmd>BufferLinePick<cr>', desc = 'Buffer Pick', icon = { icon = '󰢷 ', color = 'purple' } },
-      { '<leader>bb', '<cmd>e #<cr>', desc = 'Switch to Other Buffer', icon = { icon = '󰈔', color = 'green' } },
       { '<leader>`', '<cmd>e #<cr>', desc = 'Switch to Other Buffer', icon = { icon = '󰈔', color = 'green' } },
 
       -- code
