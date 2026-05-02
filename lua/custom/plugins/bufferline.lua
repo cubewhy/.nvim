@@ -75,9 +75,6 @@ return {
         update = { 'DiagnosticChanged', 'BufEnter' },
 
         {
-          provider = ' ',
-        },
-        {
           provider = function(self)
             -- 0 is just another output, we can decide to print it or not!
             return self.errors > 0 and (self.error_icon .. self.errors .. ' ')
@@ -95,9 +92,6 @@ return {
         {
           provider = function(self) return self.hints > 0 and (self.hint_icon .. self.hints) end,
           hl = { fg = 'diag_hint' },
-        },
-        {
-          provider = ' ',
         },
       }
 
@@ -129,7 +123,9 @@ return {
         { provider = '  ' },
         TablineFileIcon,
         TablineFileName,
+        { provider = ' ' },
         Diagnostics,
+        { provider = ' ' },
         TablineModifiedIndicator,
         { provider = '  ' },
         hl = function(self)
