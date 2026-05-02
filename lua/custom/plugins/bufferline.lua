@@ -6,7 +6,6 @@ return {
     config = function()
       vim.opt.showtabline = 2
 
-      local conditions = require 'heirline.conditions'
       local utils = require 'heirline.utils'
 
       local colors = {
@@ -27,11 +26,6 @@ return {
         git_del = utils.get_highlight('diffDeleted').fg,
         git_add = utils.get_highlight('diffAdded').fg,
         git_change = utils.get_highlight('diffChanged').fg,
-      }
-
-      local TablineBufnr = {
-        provider = function(self) return tostring(self.bufnr) .. '. ' end,
-        hl = 'Comment',
       }
 
       vim.diagnostic.config {
