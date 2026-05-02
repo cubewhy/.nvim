@@ -1,44 +1,99 @@
 return {
   {
-    'akinsho/bufferline.nvim',
-    lazy = false,
-    version = '*',
-    dependencies = 'nvim-tree/nvim-web-devicons',
+    'rebelot/heirline.nvim',
+    event = 'BufEnter',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      vim.opt.showtabline = 2
+
+      local utils = require 'heirline.utils'
+
+      local colors = {
+        bright_orange = utils.get_highlight('DiagnosticWarn').fg,
+        red = utils.get_highlight('DiagnosticError').fg,
+        dark_red = utils.get_highlight('DiffDelete').fg,
+        gray = utils.get_highlight('NonText').fg,
+        bg = utils.get_highlight('TabLine').bg,
+        tabline_sel_bg = utils.get_highlight('TabLineSel').bg,
+        tabline_sel_fg = utils.get_highlight('TabLineSel').fg,
+      }
+
+      local TablineBufnr = {
+        provider = function(self) return tostring(self.bufnr) .. '. ' end,
+        hl = 'Comment',
+      }
+
+      local TablineFileName = {
+        provider = function(self)
+          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(self.bufnr), ':t')
+          return filename == '' and '[No Name]' or filename
+        end,
+        hl = function(self) return { bold = self.is_active or self.is_visible, italic = false } end,
+      }
+
+      local TablineFileIcon = {
+        init = function(self)
+          local filename = vim.api.nvim_buf_get_name(self.bufnr)
+          local extension = vim.fn.fnamemodify(filename, ':e')
+          self.icon, self.icon_color = require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
+        end,
+        provider = function(self) return self.icon and (self.icon .. ' ') end,
+        hl = function(self) return { fg = self.icon_color } end,
+      }
+
+      local TablineModifiedIndicator = {
+        condition = function(self) return vim.api.nvim_get_option_value('modified', { buf = self.bufnr }) end,
+        provider = ' [+]',
+        hl = { fg = colors.bright_orange },
+      }
+
+      local TablineBufferBlock = {
+        { provider = '  ' },
+        TablineFileIcon,
+        TablineFileName,
+        TablineModifiedIndicator,
+        { provider = '  ' },
+        hl = function(self)
+          if self.is_active then
+            return 'TabLineSel'
+          else
+            return 'TabLine'
+          end
+        end,
+      }
+
+      local TablineOffset = {
+        condition = function(self)
+          local win = vim.api.nvim_tabpage_list_wins(0)[1]
+          local bufnr = vim.api.nvim_win_get_buf(win)
+          self.winid = win
+          if vim.bo[bufnr].filetype == 'neo-tree' then
+            self.title = 'File Explorer'
+            return true
+          end
+        end,
+        provider = function(self)
+          local width = vim.api.nvim_win_get_width(self.winid)
+          return string.rep(' ', width)
+        end,
+        hl = { bg = colors.bg },
+      }
+
+      local BufferLine = require('heirline.utils').make_buflist(
+        TablineBufferBlock,
+        { provider = ' ', hl = { bg = colors.bg } },
+        { provider = ' ', hl = { bg = colors.bg } }
+      )
+
+      require('heirline').setup {
+        tabline = { TablineOffset, BufferLine },
+      }
+    end,
     keys = {
-      {
-        'H',
-        function() require('bufferline').cycle(-vim.v.count1) end,
-        desc = 'Prev Buffer (Smart Jump)',
-      },
-      {
-        'L',
-        function() require('bufferline').cycle(vim.v.count1) end,
-        desc = 'Next Buffer (Smart Jump)',
-      },
-      { '<leader>bp', '<cmd>BufferLinePick<cr>', desc = 'Buffer Pick' },
-      { '<leader>bc', '<cmd>BufferLinePickClose<cr>', desc = 'Pick Close' },
-      { '<leader>bo', '<cmd>BufferLineCloseOthers<cr>', desc = 'Close Others' },
-      { '<leader>be', '<cmd>BufferLineSortByExtension<cr>', desc = 'Sort by Extension' },
+      { 'H', '<cmd>bprevious<cr>', desc = 'Prev Buffer' },
+      { 'L', '<cmd>bnext<cr>', desc = 'Next Buffer' },
       { '<leader>`', '<cmd>e #<cr>', desc = 'Switch to Other Buffer' },
       { '<leader>bb', '<cmd>e #<cr>', desc = 'Switch to Other Buffer' },
-    },
-    opts = {
-      options = {
-        diagnostics = 'nvim_lsp',
-        diagnostics_indicator = function(count, level, diagnostics_dict, context)
-          local icon = level:match 'error' and ' ' or ' '
-          return ' ' .. icon .. count
-        end,
-        mode = 'buffers',
-        offsets = {
-          {
-            filetype = 'neo-tree',
-            text = 'File Explorer',
-            highlight = 'Directory',
-            text_align = 'left',
-          },
-        },
-      },
     },
   },
   {
