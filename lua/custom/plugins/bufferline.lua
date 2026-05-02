@@ -90,8 +90,16 @@ return {
       }
     end,
     keys = {
-      { 'H', '<cmd>bprevious<cr>', desc = 'Prev Buffer' },
-      { 'L', '<cmd>bnext<cr>', desc = 'Next Buffer' },
+      {
+        'H',
+        function() vim.cmd(vim.v.count1 .. 'bprevious') end,
+        desc = 'Prev Buffer',
+      },
+      {
+        'L',
+        function() vim.cmd(vim.v.count1 .. 'bnext') end,
+        desc = 'Next Buffer',
+      },
       { '<leader>`', '<cmd>e #<cr>', desc = 'Switch to Other Buffer' },
     },
   },
