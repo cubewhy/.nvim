@@ -96,7 +96,7 @@ return {
     },
   },
   {
-    'nvim-mini/mini.bufremove',
+    'nvim-mini/mini.nvim',
     version = false,
     keys = {
       {
@@ -139,5 +139,6 @@ return {
         end,
       })
     end,
+    config = function() require('mini.bufremove').setup {} end,
   },
 }
