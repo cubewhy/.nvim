@@ -40,7 +40,8 @@ return {
       },
       { 'H', desc = 'Prev Buffer', icon = { icon = ' ', color = 'cyan' } },
       { 'L', desc = 'Next Buffer', icon = { icon = ' ', color = 'cyan' } },
-      { '<leader>bd', desc = 'Delete Buffer', icon = { icon = '󰆴', color = 'red' } },
+      { '<leader>bd', desc = 'Delete Buffer', icon = { icon = ' ', color = 'red' } },
+      { '<leader>bo', desc = 'Delete Other Buffers', icon = { icon = ' ', color = 'red' } },
       { '<leader>`', '<cmd>e #<cr>', desc = 'Switch to Other Buffer', icon = { icon = '󰈔', color = 'green' } },
 
       -- code
