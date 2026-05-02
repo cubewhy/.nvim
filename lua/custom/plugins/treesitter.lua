@@ -160,4 +160,36 @@ return {
       { '<leader>A', function() require('nvim-treesitter-textobjects.swap').swap_previous '@parameter.outer' end, desc = 'Swap prev parameter' },
     },
   },
+  {
+    'nvim-mini/mini.nvim',
+    event = 'InsertEnter',
+    config = function()
+      -- Better Around/Inside textobjects
+      --
+      -- Examples:
+      --  - va)  - [V]isually select [A]round [)]paren
+      --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
+      --  - ci'  - [C]hange [I]nside [']quote
+      local ai = require 'mini.ai'
+      ai.setup {
+        custom_textobjects = {
+          f = ai.gen_spec.treesitter {
+            a = '@function.outer',
+            i = '@function.inner',
+          },
+
+          c = ai.gen_spec.treesitter {
+            a = '@class.outer',
+            i = '@class.inner',
+          },
+
+          o = ai.gen_spec.treesitter {
+            a = { '@conditional.outer', '@loop.outer' },
+            i = { '@conditional.inner', '@loop.inner' },
+          },
+        },
+        n_lines = 500,
+      }
+    end,
+  },
 }

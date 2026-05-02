@@ -155,33 +155,6 @@ require('lazy').setup({
     'nvim-mini/mini.nvim',
     event = 'InsertEnter',
     config = function()
-      -- Better Around/Inside textobjects
-      --
-      -- Examples:
-      --  - va)  - [V]isually select [A]round [)]paren
-      --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-      --  - ci'  - [C]hange [I]nside [']quote
-      local ai = require 'mini.ai'
-      ai.setup {
-        custom_textobjects = {
-          f = ai.gen_spec.treesitter {
-            a = '@function.outer',
-            i = '@function.inner',
-          },
-
-          c = ai.gen_spec.treesitter {
-            a = '@class.outer',
-            i = '@class.inner',
-          },
-
-          o = ai.gen_spec.treesitter {
-            a = { '@conditional.outer', '@loop.outer' },
-            i = { '@conditional.inner', '@loop.inner' },
-          },
-        },
-        n_lines = 500,
-      }
-
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
