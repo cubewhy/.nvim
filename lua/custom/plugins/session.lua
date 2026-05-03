@@ -24,6 +24,11 @@ return {
           local ok_neotree, neotree = pcall(require, 'neo-tree.command')
           if ok_neotree then neotree.execute { action = 'close' } end
 
+          -- close quickfix list
+          vim.cmd 'cclose'
+          -- close location list
+          vim.cmd 'lclose'
+
           for _, win in ipairs(vim.api.nvim_list_wins()) do
             local buf = vim.api.nvim_win_get_buf(win)
 
