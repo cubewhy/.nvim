@@ -175,6 +175,12 @@ return {
               icon = toggle_icon(vim.wo.wrap),
             },
             {
+              'l',
+              function() vim.wo.relativenumber = not vim.wo.relativenumber end,
+              desc = 'Toggle Relative Number',
+              icon = toggle_icon(vim.wo.relativenumber),
+            },
+            {
               'T',
               function()
                 if vim.treesitter.highlighter.active[bufnr] then
