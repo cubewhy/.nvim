@@ -30,7 +30,7 @@ return {
         function() require('telescope.builtin').diagnostics { bufnr = 0 } end,
         desc = 'Search Document Diagnostics',
       },
-      { '<leader>sr', function() require('telescope.builtin').resume() end, desc = 'Search Resume' },
+      { '<leader>sR', function() require('telescope.builtin').resume() end, desc = 'Search Resume' },
       { '<leader>sg', function() require('telescope.builtin').live_grep() end, desc = 'Search by Grep' },
       { '<leader>/', function() require('telescope.builtin').live_grep() end, desc = 'Live Grep In Workspace' },
       { '<leader>su', function() require('telescope').extensions.undo.undo() end, desc = 'Search Undo history' },
@@ -183,12 +183,28 @@ return {
     cmd = { 'GrugFar', 'GrugFarWithin' },
     keys = {
       {
-        '<leader>sR',
+        '<leader>sr',
         function()
           local grug = require 'grug-far'
           local ext = vim.bo.buftype == '' and vim.fn.expand '%:e'
           grug.open {
             transient = true,
+            prefills = {
+              filesFilter = ext and ext ~= '' and '*.' .. ext or nil,
+            },
+          }
+        end,
+        mode = { 'n', 'x' },
+        desc = 'Search and Replace',
+      },
+      {
+        '<leader>sa',
+        function()
+          local grug = require 'grug-far'
+          local ext = vim.bo.buftype == '' and vim.fn.expand '%:e'
+          grug.open {
+            transient = true,
+            engine = 'astgrep',
             prefills = {
               filesFilter = ext and ext ~= '' and '*.' .. ext or nil,
             },
