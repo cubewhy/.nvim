@@ -9,7 +9,7 @@ end
 
 vim.api.nvim_create_autocmd('FileType', {
   group = indent_settings,
-  pattern = { 'json', 'yaml', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'html', 'css' },
+  pattern = { 'json', 'yaml', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'html', 'css', 'cmake', 'c', 'cpp' },
   callback = function() set_indent(2) end,
 })
 
