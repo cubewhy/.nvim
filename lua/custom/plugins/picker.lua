@@ -1,218 +1,75 @@
 return {
   {
-    'nvim-telescope/telescope.nvim',
-    event = 'BufEnter',
-    cmd = 'Telescope',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'make',
-        cond = function() return vim.fn.executable 'make' == 1 end,
+    'folke/snacks.nvim',
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    opts = {
+      picker = {
+        enabled = true,
+        ui_select = true,
+        formatters = {
+          file = {
+            filename_first = true,
+          },
+        },
+        layout = {
+          preset = 'telescope',
+        },
+        win = {
+          input = {
+            keys = {
+              ['<C-y>'] = { 'confirm', mode = { 'i', 'n' } },
+            },
+          },
+        },
       },
-      { 'nvim-telescope/telescope-ui-select.nvim' },
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
-      -- Extension for better ripgrep arguments support
-      { 'nvim-telescope/telescope-live-grep-args.nvim' },
-      { 'debugloop/telescope-undo.nvim' },
+      input = { enabled = true },
     },
-    -- Refactored keybindings into lazy.nvim keys table
     keys = {
       -- Basic Search
-      { '<leader>sh', function() require('telescope.builtin').help_tags() end, desc = 'Search Help' },
-      { '<leader>sk', function() require('telescope.builtin').keymaps() end, desc = 'Search Keymaps' },
-      { '<leader>sf', function() require('telescope.builtin').find_files() end, desc = 'Search Files' },
-      { '<leader>sc', function() require('telescope.builtin').commands() end, desc = 'Search Commands' },
-      { '<leader>sj', function() require('telescope.builtin').jumplist() end, desc = 'Search Jumplist' },
-      { '<leader>sd', function() require('telescope.builtin').diagnostics() end, desc = 'Search Diagnostics' },
-      {
-        '<leader>sD',
-        function() require('telescope.builtin').diagnostics { bufnr = 0 } end,
-        desc = 'Search Document Diagnostics',
-      },
-      { '<leader>sR', function() require('telescope.builtin').resume() end, desc = 'Search Resume' },
-      { '<leader>sg', function() require('telescope.builtin').live_grep() end, desc = 'Search by Grep' },
-      { '<leader>/', function() require('telescope.builtin').live_grep() end, desc = 'Live Grep In Workspace' },
-      { '<leader>su', function() require('telescope').extensions.undo.undo() end, desc = 'Search Undo history' },
-      { '<leader>s.', function() require('telescope.builtin').oldfiles() end, desc = 'Search Recent Files' },
-      { '<leader><leader>', function() require('telescope.builtin').buffers() end, desc = 'Find existing buffers' },
-      {
-        '<leader>sw',
-        function() require('telescope.builtin').grep_string() end,
-        mode = { 'n', 'v' },
-        desc = 'Search current Word',
-      },
+      { '<leader>sh', function() Snacks.picker.help() end, desc = 'Search Help' },
+      { '<leader>sk', function() Snacks.picker.keymaps() end, desc = 'Search Keymaps' },
+      { '<leader>sf', function() Snacks.picker.files() end, desc = 'Search Files' },
+      { '<leader>sc', function() Snacks.picker.commands() end, desc = 'Search Commands' },
+      { '<leader>sj', function() Snacks.picker.jumps() end, desc = 'Search Jumplist' },
+      { '<leader>sd', function() Snacks.picker.diagnostics() end, desc = 'Search Diagnostics' },
+      { '<leader>sD', function() Snacks.picker.diagnostics_buffer() end, desc = 'Search Document Diagnostics' },
+      { '<leader>sR', function() Snacks.picker.resume() end, desc = 'Search Resume' },
+      { '<leader>sg', function() Snacks.picker.grep() end, desc = 'Search by Grep' },
+      { '<leader>/', function() Snacks.picker.grep() end, desc = 'Grep In Workspace' },
+      { '<leader>su', function() Snacks.picker.undo() end, desc = 'Search Undo history' },
+      { '<leader>s.', function() Snacks.picker.recent() end, desc = 'Search Recent Files' },
+      { '<leader><leader>', function() Snacks.picker.buffers() end, desc = 'Find existing buffers' },
+      { '<leader>sw', function() Snacks.picker.grep_word() end, desc = 'Search current Word', mode = { 'n', 'v' } },
 
       -- Specialized Search
-      { '<leader>sn', function() require('telescope.builtin').find_files { cwd = vim.fn.stdpath 'config' } end, desc = 'Search Neovim files' },
-      {
-        '<leader>sb',
-        function()
-          require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-            winblend = 10,
-            previewer = false,
-          })
-        end,
-        desc = 'Fuzzily search in current buffer',
-      },
-      {
-        '<leader>s/',
-        function()
-          require('telescope.builtin').live_grep {
-            grep_open_files = true,
-            prompt_title = 'Live Grep in Open Files',
-          }
-        end,
-        desc = 'Search in Open Files',
-      },
-      {
-        '<leader>uC',
-        function()
-          require('telescope.builtin').colorscheme {
-            enable_preview = true,
-          }
-        end,
-        desc = 'Colorscheme',
-      },
+      { '<leader>sn', function() Snacks.picker.files { cwd = vim.fn.stdpath 'config' } end, desc = 'Search Neovim files' },
+      { '<leader>sb', function() Snacks.picker.lines() end, desc = 'Buffer Fuzzy Find' },
+      { '<leader>s/', function() Snacks.picker.grep_buffers() end, desc = 'Search in Open Files' },
+      { '<leader>uC', function() Snacks.picker.colorschemes() end, desc = 'Colorschemes' },
     },
-    config = function()
-      -- [[ Configure Telescope ]]
-      -- See `:help telescope` and `:help telescope.setup()`
-
-      local telescope = require 'telescope'
-      local actions = require 'telescope.actions'
-
-      local function flash(prompt_bufnr)
-        require('flash').jump {
-          pattern = '^',
-          label = { after = { 0, 0 } },
-          search = {
-            mode = 'search',
-            exclude = {
-              function(win) return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= 'TelescopeResults' end,
-            },
-          },
-          action = function(match)
-            local picker = require('telescope.actions.state').get_current_picker(prompt_bufnr)
-            picker:set_selection(match.pos[1] - 1)
-          end,
-        }
-      end
-
-      telescope.setup {
-        defaults = {
-          -- General appearance
-          path_display = { 'smart' },
-          mappings = {
-            i = {
-              ['<C-k>'] = require('telescope.actions').move_selection_previous, -- move to prev result
-              ['<C-j>'] = require('telescope.actions').move_selection_next, -- move to next result
-              ['<C-y>'] = require('telescope.actions').select_default, -- move to next result
-
-              ['<C-Up>'] = actions.cycle_history_prev,
-              ['<C-Down>'] = actions.cycle_history_next,
-              ['<c-s>'] = flash,
-            },
-            n = {
-              ['<C-k>'] = require('telescope.actions').move_selection_previous, -- move to prev result
-              ['<C-j>'] = require('telescope.actions').move_selection_next, -- move to next result
-              ['<C-y>'] = require('telescope.actions').select_default, -- move to next result
-
-              ['<C-Up>'] = actions.cycle_history_prev,
-              ['<C-Down>'] = actions.cycle_history_next,
-
-              ['q'] = require('telescope.actions').close,
-              ['s'] = flash,
-            },
-          },
-          -- get_selection_window = function()
-          --   local wins = vim.api.nvim_list_wins()
-          --   for _, win in ipairs(wins) do
-          --     local buf = vim.api.nvim_win_get_buf(win)
-          --     if vim.bo[buf].buftype == '' and not vim.wo[win].winfixbuf then return win end
-          --   end
-          --   vim.cmd 'vsplit'
-          --   local new_win = vim.api.nvim_get_current_win()
-          --   vim.wo[new_win].winfixbuf = false
-          --   return new_win
-          -- end,
-        },
-        extensions = {
-          ['ui-select'] = {
-            require('telescope.themes').get_dropdown(),
-          },
-          -- live_grep_args configuration
-          live_grep_args = {
-            auto_quoting = true, -- enable/disable auto-quoting
-          },
-          undo = {},
-        },
-      }
-
-      -- Load extensions if installed
-      pcall(telescope.load_extension, 'fzf')
-      pcall(telescope.load_extension, 'ui-select')
-      pcall(telescope.load_extension, 'live_grep_args')
-      pcall(telescope.load_extension, 'undo')
+    config = function(_, opts)
+      require('snacks').setup(opts)
 
       -- [[ LSP Keybindings via Autocmd ]]
-      -- These are only mapped when an LSP attaches to a buffer
       vim.api.nvim_create_autocmd('LspAttach', {
-        group = vim.api.nvim_create_augroup('telescope-lsp-attach', { clear = true }),
+        group = vim.api.nvim_create_augroup('snacks-lsp-attach', { clear = true }),
         callback = function(event)
           local buf = event.buf
-          local builtin = require 'telescope.builtin'
 
           -- Navigation
-          vim.keymap.set('n', 'gd', builtin.lsp_definitions, { buffer = buf, desc = 'Goto Definition' })
-          vim.keymap.set('n', 'gr', builtin.lsp_references, { buffer = buf, desc = 'Goto References' })
-          vim.keymap.set('n', 'gI', builtin.lsp_implementations, { buffer = buf, desc = 'Goto Implementation' })
-          vim.keymap.set('n', 'gt', builtin.lsp_type_definitions, { buffer = buf, desc = 'Type Definition' })
+          vim.keymap.set('n', 'gd', function() Snacks.picker.lsp_definitions() end, { buffer = buf, desc = 'Goto Definition' })
+          vim.keymap.set('n', 'gr', function() Snacks.picker.lsp_references() end, { buffer = buf, desc = 'Goto References' })
+          vim.keymap.set('n', 'gI', function() Snacks.picker.lsp_implementations() end, { buffer = buf, desc = 'Goto Implementation' })
+          vim.keymap.set('n', 'gt', function() Snacks.picker.lsp_type_definitions() end, { buffer = buf, desc = 'Type Definition' })
           vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = buf, desc = 'Goto Declaration' })
 
-          -- Symbol Search (Your ss/sS request)
-          vim.keymap.set('n', '<leader>ss', builtin.lsp_document_symbols, { buffer = buf, desc = 'Search Document Symbols' })
-          vim.keymap.set('n', '<leader>sS', builtin.lsp_dynamic_workspace_symbols, { buffer = buf, desc = 'Search Workspace Symbols' })
+          -- Symbol Search
+          vim.keymap.set('n', '<leader>ss', function() Snacks.picker.lsp_symbols() end, { buffer = buf, desc = 'Search Document Symbols' })
+          vim.keymap.set('n', '<leader>sS', function() Snacks.picker.lsp_workspace_symbols() end, { buffer = buf, desc = 'Search Workspace Symbols' })
         end,
       })
     end,
-  },
-  {
-    'MagicDuck/grug-far.nvim',
-    opts = { headerMaxWidth = 80 },
-    cmd = { 'GrugFar', 'GrugFarWithin' },
-    keys = {
-      {
-        '<leader>sr',
-        function()
-          local grug = require 'grug-far'
-          local ext = vim.bo.buftype == '' and vim.fn.expand '%:e'
-          grug.open {
-            transient = true,
-            prefills = {
-              filesFilter = ext and ext ~= '' and '*.' .. ext or nil,
-            },
-          }
-        end,
-        mode = { 'n', 'x' },
-        desc = 'Search and Replace',
-      },
-      {
-        '<leader>sa',
-        function()
-          local grug = require 'grug-far'
-          local ext = vim.bo.buftype == '' and vim.fn.expand '%:e'
-          grug.open {
-            transient = true,
-            engine = 'astgrep',
-            prefills = {
-              filesFilter = ext and ext ~= '' and '*.' .. ext or nil,
-            },
-          }
-        end,
-        mode = { 'n', 'x' },
-        desc = 'Search and Replace',
-      },
-    },
   },
 }
