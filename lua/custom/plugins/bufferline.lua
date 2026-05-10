@@ -9,6 +9,7 @@ return {
       local utils = require 'heirline.utils'
 
       local colors = {
+        bg = utils.get_highlight('Normal').bg,
         bright_bg = utils.get_highlight('Folded').bg,
         bright_fg = utils.get_highlight('Folded').fg,
         red = utils.get_highlight('DiagnosticError').fg,
@@ -116,7 +117,7 @@ return {
       local TablineModifiedIndicator = {
         condition = function(self) return vim.api.nvim_get_option_value('modified', { buf = self.bufnr }) end,
         provider = ' [+]',
-        hl = { fg = colors.bright_orange },
+        hl = { fg = colors.orange },
       }
 
       local TablineBufferBlock = {
@@ -158,9 +159,28 @@ return {
         { provider = ' ', hl = { bg = colors.bg } }
       )
 
+      local TablineTab = {
+        provider = function(self)
+          -- Simple padding around the tab number
+          return ' %' .. self.tabnr .. 'T ' .. self.tabnr .. ' %T '
+        end,
+        hl = function(self) return self.is_active and 'TabLineSel' or 'TabLine' end,
+      }
+
+      local TabPages = {
+        -- CONDITION: Only show the tablist if there is more than 1 tab
+        condition = function() return #vim.api.nvim_list_tabpages() > 1 end,
+        -- Use make_tablist to iterate over tabs
+        utils.make_tablist(
+          TablineTab,
+          -- This is the "spacer" or separator between tabs
+          { provider = ' ', hl = { bg = colors.bg } }
+        ),
+      }
+
       require('heirline').load_colors(colors)
       require('heirline').setup {
-        tabline = { TablineOffset, BufferLine },
+        tabline = { TablineOffset, BufferLine, { provider = '%=' }, TabPages },
       }
     end,
     keys = {
