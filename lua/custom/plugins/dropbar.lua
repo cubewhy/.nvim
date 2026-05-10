@@ -2,10 +2,6 @@ return {
   {
     'cubewhy/dropbar.nvim',
     branch = 'fix-event',
-    dependencies = {
-      'nvim-telescope/telescope-fzf-native.nvim',
-      build = 'make',
-    },
     opts = {},
     config = function(_, opts)
       require('dropbar').setup(opts)

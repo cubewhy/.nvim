@@ -4,12 +4,13 @@ return {
     dependencies = {
       {
         '2kabhishek/pickme.nvim',
+        event = 'VeryLazy',
         dependencies = {
-          'nvim-telescope/telescope.nvim',
+          'folke/snacks.nvim',
         },
         config = function()
           require('pickme').setup {
-            provider = 'telescope',
+            picker_provider = 'snacks',
             add_default_keybindings = false,
           }
         end,

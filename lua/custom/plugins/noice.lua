@@ -19,7 +19,7 @@ return {
       },
       {
         '<leader>n',
-        '<cmd>Noice telescope<cr>',
+        '<cmd>Noice snacks<cr>',
         desc = 'Noice History',
       },
     },

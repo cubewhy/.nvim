@@ -20,9 +20,6 @@ return {
       'mason-org/mason.nvim',
       'jay-babu/mason-nvim-dap.nvim',
 
-      -- Telescope plugin
-      'nvim-telescope/telescope-dap.nvim',
-
       -- Add your own debuggers here
       'leoluz/nvim-dap-go',
       'mfussenegger/nvim-dap-python',
@@ -61,8 +58,6 @@ return {
       local dap = require 'dap'
       local dapui = require 'dapui'
 
-      require('telescope').load_extension 'dap'
-
       require('mason-nvim-dap').setup {
         -- Makes a best effort to setup the various debuggers with
         -- reasonable debug configurations
@@ -78,26 +73,6 @@ return {
           -- Update this to ensure that you have the debuggers for the langs you want
           'delve',
           'debugpy',
-        },
-      }
-
-      -- keybinding config
-      require('which-key').add {
-        {
-          '<leader>fd',
-          group = 'Telescope Debug',
-          expand = function()
-            local ok, dap = pcall(require, 'dap')
-            if not ok or dap.session() == nil then return {} end
-
-            return {
-              { 'fdb', function() require('telescope').extensions.dap.list_breakpoints {} end, desc = 'Search Debug Breakpoints' },
-              { 'fdf', function() require('telescope').extensions.dap.frames {} end, desc = 'Search Debug Frames' },
-              { 'fdv', function() require('telescope').extensions.dap.variables {} end, desc = 'Search Debug Variables' },
-            }
-          end,
-          { '<leader>fdg', function() require('telescope').extensions.dap.configurations {} end, desc = 'Search Debug Configs' },
-          { '<leader>fdc', function() require('telescope').extensions.dap.commands {} end, desc = 'Search Debug Commands' },
         },
       }
 
