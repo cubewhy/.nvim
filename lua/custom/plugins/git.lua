@@ -1,30 +1,56 @@
 return {
   {
-    'kdheepak/lazygit.nvim',
-    lazy = true,
-    cmd = { 'LazyGit', 'LazyGitConfig', 'LazyGitCurrentFile', 'LazyGitFilter', 'LazyGitFilterCurrentFile', 'LazyGitLog' },
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    'folke/snacks.nvim',
     keys = {
-      { '<leader>gg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
-      { '<leader>gh', '<cmd>LazyGitLog<cr>', desc = 'Git History' },
+      {
+        '<leader>gg',
+        function()
+          ---@type fun(opts?: snacks.lazygit.Config): snacks.win
+          Snacks.lazygit()
+        end,
+        desc = 'LazyGit',
+      },
+      { '<leader>gh', function() Snacks.lazygit.log() end, desc = 'Git History' },
+      { '<leader>gf', function() Snacks.lazygit.log_file() end, desc = 'Git History' },
     },
-    config = function()
-      vim.api.nvim_create_autocmd('TermEnter', {
-        pattern = 'lazygit',
-        callback = function() vim.o.winfixbuf = true end,
-      })
-      vim.opt.termguicolors = true
-      vim.api.nvim_set_hl(0, 'LazyGitBorder', { fg = 'NONE', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'LazyGitFloat', { link = 'Normal' })
-
-      vim.g.lazygit_floating_window_winblend = 0 -- transparency of floating window
-      vim.g.lazygit_floating_window_scaling_factor = 0.9 -- scaling factor for floating window
-      vim.g.lazygit_floating_window_border_chars = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' } -- customize lazygit popup window border characters
-      vim.g.lazygit_floating_window_use_plenary = 0 -- use plenary.nvim to manage floating window if available
-      vim.g.lazygit_use_neovim_remote = 1 -- fallback to 0 if neovim-remote is not installed
-
-      vim.g.lazygit_on_exit_callback = nil -- optional function callback when exiting lazygit (useful for example to refresh some UI elements after lazy git has made some changes)
-    end,
+    ---@type snacks.Config
+    opts = {
+      ---@class snacks.lazygit.Config: snacks.terminal.Opts
+      ---@field args? string[]
+      ---@field theme? snacks.lazygit.Theme
+      lazygit = {
+        -- automatically configure lazygit to use the current colorscheme
+        -- and integrate edit with the current neovim instance
+        configure = true,
+        -- extra configuration for lazygit that will be merged with the default
+        -- snacks does NOT have a full yaml parser, so if you need `"test"` to appear with the quotes
+        -- you need to double quote it: `"\"test\""`
+        config = {
+          os = { editPreset = 'nvim-remote' },
+          gui = {
+            -- set to an empty string "" to disable icons
+            nerdFontsVersion = '3',
+          },
+        },
+        theme_path = vim.fs.normalize(vim.fn.stdpath 'cache' .. '/lazygit-theme.yml'),
+        -- Theme for lazygit
+        theme = {
+          [241] = { fg = 'Special' },
+          activeBorderColor = { fg = 'MatchParen', bold = true },
+          cherryPickedCommitBgColor = { fg = 'Identifier' },
+          cherryPickedCommitFgColor = { fg = 'Function' },
+          defaultFgColor = { fg = 'Normal' },
+          inactiveBorderColor = { fg = 'FloatBorder' },
+          optionsTextColor = { fg = 'Function' },
+          searchingActiveBorderColor = { fg = 'MatchParen', bold = true },
+          selectedLineBgColor = { bg = 'Visual' }, -- set to `default` to have no background colour
+          unstagedChangesColor = { fg = 'DiagnosticError' },
+        },
+        win = {
+          style = 'lazygit',
+        },
+      },
+    },
   },
   {
     'lewis6991/gitsigns.nvim',
@@ -98,19 +124,5 @@ return {
 
       vim.keymap.set({ 'o', 'x' }, 'ih', '<Cmd>Gitsigns select_hunk<CR>')
     end,
-  },
-  {
-    'nvim-telescope/telescope.nvim',
-    keys = {
-      {
-        '<leader>gf',
-        function()
-          require('telescope.builtin').git_bcommits {
-            prompt_title = 'Current File History (Commits)',
-          }
-        end,
-        desc = 'Git File History',
-      },
-    },
   },
 }
