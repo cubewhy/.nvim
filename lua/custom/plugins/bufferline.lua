@@ -98,8 +98,57 @@ return {
 
       local TablineFileName = {
         provider = function(self)
-          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(self.bufnr), ':t')
-          return filename == '' and '[No Name]' or filename
+          local full_path = vim.api.nvim_buf_get_name(self.bufnr)
+          if full_path == '' then return '[No Name]' end
+
+          local filename = vim.fn.fnamemodify(full_path, ':t')
+
+          local all_bufs = vim.tbl_filter(
+            function(b) return b ~= self.bufnr and vim.api.nvim_buf_is_loaded(b) and vim.bo[b].buflisted end,
+            vim.api.nvim_list_bufs()
+          )
+
+          local duplicates = {}
+          for _, b in ipairs(all_bufs) do
+            if vim.fn.fnamemodify(vim.api.nvim_buf_get_name(b), ':t') == filename then
+              table.insert(duplicates, vim.fn.fnamemodify(vim.api.nvim_buf_get_name(b), ':.'))
+            end
+          end
+
+          if #duplicates == 0 then return filename end
+
+          local current_rel_path = vim.fn.fnamemodify(full_path, ':.')
+          local current_parts = vim.split(current_rel_path, '/', { trimempty = true })
+
+          local start_idx = 1
+          for i = 1, #current_parts - 1 do
+            local is_common = true
+            for _, other_path in ipairs(duplicates) do
+              local other_parts = vim.split(other_path, '/', { trimempty = true })
+              if other_parts[i] ~= current_parts[i] then
+                is_common = false
+                break
+              end
+            end
+            if not is_common then
+              start_idx = i
+              break
+            end
+          end
+
+          local result = {}
+          for i = start_idx, #current_parts do
+            local part = current_parts[i]
+            if i == start_idx or i == #current_parts then
+              table.insert(result, part)
+            else
+              local short = part:sub(1, 1)
+              if short == '.' then short = part:sub(1, 2) end
+              table.insert(result, short)
+            end
+          end
+
+          return table.concat(result, '/')
         end,
         hl = function(self) return { bold = self.is_active or self.is_visible, italic = false } end,
       }
