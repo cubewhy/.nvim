@@ -42,8 +42,12 @@ vim.o.timeoutlen = 300
 vim.o.splitright = true
 vim.o.splitbelow = true
 
-vim.g.lazygit_floating_window_use_plenary = 0
-vim.g.lazygit_floating_window_winblend = 0
+local tabsize = 4
+
+vim.o.expandtab = true
+vim.o.shiftwidth = tabsize
+vim.o.tabstop = tabsize
+vim.o.softtabstop = tabsize
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
