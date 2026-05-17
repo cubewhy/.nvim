@@ -204,8 +204,8 @@ return {
 
       local BufferLine = require('heirline.utils').make_buflist(
         TablineBufferBlock,
-        { provider = ' ', hl = { bg = colors.bg } },
-        { provider = ' ', hl = { bg = colors.bg } }
+        { provider = ' ', hl = { bg = colors.bg, fg = colors.gray } },
+        { provider = ' ', hl = { bg = colors.bg, fg = colors.gray } }
       )
 
       local TablineTab = {
