@@ -40,7 +40,7 @@ return {
         },
       }
 
-      local Diagnostics = {
+      local TablineFileDiagnostics = {
         condition = function(self) return #vim.diagnostic.get(self.bufnr) > 0 end,
 
         -- Fetching custom diagnostic icons
@@ -163,27 +163,63 @@ return {
         hl = function(self) return { fg = self.icon_color } end,
       }
 
-      local TablineModifiedIndicator = {
-        condition = function(self) return vim.api.nvim_get_option_value('modified', { buf = self.bufnr }) end,
-        provider = ' [+]',
-        hl = { fg = colors.orange },
+      local TablineFileFlags = {
+        {
+          condition = function(self) return vim.api.nvim_get_option_value('modified', { buf = self.bufnr }) end,
+          provider = '[+]',
+          hl = { fg = 'green' },
+        },
+        {
+          condition = function(self)
+            return not vim.api.nvim_get_option_value('modifiable', { buf = self.bufnr }) or vim.api.nvim_get_option_value('readonly', { buf = self.bufnr })
+          end,
+          provider = function(self)
+            if vim.api.nvim_get_option_value('buftype', { buf = self.bufnr }) == 'terminal' then
+              return '  '
+            else
+              return ''
+            end
+          end,
+          hl = { fg = 'orange' },
+        },
       }
 
-      local TablineBufferBlock = {
-        { provider = '  ' },
-        TablineFileIcon,
-        TablineFileName,
-        Diagnostics,
-        TablineModifiedIndicator,
-        { provider = '  ' },
+      local TablineFileNameBlock = {
+        init = function(self) self.filename = vim.api.nvim_buf_get_name(self.bufnr) end,
         hl = function(self)
           if self.is_active then
             return 'TabLineSel'
+          -- why not?
+          -- elseif not vim.api.nvim_buf_is_loaded(self.bufnr) then
+          --     return { fg = "gray" }
           else
             return 'TabLine'
           end
         end,
+        on_click = {
+          callback = function(_, minwid, _, button)
+            if button == 'm' then -- close on mouse middle click
+              vim.schedule(function() vim.api.nvim_buf_delete(minwid, { force = false }) end)
+            else
+              vim.api.nvim_win_set_buf(0, minwid)
+            end
+          end,
+          minwid = function(self) return self.bufnr end,
+          name = 'heirline_tabline_buffer_callback',
+        },
+        TablineFileIcon,
+        TablineFileName,
+        TablineFileFlags,
+        TablineFileDiagnostics,
       }
+
+      local TablineBufferBlock = utils.surround({ '', '' }, function(self)
+        if self.is_active then
+          return utils.get_highlight('TabLineSel').bg
+        else
+          return utils.get_highlight('TabLine').bg
+        end
+      end, { TablineFileNameBlock })
 
       local TablineOffset = {
         condition = function(self)
@@ -202,11 +238,7 @@ return {
         hl = { bg = colors.bg },
       }
 
-      local BufferLine = require('heirline.utils').make_buflist(
-        TablineBufferBlock,
-        { provider = ' ', hl = { bg = colors.bg, fg = colors.gray } },
-        { provider = ' ', hl = { bg = colors.bg, fg = colors.gray } }
-      )
+      local BufferLine = utils.make_buflist(TablineBufferBlock, { provider = '', hl = { fg = 'gray' } }, { provider = '', hl = { fg = 'gray' } })
 
       local TablineTab = {
         provider = function(self)
