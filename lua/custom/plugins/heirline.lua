@@ -166,7 +166,7 @@ return {
       local TablineFileFlags = {
         {
           condition = function(self) return vim.api.nvim_get_option_value('modified', { buf = self.bufnr }) end,
-          provider = '[+]',
+          provider = ' [+]',
           hl = { fg = 'orange' },
         },
         {
