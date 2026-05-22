@@ -8,7 +8,7 @@
   (token_tree
     [
       (raw_string_literal (string_content) @injection.content)
-      (string_literal) @injection.content
+      (string_literal (string_content) @injection.content)
     ]
   )
   (#match? @_macro_name "^query(_as|_scalar)?$")
