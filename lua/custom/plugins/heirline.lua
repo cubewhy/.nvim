@@ -167,7 +167,7 @@ return {
         {
           condition = function(self) return vim.api.nvim_get_option_value('modified', { buf = self.bufnr }) end,
           provider = '[+]',
-          hl = { fg = 'green' },
+          hl = { fg = 'orange' },
         },
         {
           condition = function(self)
@@ -248,15 +248,28 @@ return {
         hl = function(self) return self.is_active and 'TabLineSel' or 'TabLine' end,
       }
 
+      local Tabpage = {
+        provider = function(self) return '%' .. self.tabnr .. 'T ' .. self.tabpage .. ' %T' end,
+        hl = function(self)
+          if not self.is_active then
+            return 'TabLine'
+          else
+            return 'TabLineSel'
+          end
+        end,
+      }
+
+      local TabpageClose = {
+        provider = '%999X  %X',
+        hl = 'TabLine',
+      }
+
       local TabPages = {
-        -- CONDITION: Only show the tablist if there is more than 1 tab
-        condition = function() return #vim.api.nvim_list_tabpages() > 1 end,
-        -- Use make_tablist to iterate over tabs
-        utils.make_tablist(
-          TablineTab,
-          -- This is the "spacer" or separator between tabs
-          { provider = ' ', hl = { bg = colors.bg } }
-        ),
+        -- only show this component if there's 2 or more tabpages
+        condition = function() return #vim.api.nvim_list_tabpages() >= 2 end,
+        { provider = '%=' },
+        utils.make_tablist(Tabpage),
+        TabpageClose,
       }
 
       require('heirline').load_colors(colors)
