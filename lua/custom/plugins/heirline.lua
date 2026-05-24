@@ -240,14 +240,6 @@ return {
 
       local BufferLine = utils.make_buflist(TablineBufferBlock, { provider = '', hl = { fg = 'gray' } }, { provider = '', hl = { fg = 'gray' } })
 
-      local TablineTab = {
-        provider = function(self)
-          -- Simple padding around the tab number
-          return ' %' .. self.tabnr .. 'T ' .. self.tabnr .. ' %T '
-        end,
-        hl = function(self) return self.is_active and 'TabLineSel' or 'TabLine' end,
-      }
-
       local Tabpage = {
         provider = function(self) return '%' .. self.tabnr .. 'T ' .. self.tabpage .. ' %T' end,
         hl = function(self)
