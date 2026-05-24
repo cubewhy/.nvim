@@ -150,7 +150,7 @@ return {
 
           return table.concat(result, '/')
         end,
-        hl = function(self) return { bold = self.is_active, italic = false } end,
+        hl = function(self) return { bold = self.is_active or self.is_visible, italic = false } end,
       }
 
       local TablineFileIcon = {
