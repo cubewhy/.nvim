@@ -37,8 +37,5 @@ return {
     for i = 1, 9 do
       vim.keymap.set('n', '<M-' .. i .. '>', function() harpoon:list():select(i) end, { desc = 'Harpoon to file ' .. i })
     end
-
-    vim.keymap.set('n', '<C-S-P>', function() harpoon:list():prev() end, { desc = 'Harpoon Prev' })
-    vim.keymap.set('n', '<C-S-N>', function() harpoon:list():next() end, { desc = 'Harpoon Next' })
   end,
 }
