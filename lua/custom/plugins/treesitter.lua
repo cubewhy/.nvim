@@ -156,8 +156,8 @@ return {
         desc = 'Prev conditional',
       },
 
-      { '<leader>a', function() require('nvim-treesitter-textobjects.swap').swap_next '@parameter.inner' end, desc = 'Swap next parameter' },
-      { '<leader>A', function() require('nvim-treesitter-textobjects.swap').swap_previous '@parameter.outer' end, desc = 'Swap prev parameter' },
+      -- { '<leader>a', function() require('nvim-treesitter-textobjects.swap').swap_next '@parameter.inner' end, desc = 'Swap next parameter' },
+      -- { '<leader>A', function() require('nvim-treesitter-textobjects.swap').swap_previous '@parameter.outer' end, desc = 'Swap prev parameter' },
     },
   },
 }
