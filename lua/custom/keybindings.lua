@@ -38,18 +38,6 @@ map('n', '<C-Right>', '<cmd>vertical resize +2<cr>', { desc = 'Increase Window W
 
 map('n', '<leader>-', '<C-w>s', { desc = 'Split Below' })
 map('n', '<leader>|', '<C-w>v', { desc = 'Split Right' })
-map('n', '<leader>w-', '<C-w>s', { desc = 'Split Window Below' })
-map('n', '<leader>w|', '<C-w>v', { desc = 'Split Window Right' })
-map('n', '<leader>wd', '<C-w>c', { desc = 'Close Window' })
-map('n', '<leader>ww', '<C-w>w', { desc = 'Switch Window' })
-map('n', '<leader>wh', '<C-w>h', { desc = 'Move to Left' })
-map('n', '<leader>wj', '<C-w>j', { desc = 'Move Down' })
-map('n', '<leader>wk', '<C-w>k', { desc = 'Move Up' })
-map('n', '<leader>wl', '<C-w>l', { desc = 'Move to Right' })
-map('n', '<leader>wo', '<C-w>o', { desc = 'Close Other Windows' })
-map('n', '<leader>w=', '<C-w>=', { desc = 'Equalize size' })
-map('n', '<leader>w>', '<cmd>vertical resize +5<cr>', { desc = 'Increase Width' })
-map('n', '<leader>w<', '<cmd>vertical resize -5<cr>', { desc = 'Decrease Width' })
 
 map(
   'n',
