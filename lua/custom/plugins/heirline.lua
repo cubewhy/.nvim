@@ -184,6 +184,46 @@ return {
         },
       }
 
+      local TablineHarpoonMarker = {
+        condition = function() return pcall(require, 'harpoon') end,
+
+        init = function(self)
+          local current_file = vim.api.nvim_buf_get_name(self.bufnr)
+          if current_file == '' then
+            self.harpoon_idx = nil
+            return
+          end
+
+          local current_abs = vim.fs.normalize(current_file)
+          local items = require('harpoon'):list().items
+
+          self.harpoon_idx = nil
+          for idx, item in ipairs(items) do
+            if item.value and item.value ~= '' then
+              local item_abs = vim.fs.normalize(vim.fn.fnamemodify(item.value, ':p'))
+              if current_abs == item_abs then
+                self.harpoon_idx = idx
+                break
+              end
+            end
+          end
+        end,
+
+        provider = function(self)
+          if self.harpoon_idx then return self.harpoon_idx .. ' ' end
+          return ''
+        end,
+
+        update = {
+          'BufEnter',
+          'WinEnter',
+          'User',
+          pattern = 'HarpoonUpdate',
+        },
+
+        hl = { fg = 'purple', bold = true },
+      }
+
       local TablineFileNameBlock = {
         init = function(self) self.filename = vim.api.nvim_buf_get_name(self.bufnr) end,
         hl = function(self)
@@ -207,6 +247,7 @@ return {
           minwid = function(self) return self.bufnr end,
           name = 'heirline_tabline_buffer_callback',
         },
+        TablineHarpoonMarker,
         TablineFileIcon,
         TablineFileName,
         TablineFileFlags,
