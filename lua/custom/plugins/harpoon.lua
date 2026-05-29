@@ -20,7 +20,10 @@ return {
         vim.api.nvim_create_autocmd('BufLeave', {
           buffer = cx.bufnr,
           callback = function()
-            vim.schedule(function() vim.api.nvim_exec_autocmds('User', { pattern = 'HarpoonUpdate' }) end)
+            vim.schedule(function()
+              vim.api.nvim_exec_autocmds('User', { pattern = 'HarpoonUpdate' })
+              vim.cmd 'redrawtabline'
+            end)
           end,
         })
       end,
