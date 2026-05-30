@@ -40,7 +40,15 @@ return {
       { '<leader>/', function() Snacks.picker.grep() end, desc = 'Grep In Workspace' },
       { '<leader>su', function() Snacks.picker.undo() end, desc = 'Search Undo history' },
       { '<leader>s.', function() Snacks.picker.recent() end, desc = 'Search Recent Files' },
-      { '<leader><leader>', function() Snacks.picker.smart() end, desc = 'Smart Find Files' },
+      {
+        '<leader><leader>',
+        function()
+          Snacks.picker.smart {
+            multi = { 'buffers', 'files' },
+          }
+        end,
+        desc = 'Smart Find Files',
+      },
       { '<leader>sw', function() Snacks.picker.grep_word() end, desc = 'Search current Word', mode = { 'n', 'v' } },
 
       -- Specialized Search
