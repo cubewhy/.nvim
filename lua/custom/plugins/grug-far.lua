@@ -32,7 +32,7 @@ return {
         }
       end,
       mode = { 'n', 'x' },
-      desc = 'Search and Replace',
+      desc = 'Search and Replace AstGrep',
     },
   },
 }
