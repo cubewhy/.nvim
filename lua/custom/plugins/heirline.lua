@@ -177,7 +177,7 @@ return {
             if vim.api.nvim_get_option_value('buftype', { buf = self.bufnr }) == 'terminal' then
               return '  '
             else
-              return ''
+              return '  '
             end
           end,
           hl = { fg = 'orange' },
