@@ -1,6 +1,14 @@
+local theme_name = 'carbonfox'
+
+vim.api.nvim_create_autocmd('VimEnter', {
+  pattern = '*',
+  callback = function() vim.cmd.colorscheme(theme_name) end,
+})
+
 return {
   { 'typicode/bg.nvim', lazy = false },
-  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000, config = function() vim.cmd.colorscheme 'catppuccin' end },
+  -- { 'catppuccin/nvim', name = 'catppuccin', priority = 1000, config = function() vim.cmd.colorscheme 'catppuccin' end },
+  { 'EdenEast/nightfox.nvim' },
 
   -- {
   --   'folke/tokyonight.nvim',
