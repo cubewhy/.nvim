@@ -1,4 +1,4 @@
-local theme_name = 'nordfox'
+local theme_name = 'onedark'
 
 vim.api.nvim_create_autocmd('VimEnter', {
   pattern = '*',
@@ -7,8 +7,17 @@ vim.api.nvim_create_autocmd('VimEnter', {
 
 return {
   { 'typicode/bg.nvim', lazy = false },
-  -- { 'catppuccin/nvim', name = 'catppuccin', priority = 1000, config = function() vim.cmd.colorscheme 'catppuccin' end },
-  { 'EdenEast/nightfox.nvim' },
+  -- { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
+  -- { 'EdenEast/nightfox.nvim' },
+  {
+    'navarasu/onedark.nvim',
+    priority = 1000,
+    config = function()
+      require('onedark').setup {
+        style = 'deep',
+      }
+    end,
+  },
 
   -- {
   --   'folke/tokyonight.nvim',
