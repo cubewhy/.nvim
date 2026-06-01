@@ -1,4 +1,4 @@
-local theme_name = 'carbonfox'
+local theme_name = 'nordfox'
 
 vim.api.nvim_create_autocmd('VimEnter', {
   pattern = '*',
