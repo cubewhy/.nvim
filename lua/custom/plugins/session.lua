@@ -1,43 +1,94 @@
 return {
   {
-    'folke/persistence.nvim',
-    event = 'BufReadPre', -- this will only start session saving when an actual file was opened
+    'stevearc/resession.nvim',
+    event = 'BufReadPre', -- Starts session tracking only when an actual file is opened
     keys = {
-      { '<leader>qs', function() require('persistence').load() end, desc = 'Restore Session' },
-      { '<leader>qS', function() require('persistence').select() end, desc = 'Select Session' },
-      { '<leader>ql', function() require('persistence').load { last = true } end, desc = 'Restore Last Session' },
-      { '<leader>qd', function() require('persistence').stop() end, desc = "Don't Save Current Session" },
+      {
+        '<leader>qs',
+        function() require('resession').load(vim.fn.getcwd(), { silence_errors = true }) end,
+        desc = 'Restore Directory Session',
+      },
+      {
+        '<leader>qS',
+        function() require('resession').select() end,
+        desc = 'Select Session',
+      },
+      {
+        '<leader>ql',
+        function() require('resession').load('last', { silence_errors = true }) end,
+        desc = 'Restore Last Session',
+      },
+      {
+        '<leader>qd',
+        function()
+          vim.g.resession_disable_save = true
+          vim.notify('Session saving disabled for this instance', vim.log.levels.INFO)
+        end,
+        desc = "Don't Save Current Session",
+      },
       { '<leader>qq', '<cmd>qa<cr>', desc = 'Quit all' },
     },
-    opts = {
-      options = { 'buffers', 'curdir', 'tabpages', 'winsize' },
-    },
-    config = function(_, opts)
-      require('persistence').setup(opts)
+    config = function()
+      local resession = require 'resession'
+      resession.setup {
+        autosave = {
+          enabled = false,
+          -- How often to save (in seconds)
+          interval = 60,
+          -- Notify when autosaved
+          notify = true,
+        },
 
-      vim.api.nvim_create_autocmd('User', {
-        pattern = 'PersistenceSavePre',
+        options = {
+          'binary',
+          'bufhidden',
+          'buflisted',
+          'cmdheight',
+          'diff',
+          'filetype',
+          'modifiable',
+          'previewwindow',
+          'readonly',
+          'scrollbind',
+          'winfixheight',
+          'winfixwidth',
+        },
+
+        -- buf_filter = function(bufnr)
+        --   if not vim.api.nvim_buf_is_valid(bufnr) then return false end
+        --
+        --   local ft = vim.bo[bufnr].filetype
+        --   if ft == 'grug-far' or ft:find 'neotest' or ft:find 'dapui' or ft == 'neo-tree' then return false end
+        --
+        --   local buftype = vim.bo[bufnr].buftype
+        --   if buftype == 'terminal' or buftype == 'quickfix' then return false end
+        --
+        --   if buftype == 'help' then return true end
+        --   if buftype ~= '' and buftype ~= 'acwrite' then return false end
+        --   if vim.api.nvim_buf_get_name(bufnr) == '' then return false end
+        --
+        --   return vim.bo[bufnr].buflisted
+        -- end,
+
+        buf_filter = require('resession').default_buf_filter,
+        tab_buf_filter = function(tabpage, bufnr) return true end,
+        load_detail = true,
+        load_order = 'modification_time',
+
+        extensions = {
+          quickfix = {},
+        },
+      }
+
+      -- Replicate persistence.nvim's automatic save-on-exit behavior
+      vim.api.nvim_create_autocmd('VimLeavePre', {
         callback = function()
-          local ok_dapui, dapui = pcall(require, 'dapui')
-          if ok_dapui then dapui.close() end
+          if vim.g.resession_disable_save then return end
 
-          local ok_neotree, neotree = pcall(require, 'neo-tree.command')
-          if ok_neotree then neotree.execute { action = 'close' } end
-
-          -- close quickfix list
-          vim.cmd 'cclose'
-          -- close location list
-          vim.cmd 'lclose'
-
-          for _, win in ipairs(vim.api.nvim_list_wins()) do
-            local buf = vim.api.nvim_win_get_buf(win)
-
-            -- close neotest buf
-            if vim.bo[buf].filetype:find 'neotest' then vim.api.nvim_win_close(win, true) end
-
-            -- close terminals
-            if vim.bo[buf].buftype == 'terminal' then vim.api.nvim_win_close(win, true) end
-          end
+          -- Save a session locked specifically to the current working directory
+          resession.save(vim.fn.getcwd(), { notify = false })
+          -- Save a global backup fallback for the `<leader>ql` keymap
+          resession.save('last', { notify = false })
         end,
       })
     end,
