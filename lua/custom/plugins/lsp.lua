@@ -125,6 +125,12 @@ return {
 
       require('mason-lspconfig').setup {
         ensure_installed = vim.tbl_keys(servers),
+        automatic_enable = {
+          exclude = {
+            'rust_analyzer',
+            'ts_ls',
+          },
+        },
         handlers = {
           function(server_name)
             -- skip rust-analyzer since we manage it via rustacenvim
