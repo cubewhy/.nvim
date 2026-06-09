@@ -133,9 +133,6 @@ return {
         },
         handlers = {
           function(server_name)
-            -- skip rust-analyzer since we manage it via rustacenvim
-            if server_name == 'rust_analyzer' or server_name == 'rust-analyzer' then return end
-
             local server = servers[server_name] or {}
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
