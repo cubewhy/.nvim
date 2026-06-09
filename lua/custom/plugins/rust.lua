@@ -6,7 +6,6 @@ return {
     config = function()
       vim.g.rustaceanvim = {
         server = {
-          cmd = { 'rustup', 'run', 'stable', 'rust-analyzer' },
           -- on_attach = function(client, _)
           --   client.server_capabilities.semanticTokensProvider = nil
           -- end,
