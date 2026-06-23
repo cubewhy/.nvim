@@ -31,6 +31,7 @@ return {
           enable = true,
         },
       }
+      vim.treesitter.language.register('json', 'jsonl')
 
       local map = vim.keymap.set
 
