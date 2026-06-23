@@ -120,7 +120,8 @@ return {
         --     typescript = {},
         --   },
         -- },
-        taplo = {},
+        -- taplo = {},
+        tombi = {},
       }
 
       require('mason-lspconfig').setup {

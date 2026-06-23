@@ -66,27 +66,27 @@ return {
       }
     end,
   },
-  {
-    'saecki/crates.nvim',
-    event = { 'BufRead Cargo.toml' },
-    config = function()
-      require('crates').setup {
-        completion = {
-          crates = {
-            enabled = true,
-            max_results = 8, -- The maximum number of search results to display
-            min_chars = 3, -- The minimum number of charaters to type before completions begin appearing
-          },
-        },
-        lsp = {
-          enabled = true,
-          name = 'crates.nvim',
-          on_attach = function(client, bufnr) end,
-          actions = true,
-          completion = true,
-          hover = true,
-        },
-      }
-    end,
-  },
+  -- {
+  --   'saecki/crates.nvim',
+  --   event = { 'BufRead Cargo.toml' },
+  --   config = function()
+  --     require('crates').setup {
+  --       completion = {
+  --         crates = {
+  --           enabled = true,
+  --           max_results = 8, -- The maximum number of search results to display
+  --           min_chars = 3, -- The minimum number of charaters to type before completions begin appearing
+  --         },
+  --       },
+  --       lsp = {
+  --         enabled = true,
+  --         name = 'crates.nvim',
+  --         on_attach = function(client, bufnr) end,
+  --         actions = true,
+  --         completion = true,
+  --         hover = true,
+  --       },
+  --     }
+  --   end,
+  -- },
 }
