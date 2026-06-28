@@ -65,17 +65,29 @@ map(
   { desc = 'Go to next Error' }
 )
 
-map('n', '[w', function()
-  vim.diagnostic.jump {
-    count = -vim.v.count1,
-  }
-end, { desc = 'Go to previous Warning/Diagnostic' })
+map(
+  'n',
+  '[w',
+  function()
+    vim.diagnostic.jump {
+      count = -vim.v.count1,
+      severity = vim.diagnostic.severity.WARN,
+    }
+  end,
+  { desc = 'Go to previous Warning' }
+)
 
-map('n', ']w', function()
-  vim.diagnostic.jump {
-    count = vim.v.count1,
-  }
-end, { desc = 'Go to next Warning/Diagnostic' })
+map(
+  'n',
+  ']w',
+  function()
+    vim.diagnostic.jump {
+      count = vim.v.count1,
+      severity = vim.diagnostic.severity.WARN,
+    }
+  end,
+  { desc = 'Go to next Warning' }
+)
 
 map(
   'n',
@@ -90,12 +102,18 @@ map(
   { desc = 'Go to previous Hint' }
 )
 
-map('n', ']h', function()
-  vim.diagnostic.jump {
-    count = vim.v.count1,
-    float = { border = 'none' },
-  }
-end, { desc = 'Go to next Hint' })
+map(
+  'n',
+  ']h',
+  function()
+    vim.diagnostic.jump {
+      count = vim.v.count1,
+      severity = vim.diagnostic.severity.HINT,
+      float = { border = 'none' },
+    }
+  end,
+  { desc = 'Go to next Hint' }
+)
 
 -- indent
 map('n', '<A-h>', '<<', { desc = 'Indent left' })
