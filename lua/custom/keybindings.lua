@@ -115,6 +115,32 @@ map(
   { desc = 'Go to next Hint' }
 )
 
+map(
+  'n',
+  ']i',
+  function()
+    vim.diagnostic.jump {
+      count = vim.v.count1,
+      severity = vim.diagnostic.severity.INFO,
+      float = { border = 'none' },
+    }
+  end,
+  { desc = 'Go to next Info' }
+)
+
+map(
+  'n',
+  '[i',
+  function()
+    vim.diagnostic.jump {
+      count = -vim.v.count1,
+      severity = vim.diagnostic.severity.INFO,
+      float = { border = 'none' },
+    }
+  end,
+  { desc = 'Go to previous Info' }
+)
+
 -- indent
 map('n', '<A-h>', '<<', { desc = 'Indent left' })
 map('v', '<A-h>', '<gv', { desc = 'Indent left' })
