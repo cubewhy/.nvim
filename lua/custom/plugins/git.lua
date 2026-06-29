@@ -11,7 +11,7 @@ return {
         desc = 'LazyGit',
       },
       { '<leader>gh', function() Snacks.lazygit.log() end, desc = 'Git History' },
-      { '<leader>gf', function() Snacks.lazygit.log_file() end, desc = 'Git History' },
+      { '<leader>gf', function() Snacks.lazygit.log_file() end, desc = 'Git File History' },
       { '<leader>gx', function() Snacks.gitbrowse() end, desc = 'Open In Browser' },
     },
     ---@type snacks.Config
