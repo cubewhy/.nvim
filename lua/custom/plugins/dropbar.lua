@@ -1,7 +1,6 @@
 return {
   {
-    'cubewhy/dropbar.nvim',
-    branch = 'fix-event',
+    'Bekaboo/dropbar.nvim',
     dependencies = {
       'nvim-telescope/telescope-fzf-native.nvim',
       build = 'make',
