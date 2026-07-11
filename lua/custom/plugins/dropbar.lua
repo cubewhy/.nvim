@@ -1,10 +1,10 @@
 return {
   {
     'Bekaboo/dropbar.nvim',
-    dependencies = {
-      'nvim-telescope/telescope-fzf-native.nvim',
-      build = 'make',
-    },
+    -- dependencies = {
+    --   'nvim-telescope/telescope-fzf-native.nvim',
+    --   build = 'make',
+    -- },
     opts = {
       {
         ['q'] = '<C-w>q',
