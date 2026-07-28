@@ -292,17 +292,11 @@ return {
         end,
       }
 
-      local TabpageClose = {
-        provider = '%999X  %X',
-        hl = 'TabLine',
-      }
-
       local TabPages = {
         -- only show this component if there's 2 or more tabpages
         condition = function() return #vim.api.nvim_list_tabpages() >= 2 end,
         { provider = '%=' },
         utils.make_tablist(Tabpage),
-        TabpageClose,
       }
 
       require('heirline').load_colors(colors)
