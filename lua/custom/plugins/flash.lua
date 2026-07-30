@@ -48,6 +48,50 @@ return {
       { 'r', mode = 'o', function() require('flash').remote() end, desc = 'Remote Flash' },
       { 'R', mode = { 'o', 'x' }, function() require('flash').treesitter_search() end, desc = 'Treesitter Search' },
       { '<c-s>', mode = { 'c' }, function() require('flash').toggle() end, desc = 'Toggle Flash Search' },
+      {
+        'f',
+        mode = { 'n', 'x', 'o' },
+        function()
+          require('flash').jump {
+            mode = 'char',
+            search = { dir = 'forward' },
+          }
+        end,
+        desc = 'Flash Forward Char',
+      },
+      {
+        'F',
+        mode = { 'n', 'x', 'o' },
+        function()
+          require('flash').jump {
+            mode = 'char',
+            search = { dir = 'backward' },
+          }
+        end,
+        desc = 'Flash Backward Char',
+      },
+      {
+        't',
+        mode = { 'n', 'x', 'o' },
+        function()
+          require('flash').jump {
+            mode = 'char',
+            search = { dir = 'forward', mode = 'till' },
+          }
+        end,
+        desc = 'Flash Till Forward Char',
+      },
+      {
+        'T',
+        mode = { 'n', 'x', 'o' },
+        function()
+          require('flash').jump {
+            mode = 'char',
+            search = { dir = 'backward', mode = 'till' },
+          }
+        end,
+        desc = 'Flash Till Backward Char',
+      },
     },
     config = function()
       vim.keymap.set(
