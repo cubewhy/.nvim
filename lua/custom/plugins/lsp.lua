@@ -100,6 +100,7 @@ return {
                   reportUnknownMemberType = 'none',
                   reportUnknownArgumentType = 'none',
                   reportUnannotatedClassAttribute = 'none',
+                  reportOptionalMemberAccess = 'warning',
                 },
               },
             },
