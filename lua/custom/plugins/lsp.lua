@@ -99,6 +99,7 @@ return {
                   reportUnknownVariableType = 'none',
                   reportUnknownMemberType = 'none',
                   reportUnknownArgumentType = 'none',
+                  reportUnannotatedClassAttribute = 'none',
                 },
               },
             },
