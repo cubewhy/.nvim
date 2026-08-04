@@ -120,21 +120,20 @@ return {
           local current_rel_path = vim.fn.fnamemodify(full_path, ':.')
           local current_parts = vim.split(current_rel_path, '/', { trimempty = true })
 
-          local start_idx = 1
-          for i = 1, #current_parts - 1 do
-            local is_common = true
-            for _, other_path in ipairs(duplicates) do
-              local other_parts = vim.split(other_path, '/', { trimempty = true })
-              if other_parts[i] ~= current_parts[i] then
-                is_common = false
-                break
-              end
+          local max_depth = 0
+          for _, other_path in ipairs(duplicates) do
+            local other_parts = vim.split(other_path, '/', { trimempty = true })
+            local depth = 1
+            while depth < #current_parts do
+              local curr_idx = #current_parts - depth
+              local other_idx = #other_parts - depth
+              if other_idx < 1 or current_parts[curr_idx] ~= other_parts[other_idx] then break end
+              depth = depth + 1
             end
-            if not is_common then
-              start_idx = i
-              break
-            end
+            if depth > max_depth then max_depth = depth end
           end
+
+          local start_idx = math.max(1, #current_parts - max_depth)
 
           local result = {}
           for i = start_idx, #current_parts do
