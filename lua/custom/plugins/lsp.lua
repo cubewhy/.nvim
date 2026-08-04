@@ -89,8 +89,24 @@ return {
             Lua = { completion = { callSnippet = 'Replace' }, diagnostics = { globals = { 'vim' } } },
           },
         },
-        -- rust_analyzer = {},
-        basedpyright = {},
+        basedpyright = {
+          settings = {
+            basedpyright = {
+              analysis = {
+                typeCheckingMode = 'basic',
+                diagnosticSeverityOverrides = {
+                  reportUnusedImport = 'none',
+                  reportUnusedVariable = 'none',
+                  reportUnusedCallResult = 'none',
+                  reportUnusedFunction = 'none',
+                  reportUnknownVariableType = 'none',
+                  reportUnknownMemberType = 'none',
+                  reportUnknownArgumentType = 'none',
+                },
+              },
+            },
+          },
+        },
         jsonls = {
           settings = {
             json = {
@@ -113,41 +129,32 @@ return {
             },
           },
         },
-        -- ty = {},
-        -- vtsls = {
-        --   settings = {
-        --     vtsls = {},
-        --     typescript = {},
-        --   },
-        -- },
-        -- taplo = {},
         tombi = {},
+        ruff = {},
+        bashls = {},
+        docker_language_server = {},
+        clangd = {},
+        docker_compose_language_service = {},
+        cssls = {},
+        html = {},
+        neocmake = {},
+        gopls = {},
+        typos_lsp = {},
       }
 
       require('mason-lspconfig').setup {
         ensure_installed = vim.tbl_keys(servers),
-        automatic_enable = {
-          exclude = {
-            'rust_analyzer',
-            'ts_ls',
-          },
-        },
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
+        automatic_enable = false,
       }
 
-      -- nixd
-      vim.lsp.config('nixd', {
-        cmd = { 'nixd' },
-        filetypes = { 'nix' },
-      })
+      for name, server in pairs(servers) do
+        local config = vim.deepcopy(server)
 
-      vim.lsp.enable 'nixd'
+        config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
+
+        vim.lsp.config(name, config)
+        vim.lsp.enable(name)
+      end
     end,
   },
   {
