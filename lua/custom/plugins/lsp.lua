@@ -93,12 +93,9 @@ return {
           settings = {
             basedpyright = {
               analysis = {
-                typeCheckingMode = 'basic',
                 diagnosticSeverityOverrides = {
                   reportUnusedImport = 'none',
-                  reportUnusedVariable = 'none',
                   reportUnusedCallResult = 'none',
-                  reportUnusedFunction = 'none',
                   reportUnknownVariableType = 'none',
                   reportUnknownMemberType = 'none',
                   reportUnknownArgumentType = 'none',
