@@ -57,24 +57,40 @@ return {
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-          if client ~= nil and client.name == 'vtsls' then
-            map('<leader>cu', function()
-              vim.lsp.buf.code_action {
-                context = {
-                  ---@diagnostic disable-next-line: assign-type-mismatch
-                  only = { 'source.removeUnused' },
-                  diagnostics = {},
-                },
-                apply = true,
-              }
-            end, 'Remove Unused Imports')
-          end
+          if client then
+            if client.name == 'vtsls' or client.name == 'ruff' then
+              map(
+                '<leader>co',
+                function()
+                  vim.lsp.buf.code_action {
+                    context = {
+                      only = { 'source.organizeImports' },
+                      diagnostics = {},
+                    },
+                    apply = true,
+                  }
+                end,
+                'Organize Imports'
+              )
+            end
 
-          if client and client:supports_method 'textDocument/codeLens' then
-            map('<leader>cc', vim.lsp.codelens.run, 'Run CodeLens')
-            map('<leader>cC', function() vim.lsp.codelens.enable(true, { bufnr = event.buf }) end, 'Refresh CodeLens')
+            if client.name == 'vtsls' then
+              map('<leader>cu', function()
+                vim.lsp.buf.code_action {
+                  context = {
+                    ---@diagnostic disable-next-line: assign-type-mismatch
+                    only = { 'source.removeUnused' },
+                    diagnostics = {},
+                  },
+                  apply = true,
+                }
+              end, 'Remove Unused Imports')
+            end
 
-            -- vim.lsp.codelens.enable(true, { bufnr = event.buf })
+            if client:supports_method 'textDocument/codeLens' then
+              map('<leader>cc', vim.lsp.codelens.run, 'Run CodeLens')
+              map('<leader>cC', function() vim.lsp.codelens.enable(true, { bufnr = event.buf }) end, 'Refresh CodeLens')
+            end
           end
 
           -- enable inlay_hint by default
