@@ -155,6 +155,7 @@ return {
         neocmake = {},
         gopls = {},
         typos_lsp = {},
+        lemminx = {},
       }
 
       require('mason-lspconfig').setup {
@@ -225,10 +226,6 @@ return {
         markdown = { 'prettierd', 'injected' },
         sql = { 'sql_formatter' },
         go = { 'goimports' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettierd', stop_after_first = true },
         typescript = { 'prettierd', stop_after_first = true },
         jsx = { 'prettierd', stop_after_first = true },
