@@ -155,7 +155,15 @@ return {
         neocmake = {},
         gopls = {},
         typos_lsp = {},
-        lemminx = {},
+        lemminx = {
+          settings = {
+            xml = {
+              catalogs = {
+                vim.fn.expand '~/.config/xml/catalog.xml',
+              },
+            },
+          },
+        },
       }
 
       require('mason-lspconfig').setup {
