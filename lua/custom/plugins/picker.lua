@@ -39,7 +39,7 @@ return {
       { '<leader>sg', function() Snacks.picker.grep() end, desc = 'Search by Grep' },
       { '<leader>/', function() Snacks.picker.grep() end, desc = 'Grep In Workspace' },
       { '<leader>su', function() Snacks.picker.undo() end, desc = 'Search Undo history' },
-      { '<leader>s.', function() Snacks.picker.recent() end, desc = 'Search Recent Files' },
+      { '<leader>s.', function() Snacks.picker.recent { filter = { cwd = true } } end, desc = 'Search Recent Files' },
       {
         '<leader><leader>',
         function()
