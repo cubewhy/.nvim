@@ -30,7 +30,7 @@ return {
       -- Basic Search
       { '<leader>sh', function() Snacks.picker.help() end, desc = 'Search Help' },
       { '<leader>sk', function() Snacks.picker.keymaps() end, desc = 'Search Keymaps' },
-      { '<leader>sf', function() Snacks.picker.files() end, desc = 'Search Files' },
+      { '<leader>ff', function() Snacks.picker.files() end, desc = 'Find Files' },
       { '<leader>sc', function() Snacks.picker.commands() end, desc = 'Search Commands' },
       { '<leader>sj', function() Snacks.picker.jumps() end, desc = 'Search Jumplist' },
       { '<leader>sd', function() Snacks.picker.diagnostics() end, desc = 'Search Diagnostics' },
