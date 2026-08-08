@@ -144,18 +144,18 @@ return {
       },
       { ']z', function() require('nvim-treesitter-textobjects.move').goto_next_start('@fold', 'folds') end, mode = { 'n', 'x', 'o' }, desc = 'Next fold' },
 
-      {
-        ']d',
-        function() require('nvim-treesitter-textobjects.move').goto_next('@conditional.outer', 'textobjects') end,
-        mode = { 'n', 'x', 'o' },
-        desc = 'Next conditional',
-      },
-      {
-        '[d',
-        function() require('nvim-treesitter-textobjects.move').goto_previous('@conditional.outer', 'textobjects') end,
-        mode = { 'n', 'x', 'o' },
-        desc = 'Prev conditional',
-      },
+      -- {
+      --   ']d',
+      --   function() require('nvim-treesitter-textobjects.move').goto_next('@conditional.outer', 'textobjects') end,
+      --   mode = { 'n', 'x', 'o' },
+      --   desc = 'Next conditional',
+      -- },
+      -- {
+      --   '[d',
+      --   function() require('nvim-treesitter-textobjects.move').goto_previous('@conditional.outer', 'textobjects') end,
+      --   mode = { 'n', 'x', 'o' },
+      --   desc = 'Prev conditional',
+      -- },
 
       -- { '<leader>a', function() require('nvim-treesitter-textobjects.swap').swap_next '@parameter.inner' end, desc = 'Swap next parameter' },
       -- { '<leader>A', function() require('nvim-treesitter-textobjects.swap').swap_previous '@parameter.outer' end, desc = 'Swap prev parameter' },

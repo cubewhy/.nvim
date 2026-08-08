@@ -18,7 +18,7 @@ return {
   },
   {
     'folke/trouble.nvim',
-    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    opts = {},
     cmd = 'Trouble',
     specs = {
       'folke/snacks.nvim',
@@ -41,6 +41,7 @@ return {
       end,
     },
     keys = {
+      -- Trouble toggle mappings
       {
         '<leader>xx',
         '<cmd>Trouble diagnostics toggle<cr>',
@@ -50,6 +51,52 @@ return {
         '<leader>xX',
         '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
         desc = 'Buffer Diagnostics (Trouble)',
+      },
+      {
+        '<leader>xe',
+        function()
+          require('trouble').toggle {
+            mode = 'diagnostics',
+            filter = { severity = vim.diagnostic.severity.ERROR },
+          }
+        end,
+        desc = 'Workspace Errors',
+      },
+      {
+        '<leader>xE',
+        function()
+          require('trouble').toggle {
+            mode = 'diagnostics',
+            filter = {
+              buf = 0,
+              severity = vim.diagnostic.severity.ERROR,
+            },
+          }
+        end,
+        desc = 'Buffer Errors',
+      },
+      {
+        '<leader>xw',
+        function()
+          require('trouble').toggle {
+            mode = 'diagnostics',
+            filter = { severity = vim.diagnostic.severity.WARN },
+          }
+        end,
+        desc = 'Workspace Warnings',
+      },
+      {
+        '<leader>xW',
+        function()
+          require('trouble').toggle {
+            mode = 'diagnostics',
+            filter = {
+              buf = 0,
+              severity = vim.diagnostic.severity.WARN,
+            },
+          }
+        end,
+        desc = 'Buffer Warnings',
       },
       {
         '<leader>cs',
@@ -67,7 +114,7 @@ return {
         desc = 'Location List (Trouble)',
       },
       {
-        '<leader>xq',
+        '<leader>xQ',
         function()
           local qf_exists = false
           for _, win in pairs(vim.fn.getwininfo()) do
@@ -85,7 +132,7 @@ return {
         desc = 'Quickfix List',
       },
       {
-        '<leader>xQ',
+        '<leader>xq',
         '<cmd>Trouble qflist toggle<cr>',
         desc = 'Quickfix List (Trouble)',
       },
