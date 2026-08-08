@@ -3,6 +3,7 @@ return {
     'rebelot/heirline.nvim',
     event = 'BufEnter',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
+    enabled = false,
     config = function()
       vim.opt.showtabline = 2
 
