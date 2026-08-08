@@ -141,18 +141,7 @@ map(
   { desc = 'Go to previous Info' }
 )
 
--- indent
-map('n', '<A-h>', '<<', { desc = 'Indent left' })
-map('v', '<A-h>', '<gv', { desc = 'Indent left' })
-
-map('n', '<A-l>', '>>', { desc = 'Indent right' })
-map('v', '<A-l>', '>gv', { desc = 'Indent right' })
-
 map('n', '<leader>fn', '<cmd>enew<cr>', { desc = 'New File' })
-
--- better indenting
-map('x', '<', '<gv')
-map('x', '>', '>gv')
 
 vim.keymap.del('n', 'grn')
 vim.keymap.del({ 'n', 'x' }, 'gra')
