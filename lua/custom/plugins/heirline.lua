@@ -228,9 +228,8 @@ return {
         hl = function(self)
           if self.is_active then
             return 'TabLineSel'
-          -- why not?
-          -- elseif not vim.api.nvim_buf_is_loaded(self.bufnr) then
-          --     return { fg = "gray" }
+          elseif not vim.api.nvim_buf_is_loaded(self.bufnr) then
+            return { fg = 'gray' }
           else
             return 'TabLine'
           end
