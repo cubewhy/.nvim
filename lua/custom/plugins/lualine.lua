@@ -21,10 +21,12 @@ return {
       local map = vim.keymap.set
       map({ 'x', 'o' }, 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next Search Result' })
       map({ 'x', 'o' }, 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Search Result' })
-      vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-      vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-      vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-      vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+      local opts = function(desc) return vim.tbl_extend('force', kopts, { desc = desc }) end
+
+      map('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], opts 'Search word forward')
+      map('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], opts 'Search word backward')
+      map('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], opts 'Search partial word forward')
+      map('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], opts 'Search partial word backward')
     end,
   },
   {
