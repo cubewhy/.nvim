@@ -9,11 +9,6 @@ return {
         desc = 'Restore Directory Session',
       },
       {
-        '<leader>qS',
-        function() require('resession').select() end,
-        desc = 'Select Session',
-      },
-      {
         '<leader>ql',
         function() require('resession').load('last', { silence_errors = true }) end,
         desc = 'Restore Last Session',
@@ -92,5 +87,15 @@ return {
         end,
       })
     end,
+  },
+  {
+    'scottmckendry/pick-resession.nvim',
+    keys = {
+      {
+        '<leader>qS',
+        function() require('pick-resession').pick() end,
+        desc = 'Select Session',
+      },
+    },
   },
 }
