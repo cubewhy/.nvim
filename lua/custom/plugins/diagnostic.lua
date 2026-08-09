@@ -20,6 +20,7 @@ return {
     'folke/trouble.nvim',
     opts = {
       auto_preview = false,
+      follow = false,
     },
     cmd = 'Trouble',
     specs = {
