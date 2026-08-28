@@ -232,7 +232,7 @@ return {
       formatters_by_ft = {
         lua = { 'stylua' },
         markdown = { 'prettierd', 'injected' },
-        sql = { 'sql_formatter' },
+        sql = { 'sqlfluff' },
         go = { 'goimports' },
         javascript = { 'prettierd', stop_after_first = true },
         typescript = { 'prettierd', stop_after_first = true },
