@@ -155,6 +155,7 @@ return {
         neocmake = {},
         gopls = {},
         typos_lsp = {},
+        vtsls = {},
         lemminx = {
           settings = {
             xml = {
