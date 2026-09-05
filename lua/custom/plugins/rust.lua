@@ -3,7 +3,7 @@ return {
     'mrcjkb/rustaceanvim',
     version = '^9', -- Recommended
     lazy = false, -- This plugin is already lazy
-    config = function()
+    init = function()
       vim.g.rustaceanvim = {
         server = {
           -- on_attach = function(client, _)
@@ -22,8 +22,6 @@ return {
                 },
               },
               cargo = {
-                allFeatures = true,
-                loadOutDirsFromCheck = true,
                 buildScripts = {
                   enable = true,
                 },
@@ -51,8 +49,7 @@ return {
                   'venv',
                   '.venv',
                 },
-                -- Avoid Roots Scanned hanging, see https://github.com/rust-lang/rust-analyzer/issues/12613#issuecomment-2096386344
-                watcher = 'client',
+                watcher = 'server',
               },
             },
           },
