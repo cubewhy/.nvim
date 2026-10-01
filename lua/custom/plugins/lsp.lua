@@ -167,12 +167,19 @@ return {
         },
       }
 
+      -- Servers that installed externally
+      local ext_servers = {
+        nil_ls = {},
+      }
+
       require('mason-lspconfig').setup {
         ensure_installed = vim.tbl_keys(servers),
         automatic_enable = false,
       }
 
-      for name, server in pairs(servers) do
+      local all_servers = vim.tbl_extend('force', servers, ext_servers)
+
+      for name, server in pairs(all_servers) do
         local config = vim.deepcopy(server)
 
         config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
@@ -247,7 +254,7 @@ return {
         json = { 'prettierd', stop_after_first = true },
         yaml = { 'prettierd', stop_after_first = true },
         html = { 'prettierd', stop_after_first = true },
-        -- nix = { 'alejandra' },
+        nix = { 'nixfmt' },
       },
       formatters = {
         injected = {
