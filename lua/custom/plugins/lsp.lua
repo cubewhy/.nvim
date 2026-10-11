@@ -7,25 +7,6 @@ return {
     },
   },
   {
-    'stevearc/aerial.nvim',
-    event = { 'BufReadPre', 'BufNewFile' },
-    config = function()
-      require('aerial').setup {
-        on_attach = function(bufnr)
-          vim.keymap.set('n', '[[', function()
-            local count = vim.v.count > 0 and vim.v.count or 1
-            vim.cmd(count .. 'AerialPrev')
-          end, { buffer = bufnr, desc = 'Prev Symbol' })
-
-          vim.keymap.set('n', ']]', function()
-            local count = vim.v.count > 0 and vim.v.count or 1
-            vim.cmd(count .. 'AerialNext')
-          end, { buffer = bufnr, desc = 'Next Symbol' })
-        end,
-      }
-    end,
-  },
-  {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
@@ -33,7 +14,6 @@ return {
       'b0o/schemastore.nvim',
       'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      'stevearc/aerial.nvim',
     },
     config = function()
       -- Capabilities (Blink.cmp & UFO)
