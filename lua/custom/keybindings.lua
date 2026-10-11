@@ -36,8 +36,8 @@ map('n', '<C-Right>', '<cmd>vertical resize +2<cr>', { desc = 'Increase Window W
 
 map('n', '<leader>wd', '<cmd>close<CR>', { desc = 'Close split' })
 
-map('n', '<leader>-', '<C-w>s', { desc = 'Split Below' })
-map('n', '<leader>|', '<C-w>v', { desc = 'Split Right' })
+-- map('n', '<leader>-', '<C-w>s', { desc = 'Split Below' })
+-- map('n', '<leader>|', '<C-w>v', { desc = 'Split Right' })
 map('n', '<BS>', '<C-^>', { desc = 'Switch to alternate buffer' })
 
 map(
