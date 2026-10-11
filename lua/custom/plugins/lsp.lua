@@ -323,9 +323,6 @@ return {
     end,
   },
   {
-    'b0o/schemastore.nvim',
-  },
-  {
     'ThePrimeagen/refactoring.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
