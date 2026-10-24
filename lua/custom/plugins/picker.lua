@@ -30,7 +30,6 @@ return {
       -- Basic Search
       { '<leader>sh', function() Snacks.picker.help() end, desc = 'Search Help' },
       { '<leader>sk', function() Snacks.picker.keymaps() end, desc = 'Search Keymaps' },
-      { '<leader>sf', function() Snacks.picker.files() end, desc = 'Search Files' },
       { '<leader>sc', function() Snacks.picker.commands() end, desc = 'Search Commands' },
       { '<leader>sj', function() Snacks.picker.jumps() end, desc = 'Search Jumplist' },
       { '<leader>sd', function() Snacks.picker.diagnostics() end, desc = 'Search Diagnostics' },
@@ -56,6 +55,7 @@ return {
       { '<leader>sb', function() Snacks.picker.lines() end, desc = 'Buffer Fuzzy Find' },
       { '<leader>s/', function() Snacks.picker.grep_buffers() end, desc = 'Search in Open Files' },
       { '<leader>uC', function() Snacks.picker.colorschemes() end, desc = 'Colorschemes' },
+      { '<leader>ff', function() Snacks.picker.files() end, desc = 'Find Files' },
       { '<leader>fb', function() Snacks.picker.buffers() end, desc = 'Find Buffers' },
 
       -- LSP
