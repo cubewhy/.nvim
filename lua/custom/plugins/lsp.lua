@@ -145,6 +145,7 @@ return {
             },
           },
         },
+        slint_lsp = {},
       }
 
       -- Servers that installed externally
