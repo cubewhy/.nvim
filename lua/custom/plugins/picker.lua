@@ -40,7 +40,7 @@ return {
       { '<leader>su', function() Snacks.picker.undo() end, desc = 'Search Undo history' },
       { '<leader>s.', function() Snacks.picker.recent { filter = { cwd = true } } end, desc = 'Search Recent Files' },
       {
-        '\\',
+        '<leader><leader>',
         function()
           Snacks.picker.smart {
             multi = { 'buffers', 'files' },
