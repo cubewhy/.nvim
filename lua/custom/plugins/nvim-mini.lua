@@ -1,6 +1,7 @@
 return {
   'nvim-mini/mini.nvim',
   version = false,
+  event = 'VeryLazy',
   keys = {
     {
       '<leader>bd',
