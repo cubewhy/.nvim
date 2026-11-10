@@ -56,7 +56,7 @@ return {
       { '<leader>s/', function() Snacks.picker.grep_buffers() end, desc = 'Search in Open Files' },
       { '<leader>uC', function() Snacks.picker.colorschemes() end, desc = 'Colorschemes' },
       { '<leader>ff', function() Snacks.picker.files() end, desc = 'Find Files' },
-      { '<leader>fb', function() Snacks.picker.buffers() end, desc = 'Find Buffers' },
+      { '<leader>bb', function() Snacks.picker.buffers() end, desc = 'Find Buffers' },
 
       -- LSP
       { 'gd', function() Snacks.picker.lsp_definitions() end, desc = 'Goto Definition' },
